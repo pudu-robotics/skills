@@ -1,0 +1,518 @@
+{
+  "openapi": "3.0.3",
+  "info": {
+    "title": "CloudOpenApi - 呼叫任务",
+    "version": "0.0.1"
+  },
+  "paths": {
+    "/open-platform-service/v1/call/list": {
+      "get": {
+        "tags": [
+          "CloudOpenApi"
+        ],
+        "operationId": "CloudOpenApi_GetCallTask",
+        "parameters": [
+          {
+            "name": "sn",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "taskId",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "shopId",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "offset",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "status",
+            "in": "query",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetCallTaskRsp"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Default error response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Status"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/open-platform-service/v1/custom_call": {
+      "post": {
+        "tags": [
+          "CloudOpenApi"
+        ],
+        "description": "自定义呼叫机器",
+        "operationId": "CloudOpenApi_CustomCall",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CustomCallReq"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CustomCallRsp"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Default error response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Status"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/open-platform-service/v1/custom_call/cancel": {
+      "post": {
+        "tags": [
+          "CloudOpenApi"
+        ],
+        "description": "自定义呼叫取消",
+        "operationId": "CloudOpenApi_CustomCallCancel",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CustomCallCancelReq"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CustomCallCancelRsp"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Default error response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Status"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/open-platform-service/v1/custom_call/complete": {
+      "post": {
+        "tags": [
+          "CloudOpenApi"
+        ],
+        "description": "完成自定义呼叫",
+        "operationId": "CloudOpenApi_CustomCallCompleted",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CustomCallCompleteReq"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CustomCallCompleteRsp"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Default error response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Status"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "CustomCallCancelReq": {
+        "type": "object",
+        "properties": {
+          "taskId": {
+            "type": "string"
+          },
+          "callDeviceName": {
+            "type": "string"
+          },
+          "sn": {
+            "type": "string"
+          },
+          "isAutoBack": {
+            "type": "boolean"
+          },
+          "returnPoint": {
+            "$ref": "#/components/schemas/ReturnPoint"
+          }
+        },
+        "description": "取消呼叫"
+      },
+      "CustomCallCancelRsp": {
+        "type": "object",
+        "properties": {
+          "message": {
+            "type": "string"
+          }
+        },
+        "description": "取消呼叫返回"
+      },
+      "CustomCallCompleteReq": {
+        "type": "object",
+        "properties": {
+          "taskId": {
+            "type": "string"
+          },
+          "callDeviceName": {
+            "type": "string"
+          },
+          "nextCallTask": {
+            "$ref": "#/components/schemas/CustomCallReq"
+          }
+        },
+        "description": "完成呼叫"
+      },
+      "CustomCallCompleteRsp": {
+        "type": "object",
+        "properties": {
+          "message": {
+            "type": "string"
+          },
+          "data": {
+            "$ref": "#/components/schemas/CustomCallCompleteRsp_Data"
+          }
+        },
+        "description": "完成呼叫返回"
+      },
+      "CustomCallCompleteRsp_Data": {
+        "type": "object",
+        "properties": {
+          "nextCallResult": {
+            "$ref": "#/components/schemas/CustomCallCompleteRsp_NextCallResult"
+          }
+        }
+      },
+      "CustomCallCompleteRsp_NextCallResult": {
+        "type": "object",
+        "properties": {
+          "message": {
+            "type": "string",
+            "description": "下次任务的返回结果"
+          },
+          "taskId": {
+            "type": "string"
+          }
+        }
+      },
+      "CustomCallReq": {
+        "type": "object",
+        "properties": {
+          "sn": {
+            "type": "string"
+          },
+          "shopId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "mapName": {
+            "type": "string"
+          },
+          "point": {
+            "type": "string"
+          },
+          "pointType": {
+            "type": "string"
+          },
+          "callDeviceName": {
+            "type": "string"
+          },
+          "callMode": {
+            "type": "string"
+          },
+          "modeData": {
+            "$ref": "#/components/schemas/CustomContentModeData"
+          },
+          "doNotQueue": {
+            "type": "boolean"
+          },
+          "robotGroupIds": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "priority": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "filterCategoryIds": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        },
+        "description": "自定义呼叫入参"
+      },
+      "CustomCallRsp": {
+        "type": "object",
+        "properties": {
+          "message": {
+            "type": "string"
+          },
+          "data": {
+            "$ref": "#/components/schemas/CustomCallRsp_Data"
+          }
+        },
+        "description": "自定义呼叫出参"
+      },
+      "CustomCallRsp_Data": {
+        "type": "object",
+        "properties": {
+          "taskId": {
+            "type": "string"
+          },
+          "queue": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "state": {
+            "type": "string"
+          },
+          "remark": {
+            "type": "string"
+          }
+        }
+      },
+      "CustomContentModeData": {
+        "type": "object",
+        "properties": {
+          "urls": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "switchTime": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "playCount": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "cancelBtnTime": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "showTimeout": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "qrcode": {
+            "type": "string"
+          },
+          "text": {
+            "type": "string"
+          }
+        }
+      },
+      "GetCallTaskRsp": {
+        "type": "object",
+        "properties": {
+          "message": {
+            "type": "string"
+          },
+          "data": {
+            "$ref": "#/components/schemas/GetCallTaskRsp_Data"
+          }
+        }
+      },
+      "GetCallTaskRsp_CallTask": {
+        "type": "object",
+        "properties": {
+          "taskId": {
+            "type": "string"
+          },
+          "shopId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "mapName": {
+            "type": "string"
+          },
+          "point": {
+            "type": "string"
+          },
+          "sn": {
+            "type": "string"
+          },
+          "queue": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "createTime": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "finishTime": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "status": {
+            "type": "string"
+          },
+          "remark": {
+            "type": "string"
+          },
+          "productCode": {
+            "type": "string"
+          }
+        }
+      },
+      "GetCallTaskRsp_Data": {
+        "type": "object",
+        "properties": {
+          "total": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "list": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/GetCallTaskRsp_CallTask"
+            }
+          }
+        }
+      },
+      "GoogleProtobufAny": {
+        "type": "object",
+        "properties": {
+          "@type": {
+            "type": "string",
+            "description": "The type of the serialized message."
+          }
+        },
+        "additionalProperties": true,
+        "description": "Contains an arbitrary serialized message along with a @type that describes the type of the serialized message."
+      },
+      "ReturnPoint": {
+        "type": "object",
+        "properties": {
+          "mapName": {
+            "type": "string"
+          },
+          "point": {
+            "type": "string"
+          }
+        }
+      },
+      "Status": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "integer",
+            "description": "The status code, which should be an enum value of [google.rpc.Code][google.rpc.Code].",
+            "format": "int32"
+          },
+          "message": {
+            "type": "string",
+            "description": "A developer-facing error message, which should be in English. Any user-facing error message should be localized and sent in the [google.rpc.Status.details][google.rpc.Status.details] field, or localized by the client."
+          },
+          "details": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/GoogleProtobufAny"
+            },
+            "description": "A list of messages that carry the error details.  There is a common set of message types for APIs to use."
+          }
+        },
+        "description": "The `Status` type defines a logical error model that is suitable for different programming environments, including REST APIs and RPC APIs. It is used by [gRPC](https://github.com/grpc). Each `Status` message contains three pieces of data: error code, error message, and error details. You can find out more about this error model and how to work with it in the [API Design Guide](https://cloud.google.com/apis/design/errors)."
+      }
+    }
+  }
+}

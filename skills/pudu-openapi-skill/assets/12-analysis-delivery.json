@@ -1,0 +1,4100 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "open/analysis_delivery.proto",
+        "version": "version not set"
+    },
+    "tags": [
+        {
+            "name": "OpenDataAnalysisDelivery"
+        }
+    ],
+    "paths": {
+        "/data-board/v1/analysis/task/ad": {
+            "get": {
+                "summary": "机器人配送数据 - 广告",
+                "operationId": "OpenDataAnalysisDelivery_AnalysisTaskAd",
+                "responses": {
+                    "200": {
+                        "description": "A successful response.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/openAnalysisTaskAdRsp"
+                                }
+                            }
+                        }
+                    },
+                    "default": {
+                        "description": "An unexpected error response.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/rpcStatus"
+                                }
+                            }
+                        }
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "timezone_offset",
+                        "description": "时区偏移小时, 范围 -12 ~ 14，表示 (UTC-12 ~ UTC+14）；默认UTC+8.",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32"
+                        }
+                    },
+                    {
+                        "name": "start_time",
+                        "description": "开始时间戳(s).",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    },
+                    {
+                        "name": "end_time",
+                        "description": "结束时间戳(s).",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    },
+                    {
+                        "name": "shop_id",
+                        "description": "门店ID过滤.",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    },
+                    {
+                        "name": "time_unit",
+                        "description": "时间单位：day | hour，表示 按天|按小时; 默认值：day(时间跨度>24小时) ，hour(时间跨度<24小时).",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "ad_id",
+                        "description": "广告ID过滤, 不传或传0则不过滤.",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "type": "string",
+                            "format": "int64"
+                        }
+                    }
+                ],
+                "tags": [
+                    "OpenDataAnalysisDelivery"
+                ]
+            }
+        },
+        "/data-board/v1/analysis/task/ad/paging": {
+            "get": {
+                "summary": "机器人配送数据 - 广告(分页)",
+                "operationId": "OpenDataAnalysisDelivery_AnalysisTaskAdPaging",
+                "responses": {
+                    "200": {
+                        "description": "A successful response.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/openAnalysisTaskAdPagingRsp"
+                                }
+                            }
+                        }
+                    },
+                    "default": {
+                        "description": "An unexpected error response.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/rpcStatus"
+                                }
+                            }
+                        }
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "timezone_offset",
+                        "description": "时区偏移小时, 范围 -12 ~ 14，表示 (UTC-12 ~ UTC+14）；默认UTC+8.",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32"
+                        }
+                    },
+                    {
+                        "name": "start_time",
+                        "description": "开始时间戳(s).",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    },
+                    {
+                        "name": "end_time",
+                        "description": "结束时间戳(s).",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    },
+                    {
+                        "name": "shop_id",
+                        "description": "门店ID过滤.",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    },
+                    {
+                        "name": "time_unit",
+                        "description": "时间单位：day | hour | all, 表示 按天|按小时|汇总(仅门店分组有效); 默认值：day(时间跨度>24小时) ，hour(时间跨度<24小时).",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "limit",
+                        "description": "每页条目数，1 ~ 20, 默认10.",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32"
+                        }
+                    },
+                    {
+                        "name": "offset",
+                        "description": "偏移量, 从0开始.",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32"
+                        }
+                    },
+                    {
+                        "name": "group_by",
+                        "description": "分组方式：robot | shop，表示 按机器 | 按门店.",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "ad_id",
+                        "description": "广告ID过滤, 不传或传0则不过滤.",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "type": "string",
+                            "format": "int64"
+                        }
+                    }
+                ],
+                "tags": [
+                    "OpenDataAnalysisDelivery"
+                ]
+            }
+        },
+        "/data-board/v1/analysis/task/call": {
+            "get": {
+                "summary": "机器人配送数据 - 呼叫",
+                "operationId": "OpenDataAnalysisDelivery_AnalysisTaskCall",
+                "responses": {
+                    "200": {
+                        "description": "A successful response.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/openAnalysisTaskCallRsp"
+                                }
+                            }
+                        }
+                    },
+                    "default": {
+                        "description": "An unexpected error response.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/rpcStatus"
+                                }
+                            }
+                        }
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "timezone_offset",
+                        "description": "时区偏移小时, 范围 -12 ~ 14，表示 (UTC-12 ~ UTC+14）；默认UTC+8.",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32"
+                        }
+                    },
+                    {
+                        "name": "start_time",
+                        "description": "开始时间戳(s).",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    },
+                    {
+                        "name": "end_time",
+                        "description": "结束时间戳(s).",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    },
+                    {
+                        "name": "shop_id",
+                        "description": "门店ID过滤.",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    },
+                    {
+                        "name": "time_unit",
+                        "description": "时间单位：day | hour，表示 按天|按小时; 默认值：day(时间跨度>24小时) ，hour(时间跨度<24小时).",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "tags": [
+                    "OpenDataAnalysisDelivery"
+                ]
+            }
+        },
+        "/data-board/v1/analysis/task/call/paging": {
+            "get": {
+                "summary": "机器人配送数据 - 呼叫(分页)",
+                "operationId": "OpenDataAnalysisDelivery_AnalysisTaskCallPaging",
+                "responses": {
+                    "200": {
+                        "description": "A successful response.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/openAnalysisTaskCallPagingRsp"
+                                }
+                            }
+                        }
+                    },
+                    "default": {
+                        "description": "An unexpected error response.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/rpcStatus"
+                                }
+                            }
+                        }
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "timezone_offset",
+                        "description": "时区偏移小时, 范围 -12 ~ 14，表示 (UTC-12 ~ UTC+14）；默认UTC+8.",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32"
+                        }
+                    },
+                    {
+                        "name": "start_time",
+                        "description": "开始时间戳(s).",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    },
+                    {
+                        "name": "end_time",
+                        "description": "结束时间戳(s).",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    },
+                    {
+                        "name": "shop_id",
+                        "description": "门店ID过滤.",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    },
+                    {
+                        "name": "time_unit",
+                        "description": "时间单位：day | hour | all, 表示 按天|按小时|汇总(仅门店分组有效); 默认值：day(时间跨度>24小时) ，hour(时间跨度<24小时).",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "limit",
+                        "description": "每页条目数，1 ~ 20, 默认10.",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32"
+                        }
+                    },
+                    {
+                        "name": "offset",
+                        "description": "偏移量, 从0开始.",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32"
+                        }
+                    },
+                    {
+                        "name": "group_by",
+                        "description": "分组方式：robot | shop，表示 按机器 | 按门店.",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "tags": [
+                    "OpenDataAnalysisDelivery"
+                ]
+            }
+        },
+        "/data-board/v1/analysis/task/cruise": {
+            "get": {
+                "summary": "机器人配送数据 - 巡航",
+                "operationId": "OpenDataAnalysisDelivery_AnalysisTaskCruise",
+                "responses": {
+                    "200": {
+                        "description": "A successful response.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/openAnalysisTaskCruiseRsp"
+                                }
+                            }
+                        }
+                    },
+                    "default": {
+                        "description": "An unexpected error response.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/rpcStatus"
+                                }
+                            }
+                        }
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "timezone_offset",
+                        "description": "时区偏移小时, 范围 -12 ~ 14，表示 (UTC-12 ~ UTC+14）；默认UTC+8.",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32"
+                        }
+                    },
+                    {
+                        "name": "start_time",
+                        "description": "开始时间戳(s).",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    },
+                    {
+                        "name": "end_time",
+                        "description": "结束时间戳(s).",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    },
+                    {
+                        "name": "shop_id",
+                        "description": "门店ID过滤.",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    },
+                    {
+                        "name": "time_unit",
+                        "description": "时间单位：day | hour，表示 按天|按小时; 默认值：day(时间跨度>24小时) ，hour(时间跨度<24小时).",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "tags": [
+                    "OpenDataAnalysisDelivery"
+                ]
+            }
+        },
+        "/data-board/v1/analysis/task/cruise/paging": {
+            "get": {
+                "summary": "机器人配送数据 - 巡航(分页)",
+                "operationId": "OpenDataAnalysisDelivery_AnalysisTaskCruisePaging",
+                "responses": {
+                    "200": {
+                        "description": "A successful response.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/openAnalysisTaskCruisePagingRsp"
+                                }
+                            }
+                        }
+                    },
+                    "default": {
+                        "description": "An unexpected error response.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/rpcStatus"
+                                }
+                            }
+                        }
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "timezone_offset",
+                        "description": "时区偏移小时, 范围 -12 ~ 14，表示 (UTC-12 ~ UTC+14）；默认UTC+8.",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32"
+                        }
+                    },
+                    {
+                        "name": "start_time",
+                        "description": "开始时间戳(s).",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    },
+                    {
+                        "name": "end_time",
+                        "description": "结束时间戳(s).",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    },
+                    {
+                        "name": "shop_id",
+                        "description": "门店ID过滤.",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    },
+                    {
+                        "name": "time_unit",
+                        "description": "时间单位：day | hour | all, 表示 按天|按小时|汇总(仅门店分组有效); 默认值：day(时间跨度>24小时) ，hour(时间跨度<24小时).",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "limit",
+                        "description": "每页条目数，1 ~ 20, 默认10.",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32"
+                        }
+                    },
+                    {
+                        "name": "offset",
+                        "description": "偏移量, 从0开始.",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32"
+                        }
+                    },
+                    {
+                        "name": "group_by",
+                        "description": "分组方式：robot | shop，表示 按机器 | 按门店.",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "tags": [
+                    "OpenDataAnalysisDelivery"
+                ]
+            }
+        },
+        "/data-board/v1/analysis/task/delivery": {
+            "get": {
+                "summary": "机器人配送数据 - 配送",
+                "operationId": "OpenDataAnalysisDelivery_AnalysisTaskDelivery",
+                "responses": {
+                    "200": {
+                        "description": "A successful response.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/openAnalysisTaskDeliveryRsp"
+                                }
+                            }
+                        }
+                    },
+                    "default": {
+                        "description": "An unexpected error response.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/rpcStatus"
+                                }
+                            }
+                        }
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "timezone_offset",
+                        "description": "时区偏移小时, 范围 -12 ~ 14，表示 (UTC-12 ~ UTC+14）；默认UTC+8.",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32"
+                        }
+                    },
+                    {
+                        "name": "start_time",
+                        "description": "开始时间戳(s).",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    },
+                    {
+                        "name": "end_time",
+                        "description": "结束时间戳(s).",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    },
+                    {
+                        "name": "shop_id",
+                        "description": "门店ID过滤.",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    },
+                    {
+                        "name": "time_unit",
+                        "description": "时间单位：day | hour，表示 按天|按小时; 默认值：day(时间跨度>24小时) ，hour(时间跨度<24小时).",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "tags": [
+                    "OpenDataAnalysisDelivery"
+                ]
+            }
+        },
+        "/data-board/v1/analysis/task/delivery/paging": {
+            "get": {
+                "summary": "机器人配送数据 - 配送(分页)",
+                "operationId": "OpenDataAnalysisDelivery_AnalysisTaskDeliveryPaging",
+                "responses": {
+                    "200": {
+                        "description": "A successful response.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/openAnalysisTaskDeliveryPagingRsp"
+                                }
+                            }
+                        }
+                    },
+                    "default": {
+                        "description": "An unexpected error response.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/rpcStatus"
+                                }
+                            }
+                        }
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "timezone_offset",
+                        "description": "时区偏移小时, 范围 -12 ~ 14，表示 (UTC-12 ~ UTC+14）；默认UTC+8.",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32"
+                        }
+                    },
+                    {
+                        "name": "start_time",
+                        "description": "开始时间戳(s).",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    },
+                    {
+                        "name": "end_time",
+                        "description": "结束时间戳(s).",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    },
+                    {
+                        "name": "shop_id",
+                        "description": "门店ID过滤.",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    },
+                    {
+                        "name": "time_unit",
+                        "description": "时间单位：day | hour | all, 表示 按天|按小时|汇总(仅门店分组有效); 默认值：day(时间跨度>24小时) ，hour(时间跨度<24小时).",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "limit",
+                        "description": "每页条目数，1 ~ 20, 默认10.",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32"
+                        }
+                    },
+                    {
+                        "name": "offset",
+                        "description": "偏移量, 从0开始.",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32"
+                        }
+                    },
+                    {
+                        "name": "group_by",
+                        "description": "分组方式：robot | shop，表示 按机器 | 按门店.",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "tags": [
+                    "OpenDataAnalysisDelivery"
+                ]
+            }
+        },
+        "/data-board/v1/analysis/task/greeter": {
+            "get": {
+                "summary": "机器人配送数据 - 领位",
+                "operationId": "OpenDataAnalysisDelivery_AnalysisTaskGreeter",
+                "responses": {
+                    "200": {
+                        "description": "A successful response.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/openAnalysisTaskGreeterRsp"
+                                }
+                            }
+                        }
+                    },
+                    "default": {
+                        "description": "An unexpected error response.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/rpcStatus"
+                                }
+                            }
+                        }
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "timezone_offset",
+                        "description": "时区偏移小时, 范围 -12 ~ 14，表示 (UTC-12 ~ UTC+14）；默认UTC+8.",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32"
+                        }
+                    },
+                    {
+                        "name": "start_time",
+                        "description": "开始时间戳(s).",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    },
+                    {
+                        "name": "end_time",
+                        "description": "结束时间戳(s).",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    },
+                    {
+                        "name": "shop_id",
+                        "description": "门店ID过滤.",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    },
+                    {
+                        "name": "time_unit",
+                        "description": "时间单位：day | hour，表示 按天|按小时; 默认值：day(时间跨度>24小时) ，hour(时间跨度<24小时).",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "tags": [
+                    "OpenDataAnalysisDelivery"
+                ]
+            }
+        },
+        "/data-board/v1/analysis/task/greeter/paging": {
+            "get": {
+                "summary": "机器人配送数据 - 领位(分页)",
+                "operationId": "OpenDataAnalysisDelivery_AnalysisTaskGreeterPaging",
+                "responses": {
+                    "200": {
+                        "description": "A successful response.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/openAnalysisTaskGreeterPagingRsp"
+                                }
+                            }
+                        }
+                    },
+                    "default": {
+                        "description": "An unexpected error response.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/rpcStatus"
+                                }
+                            }
+                        }
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "timezone_offset",
+                        "description": "时区偏移小时, 范围 -12 ~ 14，表示 (UTC-12 ~ UTC+14）；默认UTC+8.",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32"
+                        }
+                    },
+                    {
+                        "name": "start_time",
+                        "description": "开始时间戳(s).",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    },
+                    {
+                        "name": "end_time",
+                        "description": "结束时间戳(s).",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    },
+                    {
+                        "name": "shop_id",
+                        "description": "门店ID过滤.",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    },
+                    {
+                        "name": "time_unit",
+                        "description": "时间单位：day | hour | all, 表示 按天|按小时|汇总(仅门店分组有效); 默认值：day(时间跨度>24小时) ，hour(时间跨度<24小时).",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "limit",
+                        "description": "每页条目数，1 ~ 20, 默认10.",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32"
+                        }
+                    },
+                    {
+                        "name": "offset",
+                        "description": "偏移量, 从0开始.",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32"
+                        }
+                    },
+                    {
+                        "name": "group_by",
+                        "description": "分组方式：robot | shop，表示 按机器 | 按门店.",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "tags": [
+                    "OpenDataAnalysisDelivery"
+                ]
+            }
+        },
+        "/data-board/v1/analysis/task/grid": {
+            "get": {
+                "summary": "机器人配送数据 - 宫格",
+                "operationId": "OpenDataAnalysisDelivery_AnalysisTaskGrid",
+                "responses": {
+                    "200": {
+                        "description": "A successful response.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/openAnalysisTaskGridRsp"
+                                }
+                            }
+                        }
+                    },
+                    "default": {
+                        "description": "An unexpected error response.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/rpcStatus"
+                                }
+                            }
+                        }
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "timezone_offset",
+                        "description": "时区偏移小时, 范围 -12 ~ 14，表示 (UTC-12 ~ UTC+14）；默认UTC+8.",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32"
+                        }
+                    },
+                    {
+                        "name": "start_time",
+                        "description": "开始时间戳(s).",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    },
+                    {
+                        "name": "end_time",
+                        "description": "结束时间戳(s).",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    },
+                    {
+                        "name": "shop_id",
+                        "description": "门店ID过滤.",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    },
+                    {
+                        "name": "time_unit",
+                        "description": "时间单位：day | hour，表示 按天|按小时; 默认值：day(时间跨度>24小时) ，hour(时间跨度<24小时).",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "tags": [
+                    "OpenDataAnalysisDelivery"
+                ]
+            }
+        },
+        "/data-board/v1/analysis/task/grid/paging": {
+            "get": {
+                "summary": "机器人配送数据 - 宫格(分页)",
+                "operationId": "OpenDataAnalysisDelivery_AnalysisTaskGridPaging",
+                "responses": {
+                    "200": {
+                        "description": "A successful response.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/openAnalysisTaskGridPagingRsp"
+                                }
+                            }
+                        }
+                    },
+                    "default": {
+                        "description": "An unexpected error response.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/rpcStatus"
+                                }
+                            }
+                        }
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "timezone_offset",
+                        "description": "时区偏移小时, 范围 -12 ~ 14，表示 (UTC-12 ~ UTC+14）；默认UTC+8.",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32"
+                        }
+                    },
+                    {
+                        "name": "start_time",
+                        "description": "开始时间戳(s).",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    },
+                    {
+                        "name": "end_time",
+                        "description": "结束时间戳(s).",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    },
+                    {
+                        "name": "shop_id",
+                        "description": "门店ID过滤.",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    },
+                    {
+                        "name": "time_unit",
+                        "description": "时间单位：day | hour | all, 表示 按天|按小时|汇总(仅门店分组有效); 默认值：day(时间跨度>24小时) ，hour(时间跨度<24小时).",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "limit",
+                        "description": "每页条目数，1 ~ 20, 默认10.",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32"
+                        }
+                    },
+                    {
+                        "name": "offset",
+                        "description": "偏移量, 从0开始.",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32"
+                        }
+                    },
+                    {
+                        "name": "group_by",
+                        "description": "分组方式：robot | shop，表示 按机器 | 按门店.",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "tags": [
+                    "OpenDataAnalysisDelivery"
+                ]
+            }
+        },
+        "/data-board/v1/analysis/task/interactive": {
+            "get": {
+                "summary": "机器人配送数据 - 互动",
+                "operationId": "OpenDataAnalysisDelivery_AnalysisTaskInteractive",
+                "responses": {
+                    "200": {
+                        "description": "A successful response.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/openAnalysisTaskInteractiveRsp"
+                                }
+                            }
+                        }
+                    },
+                    "default": {
+                        "description": "An unexpected error response.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/rpcStatus"
+                                }
+                            }
+                        }
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "timezone_offset",
+                        "description": "时区偏移小时, 范围 -12 ~ 14，表示 (UTC-12 ~ UTC+14）；默认UTC+8.",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32"
+                        }
+                    },
+                    {
+                        "name": "start_time",
+                        "description": "开始时间戳(s).",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    },
+                    {
+                        "name": "end_time",
+                        "description": "结束时间戳(s).",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    },
+                    {
+                        "name": "shop_id",
+                        "description": "门店ID过滤.",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    },
+                    {
+                        "name": "time_unit",
+                        "description": "时间单位：day | hour，表示 按天|按小时; 默认值：day(时间跨度>24小时) ，hour(时间跨度<24小时).",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "tags": [
+                    "OpenDataAnalysisDelivery"
+                ]
+            }
+        },
+        "/data-board/v1/analysis/task/interactive/paging": {
+            "get": {
+                "summary": "机器人配送数据 - 互动(分页)",
+                "operationId": "OpenDataAnalysisDelivery_AnalysisTaskInteractivePaging",
+                "responses": {
+                    "200": {
+                        "description": "A successful response.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/openAnalysisTaskInteractivePagingRsp"
+                                }
+                            }
+                        }
+                    },
+                    "default": {
+                        "description": "An unexpected error response.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/rpcStatus"
+                                }
+                            }
+                        }
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "timezone_offset",
+                        "description": "时区偏移小时, 范围 -12 ~ 14，表示 (UTC-12 ~ UTC+14）；默认UTC+8.",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32"
+                        }
+                    },
+                    {
+                        "name": "start_time",
+                        "description": "开始时间戳(s).",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    },
+                    {
+                        "name": "end_time",
+                        "description": "结束时间戳(s).",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    },
+                    {
+                        "name": "shop_id",
+                        "description": "门店ID过滤.",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    },
+                    {
+                        "name": "time_unit",
+                        "description": "时间单位：day | hour | all, 表示 按天|按小时|汇总(仅门店分组有效); 默认值：day(时间跨度>24小时) ，hour(时间跨度<24小时).",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "limit",
+                        "description": "每页条目数，1 ~ 20, 默认10.",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32"
+                        }
+                    },
+                    {
+                        "name": "offset",
+                        "description": "偏移量, 从0开始.",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32"
+                        }
+                    },
+                    {
+                        "name": "group_by",
+                        "description": "分组方式：robot | shop，表示 按机器 | 按门店.",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "tags": [
+                    "OpenDataAnalysisDelivery"
+                ]
+            }
+        },
+        "/data-board/v1/analysis/task/recovery": {
+            "get": {
+                "summary": "机器人配送数据 - 回盘",
+                "operationId": "OpenDataAnalysisDelivery_AnalysisTaskRecovery",
+                "responses": {
+                    "200": {
+                        "description": "A successful response.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/openAnalysisTaskRecoveryRsp"
+                                }
+                            }
+                        }
+                    },
+                    "default": {
+                        "description": "An unexpected error response.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/rpcStatus"
+                                }
+                            }
+                        }
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "timezone_offset",
+                        "description": "时区偏移小时, 范围 -12 ~ 14，表示 (UTC-12 ~ UTC+14）；默认UTC+8.",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32"
+                        }
+                    },
+                    {
+                        "name": "start_time",
+                        "description": "开始时间戳(s).",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    },
+                    {
+                        "name": "end_time",
+                        "description": "结束时间戳(s).",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    },
+                    {
+                        "name": "shop_id",
+                        "description": "门店ID过滤.",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    },
+                    {
+                        "name": "time_unit",
+                        "description": "时间单位：day | hour，表示 按天|按小时; 默认值：day(时间跨度>24小时) ，hour(时间跨度<24小时).",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "tags": [
+                    "OpenDataAnalysisDelivery"
+                ]
+            }
+        },
+        "/data-board/v1/analysis/task/recovery/paging": {
+            "get": {
+                "summary": "机器人配送数据 - 回盘(分页)",
+                "operationId": "OpenDataAnalysisDelivery_AnalysisTaskRecoveryPaging",
+                "responses": {
+                    "200": {
+                        "description": "A successful response.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/openAnalysisTaskRecoveryPagingRsp"
+                                }
+                            }
+                        }
+                    },
+                    "default": {
+                        "description": "An unexpected error response.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/rpcStatus"
+                                }
+                            }
+                        }
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "timezone_offset",
+                        "description": "时区偏移小时, 范围 -12 ~ 14，表示 (UTC-12 ~ UTC+14）；默认UTC+8.",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32"
+                        }
+                    },
+                    {
+                        "name": "start_time",
+                        "description": "开始时间戳(s).",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    },
+                    {
+                        "name": "end_time",
+                        "description": "结束时间戳(s).",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    },
+                    {
+                        "name": "shop_id",
+                        "description": "门店ID过滤.",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    },
+                    {
+                        "name": "time_unit",
+                        "description": "时间单位：day | hour | all, 表示 按天|按小时|汇总(仅门店分组有效); 默认值：day(时间跨度>24小时) ，hour(时间跨度<24小时).",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "limit",
+                        "description": "每页条目数，1 ~ 20, 默认10.",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32"
+                        }
+                    },
+                    {
+                        "name": "offset",
+                        "description": "偏移量, 从0开始.",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32"
+                        }
+                    },
+                    {
+                        "name": "group_by",
+                        "description": "分组方式：robot | shop，表示 按机器 | 按门店.",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "tags": [
+                    "OpenDataAnalysisDelivery"
+                ]
+            }
+        },
+        "/data-board/v1/analysis/task/solicit": {
+            "get": {
+                "summary": "机器人配送数据 - 揽客",
+                "operationId": "OpenDataAnalysisDelivery_AnalysisTaskSolicit",
+                "responses": {
+                    "200": {
+                        "description": "A successful response.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/openAnalysisTaskSolicitRsp"
+                                }
+                            }
+                        }
+                    },
+                    "default": {
+                        "description": "An unexpected error response.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/rpcStatus"
+                                }
+                            }
+                        }
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "timezone_offset",
+                        "description": "时区偏移小时, 范围 -12 ~ 14，表示 (UTC-12 ~ UTC+14）；默认UTC+8.",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32"
+                        }
+                    },
+                    {
+                        "name": "start_time",
+                        "description": "开始时间戳(s).",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    },
+                    {
+                        "name": "end_time",
+                        "description": "结束时间戳(s).",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    },
+                    {
+                        "name": "shop_id",
+                        "description": "门店ID过滤.",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    },
+                    {
+                        "name": "time_unit",
+                        "description": "时间单位：day | hour，表示 按天|按小时; 默认值：day(时间跨度>24小时) ，hour(时间跨度<24小时).",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "tags": [
+                    "OpenDataAnalysisDelivery"
+                ]
+            }
+        },
+        "/data-board/v1/analysis/task/solicit/paging": {
+            "get": {
+                "summary": "机器人配送数据 - 揽客(分页)",
+                "operationId": "OpenDataAnalysisDelivery_AnalysisTaskSolicitPaging",
+                "responses": {
+                    "200": {
+                        "description": "A successful response.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/openAnalysisTaskSolicitPagingRsp"
+                                }
+                            }
+                        }
+                    },
+                    "default": {
+                        "description": "An unexpected error response.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/rpcStatus"
+                                }
+                            }
+                        }
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "timezone_offset",
+                        "description": "时区偏移小时, 范围 -12 ~ 14，表示 (UTC-12 ~ UTC+14）；默认UTC+8.",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32"
+                        }
+                    },
+                    {
+                        "name": "start_time",
+                        "description": "开始时间戳(s).",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    },
+                    {
+                        "name": "end_time",
+                        "description": "结束时间戳(s).",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    },
+                    {
+                        "name": "shop_id",
+                        "description": "门店ID过滤.",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    },
+                    {
+                        "name": "time_unit",
+                        "description": "时间单位：day | hour | all, 表示 按天|按小时|汇总(仅门店分组有效); 默认值：day(时间跨度>24小时) ，hour(时间跨度<24小时).",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "limit",
+                        "description": "每页条目数，1 ~ 20, 默认10.",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32"
+                        }
+                    },
+                    {
+                        "name": "offset",
+                        "description": "偏移量, 从0开始.",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32"
+                        }
+                    },
+                    {
+                        "name": "group_by",
+                        "description": "分组方式：robot | shop，表示 按机器 | 按门店.",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "tags": [
+                    "OpenDataAnalysisDelivery"
+                ]
+            }
+        },
+        "/data-board/v1/analysis/task/turn_back": {
+            "get": {
+                "summary": "机器人配送数据 - 返航",
+                "operationId": "OpenDataAnalysisDelivery_AnalysisTaskTurnBack",
+                "responses": {
+                    "200": {
+                        "description": "A successful response.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/openAnalysisTaskTurnBackRsp"
+                                }
+                            }
+                        }
+                    },
+                    "default": {
+                        "description": "An unexpected error response.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/rpcStatus"
+                                }
+                            }
+                        }
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "timezone_offset",
+                        "description": "时区偏移小时, 范围 -12 ~ 14，表示 (UTC-12 ~ UTC+14）；默认UTC+8.",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32"
+                        }
+                    },
+                    {
+                        "name": "start_time",
+                        "description": "开始时间戳(s).",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    },
+                    {
+                        "name": "end_time",
+                        "description": "结束时间戳(s).",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    },
+                    {
+                        "name": "shop_id",
+                        "description": "门店ID过滤.",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    },
+                    {
+                        "name": "time_unit",
+                        "description": "时间单位：day | hour，表示 按天|按小时; 默认值：day(时间跨度>24小时) ，hour(时间跨度<24小时).",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "tags": [
+                    "OpenDataAnalysisDelivery"
+                ]
+            }
+        },
+        "/data-board/v1/analysis/task/turn_back/paging": {
+            "get": {
+                "summary": "机器人配送数据 - 返航(分页)",
+                "operationId": "OpenDataAnalysisDelivery_AnalysisTaskTurnBackPaging",
+                "responses": {
+                    "200": {
+                        "description": "A successful response.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/openAnalysisTaskTurnBackPagingRsp"
+                                }
+                            }
+                        }
+                    },
+                    "default": {
+                        "description": "An unexpected error response.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/rpcStatus"
+                                }
+                            }
+                        }
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "timezone_offset",
+                        "description": "时区偏移小时, 范围 -12 ~ 14，表示 (UTC-12 ~ UTC+14）；默认UTC+8.",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32"
+                        }
+                    },
+                    {
+                        "name": "start_time",
+                        "description": "开始时间戳(s).",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    },
+                    {
+                        "name": "end_time",
+                        "description": "结束时间戳(s).",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    },
+                    {
+                        "name": "shop_id",
+                        "description": "门店ID过滤.",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    },
+                    {
+                        "name": "time_unit",
+                        "description": "时间单位：day | hour | all, 表示 按天|按小时|汇总(仅门店分组有效); 默认值：day(时间跨度>24小时) ，hour(时间跨度<24小时).",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "limit",
+                        "description": "每页条目数，1 ~ 20, 默认10.",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32"
+                        }
+                    },
+                    {
+                        "name": "offset",
+                        "description": "偏移量, 从0开始.",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32"
+                        }
+                    },
+                    {
+                        "name": "group_by",
+                        "description": "分组方式：robot | shop，表示 按机器 | 按门店.",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "tags": [
+                    "OpenDataAnalysisDelivery"
+                ]
+            }
+        }
+    },
+    "components": {
+        "schemas": {
+            "openAnalysisTaskAdPagingRsp": {
+                "type": "object",
+                "properties": {
+                    "message": {
+                        "type": "string"
+                    },
+                    "data": {
+                        "$ref": "#/components/schemas/openAnalysisTaskAdPagingRspData"
+                    }
+                },
+                "title": "出参:广告(分页)"
+            },
+            "openAnalysisTaskAdPagingRspData": {
+                "type": "object",
+                "properties": {
+                    "total": {
+                        "type": "integer",
+                        "format": "int32",
+                        "title": "总条目数"
+                    },
+                    "offset": {
+                        "type": "integer",
+                        "format": "int32",
+                        "title": "偏移量"
+                    },
+                    "limit": {
+                        "type": "integer",
+                        "format": "int32",
+                        "title": "每页条目数"
+                    },
+                    "list": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/openAnalysisTaskAdPagingRspItem"
+                        },
+                        "title": "当前页详细数据"
+                    }
+                }
+            },
+            "openAnalysisTaskAdPagingRspItem": {
+                "type": "object",
+                "properties": {
+                    "task_time": {
+                        "type": "string",
+                        "title": "任务结束时归属时段（hour时用Y-m-d H:i:s时间，day时用Y-m-d日期，all时无此字段）"
+                    },
+                    "mac": {
+                        "type": "string",
+                        "title": "MAC"
+                    },
+                    "shop_id": {
+                        "type": "integer",
+                        "format": "int64",
+                        "title": "门店ID"
+                    },
+                    "shop_name": {
+                        "type": "string",
+                        "title": "门店名称"
+                    },
+                    "product_code": {
+                        "type": "string",
+                        "title": "产品枚举；注：按机器分组时有效"
+                    },
+                    "tiny_play_duration": {
+                        "type": "number",
+                        "format": "double",
+                        "title": "小屏广告播放时长(h)"
+                    },
+                    "tiny_play_times": {
+                        "type": "integer",
+                        "format": "int32",
+                        "title": "小屏广告播放次数"
+                    },
+                    "big_play_duration": {
+                        "type": "number",
+                        "format": "double",
+                        "title": "大屏广告播放时长(h)"
+                    },
+                    "big_play_times": {
+                        "type": "integer",
+                        "format": "int32",
+                        "title": "大屏广告播放次数"
+                    },
+                    "sn": {
+                        "type": "string",
+                        "title": "设备SN；注：按机器分组时有效"
+                    },
+                    "run_count": {
+                        "type": "integer",
+                        "format": "int32",
+                        "title": "运行机器人数；注：按门店分组时有效"
+                    },
+                    "bind_count": {
+                        "type": "integer",
+                        "format": "int32",
+                        "title": "绑定机器人数；注：按门店分组时有效"
+                    },
+                    "robot_name": {
+                        "type": "string",
+                        "title": "机器人昵称；注：按机器分组时有效"
+                    },
+                    "work_days": {
+                        "type": "integer",
+                        "format": "int32",
+                        "title": "工作天数(仅all汇总时有效)"
+                    }
+                }
+            },
+            "openAnalysisTaskAdRsp": {
+                "type": "object",
+                "properties": {
+                    "message": {
+                        "type": "string"
+                    },
+                    "data": {
+                        "$ref": "#/components/schemas/openAnalysisTaskAdRspData"
+                    }
+                },
+                "title": "出参:广告"
+            },
+            "openAnalysisTaskAdRspChartItem": {
+                "type": "object",
+                "properties": {
+                    "task_time": {
+                        "type": "string",
+                        "title": "横坐标时间（hour时用0-24小时，day时用Y-m-d日期）"
+                    },
+                    "tiny_play_duration": {
+                        "type": "number",
+                        "format": "double",
+                        "title": "小屏广告播放时长(h)"
+                    },
+                    "tiny_play_times": {
+                        "type": "integer",
+                        "format": "int32",
+                        "title": "小屏广告播放次数"
+                    },
+                    "big_play_duration": {
+                        "type": "number",
+                        "format": "double",
+                        "title": "大屏广告播放时长(h)"
+                    },
+                    "big_play_times": {
+                        "type": "integer",
+                        "format": "int32",
+                        "title": "大屏广告播放次数"
+                    }
+                }
+            },
+            "openAnalysisTaskAdRspData": {
+                "type": "object",
+                "properties": {
+                    "summary": {
+                        "$ref": "#/components/schemas/openAnalysisTaskAdRspItem"
+                    },
+                    "qoq": {
+                        "$ref": "#/components/schemas/openAnalysisTaskAdRspItem"
+                    },
+                    "chart": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/openAnalysisTaskAdRspChartItem"
+                        },
+                        "title": "折线图的数据"
+                    },
+                    "qoq_chart": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/openAnalysisTaskAdRspChartItem"
+                        },
+                        "title": "环比折线图的数据"
+                    }
+                }
+            },
+            "openAnalysisTaskAdRspItem": {
+                "type": "object",
+                "properties": {
+                    "tiny_play_duration": {
+                        "type": "number",
+                        "format": "double",
+                        "title": "小屏广告播放时长(h)"
+                    },
+                    "tiny_play_times": {
+                        "type": "integer",
+                        "format": "int32",
+                        "title": "小屏广告播放次数"
+                    },
+                    "big_play_duration": {
+                        "type": "number",
+                        "format": "double",
+                        "title": "大屏广告播放时长(h)"
+                    },
+                    "big_play_times": {
+                        "type": "integer",
+                        "format": "int32",
+                        "title": "大屏广告播放次数"
+                    }
+                }
+            },
+            "openAnalysisTaskCallPagingRsp": {
+                "type": "object",
+                "properties": {
+                    "message": {
+                        "type": "string"
+                    },
+                    "data": {
+                        "$ref": "#/components/schemas/openAnalysisTaskCallPagingRspData"
+                    }
+                },
+                "title": "出参:呼叫(分页)"
+            },
+            "openAnalysisTaskCallPagingRspData": {
+                "type": "object",
+                "properties": {
+                    "total": {
+                        "type": "integer",
+                        "format": "int32",
+                        "title": "总条目数"
+                    },
+                    "offset": {
+                        "type": "integer",
+                        "format": "int32",
+                        "title": "偏移量"
+                    },
+                    "limit": {
+                        "type": "integer",
+                        "format": "int32",
+                        "title": "每页条目数"
+                    },
+                    "list": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/openAnalysisTaskCallPagingRspItem"
+                        },
+                        "title": "当前页详细数据"
+                    }
+                }
+            },
+            "openAnalysisTaskCallPagingRspItem": {
+                "type": "object",
+                "properties": {
+                    "task_time": {
+                        "type": "string",
+                        "title": "任务结束时归属时段（hour时用Y-m-d H:i:s时间，day时用Y-m-d日期，all时无此字段）"
+                    },
+                    "mac": {
+                        "type": "string",
+                        "title": "MAC"
+                    },
+                    "shop_id": {
+                        "type": "integer",
+                        "format": "int64",
+                        "title": "门店ID"
+                    },
+                    "shop_name": {
+                        "type": "string",
+                        "title": "门店名称"
+                    },
+                    "product_code": {
+                        "type": "string",
+                        "title": "产品枚举；注：按机器分组时有效"
+                    },
+                    "mileage": {
+                        "type": "number",
+                        "format": "double",
+                        "title": "运行里程(km)"
+                    },
+                    "duration": {
+                        "type": "number",
+                        "format": "double",
+                        "title": "运行时长(h)"
+                    },
+                    "sn": {
+                        "type": "string",
+                        "title": "设备SN；注：按机器分组时有效"
+                    },
+                    "run_count": {
+                        "type": "integer",
+                        "format": "int32",
+                        "title": "运行机器人数；注：按门店分组时有效"
+                    },
+                    "bind_count": {
+                        "type": "integer",
+                        "format": "int32",
+                        "title": "绑定机器人数；注：按门店分组时有效"
+                    },
+                    "task_count": {
+                        "type": "integer",
+                        "format": "int32",
+                        "title": "呼叫任务数"
+                    },
+                    "robot_name": {
+                        "type": "string",
+                        "title": "机器人昵称；注：按机器分组时有效"
+                    },
+                    "destination_count": {
+                        "type": "integer",
+                        "format": "int32",
+                        "title": "目的地数"
+                    },
+                    "finished_destination_count": {
+                        "type": "integer",
+                        "format": "int32",
+                        "title": "完成目的地数"
+                    },
+                    "work_days": {
+                        "type": "integer",
+                        "format": "int32",
+                        "title": "工作天数(仅all汇总时有效)"
+                    }
+                }
+            },
+            "openAnalysisTaskCallRsp": {
+                "type": "object",
+                "properties": {
+                    "message": {
+                        "type": "string"
+                    },
+                    "data": {
+                        "$ref": "#/components/schemas/openAnalysisTaskCallRspData"
+                    }
+                },
+                "title": "出参:呼叫"
+            },
+            "openAnalysisTaskCallRspChartItem": {
+                "type": "object",
+                "properties": {
+                    "task_time": {
+                        "type": "string",
+                        "title": "横坐标时间（hour时用0-24小时，day时用Y-m-d日期）"
+                    },
+                    "mileage": {
+                        "type": "number",
+                        "format": "double",
+                        "title": "运行里程(km)"
+                    },
+                    "duration": {
+                        "type": "number",
+                        "format": "double",
+                        "title": "运行时长(h)"
+                    },
+                    "task_count": {
+                        "type": "integer",
+                        "format": "int32",
+                        "title": "呼叫任务数"
+                    },
+                    "destination_count": {
+                        "type": "integer",
+                        "format": "int32",
+                        "title": "目的地数"
+                    },
+                    "finished_destination_count": {
+                        "type": "integer",
+                        "format": "int32",
+                        "title": "完成目的地数"
+                    }
+                }
+            },
+            "openAnalysisTaskCallRspData": {
+                "type": "object",
+                "properties": {
+                    "summary": {
+                        "$ref": "#/components/schemas/openAnalysisTaskCallRspItem"
+                    },
+                    "qoq": {
+                        "$ref": "#/components/schemas/openAnalysisTaskCallRspItem"
+                    },
+                    "chart": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/openAnalysisTaskCallRspChartItem"
+                        },
+                        "title": "折线图的数据"
+                    },
+                    "qoq_chart": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/openAnalysisTaskCallRspChartItem"
+                        },
+                        "title": "环比折线图的数据"
+                    }
+                }
+            },
+            "openAnalysisTaskCallRspItem": {
+                "type": "object",
+                "properties": {
+                    "mileage": {
+                        "type": "number",
+                        "format": "double",
+                        "title": "运行里程(km)"
+                    },
+                    "duration": {
+                        "type": "number",
+                        "format": "double",
+                        "title": "运行时长(h)"
+                    },
+                    "task_count": {
+                        "type": "integer",
+                        "format": "int32",
+                        "title": "呼叫任务数"
+                    },
+                    "destination_count": {
+                        "type": "integer",
+                        "format": "int32",
+                        "title": "目的地数"
+                    },
+                    "finished_destination_count": {
+                        "type": "integer",
+                        "format": "int32",
+                        "title": "完成目的地数"
+                    }
+                }
+            },
+            "openAnalysisTaskCruisePagingRsp": {
+                "type": "object",
+                "properties": {
+                    "message": {
+                        "type": "string"
+                    },
+                    "data": {
+                        "$ref": "#/components/schemas/openAnalysisTaskCruisePagingRspData"
+                    }
+                },
+                "title": "出参:巡航(分页)"
+            },
+            "openAnalysisTaskCruisePagingRspData": {
+                "type": "object",
+                "properties": {
+                    "total": {
+                        "type": "integer",
+                        "format": "int32",
+                        "title": "总条目数"
+                    },
+                    "offset": {
+                        "type": "integer",
+                        "format": "int32",
+                        "title": "偏移量"
+                    },
+                    "limit": {
+                        "type": "integer",
+                        "format": "int32",
+                        "title": "每页条目数"
+                    },
+                    "list": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/openAnalysisTaskCruisePagingRspItem"
+                        },
+                        "title": "当前页详细数据"
+                    }
+                }
+            },
+            "openAnalysisTaskCruisePagingRspItem": {
+                "type": "object",
+                "properties": {
+                    "task_time": {
+                        "type": "string",
+                        "title": "任务结束时归属时段（hour时用Y-m-d H:i:s时间，day时用Y-m-d日期，all时无此字段）"
+                    },
+                    "mac": {
+                        "type": "string",
+                        "title": "MAC"
+                    },
+                    "shop_id": {
+                        "type": "integer",
+                        "format": "int64",
+                        "title": "门店ID"
+                    },
+                    "shop_name": {
+                        "type": "string",
+                        "title": "门店名称"
+                    },
+                    "product_code": {
+                        "type": "string",
+                        "title": "产品枚举；注：按机器分组时有效"
+                    },
+                    "mileage": {
+                        "type": "number",
+                        "format": "double",
+                        "title": "运行里程(km)"
+                    },
+                    "duration": {
+                        "type": "number",
+                        "format": "double",
+                        "title": "运行时长(h)"
+                    },
+                    "interactive_count": {
+                        "type": "integer",
+                        "format": "int32",
+                        "title": "互动人次"
+                    },
+                    "interactive_duration": {
+                        "type": "number",
+                        "format": "double",
+                        "title": "互动时长(h)"
+                    },
+                    "sn": {
+                        "type": "string",
+                        "title": "设备SN；注：按机器分组时有效"
+                    },
+                    "run_count": {
+                        "type": "integer",
+                        "format": "int32",
+                        "title": "运行机器人数；注：按门店分组时有效"
+                    },
+                    "bind_count": {
+                        "type": "integer",
+                        "format": "int32",
+                        "title": "绑定机器人数；注：按门店分组时有效"
+                    },
+                    "task_count": {
+                        "type": "integer",
+                        "format": "int32",
+                        "title": "任务数"
+                    },
+                    "robot_name": {
+                        "type": "string",
+                        "title": "机器人昵称；注：按机器分组时有效"
+                    },
+                    "work_days": {
+                        "type": "integer",
+                        "format": "int32",
+                        "title": "工作天数(仅all汇总时有效)"
+                    }
+                }
+            },
+            "openAnalysisTaskCruiseRsp": {
+                "type": "object",
+                "properties": {
+                    "message": {
+                        "type": "string"
+                    },
+                    "data": {
+                        "$ref": "#/components/schemas/openAnalysisTaskCruiseRspData"
+                    }
+                },
+                "title": "出参:巡航"
+            },
+            "openAnalysisTaskCruiseRspChartItem": {
+                "type": "object",
+                "properties": {
+                    "task_time": {
+                        "type": "string",
+                        "title": "横坐标时间（hour时用0-24小时，day时用Y-m-d日期）"
+                    },
+                    "mileage": {
+                        "type": "number",
+                        "format": "double",
+                        "title": "运行里程(km)"
+                    },
+                    "duration": {
+                        "type": "number",
+                        "format": "double",
+                        "title": "运行时长(h)"
+                    },
+                    "interactive_count": {
+                        "type": "integer",
+                        "format": "int32",
+                        "title": "互动人次"
+                    },
+                    "interactive_duration": {
+                        "type": "number",
+                        "format": "double",
+                        "title": "互动时长(h)"
+                    },
+                    "task_count": {
+                        "type": "integer",
+                        "format": "int32",
+                        "title": "任务数"
+                    }
+                }
+            },
+            "openAnalysisTaskCruiseRspData": {
+                "type": "object",
+                "properties": {
+                    "summary": {
+                        "$ref": "#/components/schemas/openAnalysisTaskCruiseRspItem"
+                    },
+                    "qoq": {
+                        "$ref": "#/components/schemas/openAnalysisTaskCruiseRspItem"
+                    },
+                    "chart": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/openAnalysisTaskCruiseRspChartItem"
+                        },
+                        "title": "折线图的数据"
+                    },
+                    "qoq_chart": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/openAnalysisTaskCruiseRspChartItem"
+                        },
+                        "title": "环比折线图的数据"
+                    }
+                }
+            },
+            "openAnalysisTaskCruiseRspItem": {
+                "type": "object",
+                "properties": {
+                    "mileage": {
+                        "type": "number",
+                        "format": "double",
+                        "title": "运行里程(km)"
+                    },
+                    "duration": {
+                        "type": "number",
+                        "format": "double",
+                        "title": "运行时长(h)"
+                    },
+                    "interactive_count": {
+                        "type": "integer",
+                        "format": "int32",
+                        "title": "互动人次"
+                    },
+                    "interactive_duration": {
+                        "type": "number",
+                        "format": "double",
+                        "title": "互动时长(h)"
+                    },
+                    "task_count": {
+                        "type": "integer",
+                        "format": "int32",
+                        "title": "任务数"
+                    }
+                }
+            },
+            "openAnalysisTaskDeliveryPagingRsp": {
+                "type": "object",
+                "properties": {
+                    "message": {
+                        "type": "string"
+                    },
+                    "data": {
+                        "$ref": "#/components/schemas/openAnalysisTaskDeliveryPagingRspData"
+                    }
+                },
+                "title": "出参:配送(分页)"
+            },
+            "openAnalysisTaskDeliveryPagingRspData": {
+                "type": "object",
+                "properties": {
+                    "total": {
+                        "type": "integer",
+                        "format": "int32",
+                        "title": "总条目数"
+                    },
+                    "offset": {
+                        "type": "integer",
+                        "format": "int32",
+                        "title": "偏移量"
+                    },
+                    "limit": {
+                        "type": "integer",
+                        "format": "int32",
+                        "title": "每页条目数"
+                    },
+                    "list": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/openAnalysisTaskDeliveryPagingRspItem"
+                        },
+                        "title": "当前页详细数据"
+                    }
+                }
+            },
+            "openAnalysisTaskDeliveryPagingRspItem": {
+                "type": "object",
+                "properties": {
+                    "task_time": {
+                        "type": "string",
+                        "title": "任务结束时归属时段（hour时用Y-m-d H:i:s时间，day时用Y-m-d日期，all时无此字段）"
+                    },
+                    "mac": {
+                        "type": "string",
+                        "title": "MAC"
+                    },
+                    "shop_id": {
+                        "type": "integer",
+                        "format": "int64",
+                        "title": "门店ID"
+                    },
+                    "shop_name": {
+                        "type": "string",
+                        "title": "门店名称"
+                    },
+                    "product_code": {
+                        "type": "string",
+                        "title": "产品枚举；注：按机器分组时有效"
+                    },
+                    "mileage": {
+                        "type": "number",
+                        "format": "double",
+                        "title": "运行里程(km)"
+                    },
+                    "duration": {
+                        "type": "number",
+                        "format": "double",
+                        "title": "运行时长(h)"
+                    },
+                    "table_count": {
+                        "type": "integer",
+                        "format": "int32",
+                        "title": "配送桌数"
+                    },
+                    "tray_count": {
+                        "type": "integer",
+                        "format": "int32",
+                        "title": "配送餐盘数"
+                    },
+                    "sn": {
+                        "type": "string",
+                        "title": "设备SN；注：按机器分组时有效"
+                    },
+                    "task_count": {
+                        "type": "integer",
+                        "format": "int32",
+                        "title": "任务数"
+                    },
+                    "speed": {
+                        "type": "number",
+                        "format": "double",
+                        "title": "平均速度m/s"
+                    },
+                    "run_count": {
+                        "type": "integer",
+                        "format": "int32",
+                        "title": "运行机器人数；注：按门店分组时有效"
+                    },
+                    "bind_count": {
+                        "type": "integer",
+                        "format": "int32",
+                        "title": "绑定机器人数；注：按门店分组时有效"
+                    },
+                    "robot_name": {
+                        "type": "string",
+                        "title": "机器人昵称；注：按机器分组时有效"
+                    },
+                    "work_days": {
+                        "type": "integer",
+                        "format": "int32",
+                        "title": "工作天数(仅all汇总时有效)"
+                    }
+                }
+            },
+            "openAnalysisTaskDeliveryRsp": {
+                "type": "object",
+                "properties": {
+                    "message": {
+                        "type": "string"
+                    },
+                    "data": {
+                        "$ref": "#/components/schemas/openAnalysisTaskDeliveryRspData"
+                    }
+                },
+                "title": "出参:配送"
+            },
+            "openAnalysisTaskDeliveryRspChartItem": {
+                "type": "object",
+                "properties": {
+                    "task_time": {
+                        "type": "string",
+                        "title": "横坐标时间（hour时用0-24小时，day时用Y-m-d日期）"
+                    },
+                    "mileage": {
+                        "type": "number",
+                        "format": "double",
+                        "title": "运行里程(km)"
+                    },
+                    "duration": {
+                        "type": "number",
+                        "format": "double",
+                        "title": "运行时长(h)"
+                    },
+                    "table_count": {
+                        "type": "integer",
+                        "format": "int32",
+                        "title": "配送桌数"
+                    },
+                    "tray_count": {
+                        "type": "integer",
+                        "format": "int32",
+                        "title": "配送餐盘数"
+                    },
+                    "task_count": {
+                        "type": "integer",
+                        "format": "int32",
+                        "title": "任务数"
+                    }
+                }
+            },
+            "openAnalysisTaskDeliveryRspData": {
+                "type": "object",
+                "properties": {
+                    "summary": {
+                        "$ref": "#/components/schemas/openAnalysisTaskDeliveryRspItem"
+                    },
+                    "qoq": {
+                        "$ref": "#/components/schemas/openAnalysisTaskDeliveryRspItem"
+                    },
+                    "chart": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/openAnalysisTaskDeliveryRspChartItem"
+                        },
+                        "title": "折线图的数据"
+                    },
+                    "qoq_chart": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/openAnalysisTaskDeliveryRspChartItem"
+                        },
+                        "title": "环比折线图的数据"
+                    }
+                }
+            },
+            "openAnalysisTaskDeliveryRspItem": {
+                "type": "object",
+                "properties": {
+                    "mileage": {
+                        "type": "number",
+                        "format": "double",
+                        "title": "运行里程(km)"
+                    },
+                    "duration": {
+                        "type": "number",
+                        "format": "double",
+                        "title": "运行时长(h)"
+                    },
+                    "table_count": {
+                        "type": "integer",
+                        "format": "int32",
+                        "title": "配送桌数"
+                    },
+                    "tray_count": {
+                        "type": "integer",
+                        "format": "int32",
+                        "title": "配送餐盘数"
+                    },
+                    "task_count": {
+                        "type": "integer",
+                        "format": "int32",
+                        "title": "任务数"
+                    }
+                }
+            },
+            "openAnalysisTaskGreeterPagingRsp": {
+                "type": "object",
+                "properties": {
+                    "message": {
+                        "type": "string"
+                    },
+                    "data": {
+                        "$ref": "#/components/schemas/openAnalysisTaskGreeterPagingRspData"
+                    }
+                },
+                "title": "出参:领位(分页)"
+            },
+            "openAnalysisTaskGreeterPagingRspData": {
+                "type": "object",
+                "properties": {
+                    "total": {
+                        "type": "integer",
+                        "format": "int32",
+                        "title": "总条目数"
+                    },
+                    "offset": {
+                        "type": "integer",
+                        "format": "int32",
+                        "title": "偏移量"
+                    },
+                    "limit": {
+                        "type": "integer",
+                        "format": "int32",
+                        "title": "每页条目数"
+                    },
+                    "list": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/openAnalysisTaskGreeterPagingRspItem"
+                        },
+                        "title": "当前页详细数据"
+                    }
+                }
+            },
+            "openAnalysisTaskGreeterPagingRspItem": {
+                "type": "object",
+                "properties": {
+                    "task_time": {
+                        "type": "string",
+                        "title": "任务结束时归属时段（hour时用Y-m-d H:i:s时间，day时用Y-m-d日期，all时无此字段）"
+                    },
+                    "mac": {
+                        "type": "string",
+                        "title": "MAC"
+                    },
+                    "shop_id": {
+                        "type": "integer",
+                        "format": "int64",
+                        "title": "门店ID"
+                    },
+                    "shop_name": {
+                        "type": "string",
+                        "title": "门店名称"
+                    },
+                    "product_code": {
+                        "type": "string",
+                        "title": "产品枚举；注：按机器分组时有效"
+                    },
+                    "mileage": {
+                        "type": "number",
+                        "format": "double",
+                        "title": "运行里程(km)"
+                    },
+                    "duration": {
+                        "type": "number",
+                        "format": "double",
+                        "title": "运行时长(h)"
+                    },
+                    "destination_count": {
+                        "type": "integer",
+                        "format": "int32",
+                        "title": "领位带客次数"
+                    },
+                    "sn": {
+                        "type": "string",
+                        "title": "设备SN；注：按机器分组时有效"
+                    },
+                    "run_count": {
+                        "type": "integer",
+                        "format": "int32",
+                        "title": "运行机器人数；注：按门店分组时有效"
+                    },
+                    "bind_count": {
+                        "type": "integer",
+                        "format": "int32",
+                        "title": "绑定机器人数；注：按门店分组时有效"
+                    },
+                    "task_count": {
+                        "type": "integer",
+                        "format": "int32",
+                        "title": "领位任务数"
+                    },
+                    "robot_name": {
+                        "type": "string",
+                        "title": "机器人昵称；注：按机器分组时有效"
+                    },
+                    "work_days": {
+                        "type": "integer",
+                        "format": "int32",
+                        "title": "工作天数(仅all汇总时有效)"
+                    }
+                }
+            },
+            "openAnalysisTaskGreeterRsp": {
+                "type": "object",
+                "properties": {
+                    "message": {
+                        "type": "string"
+                    },
+                    "data": {
+                        "$ref": "#/components/schemas/openAnalysisTaskGreeterRspData"
+                    }
+                },
+                "title": "出参:领位"
+            },
+            "openAnalysisTaskGreeterRspChartItem": {
+                "type": "object",
+                "properties": {
+                    "task_time": {
+                        "type": "string",
+                        "title": "横坐标时间（hour时用0-24小时，day时用Y-m-d日期）"
+                    },
+                    "mileage": {
+                        "type": "number",
+                        "format": "double",
+                        "title": "运行里程(km)"
+                    },
+                    "duration": {
+                        "type": "number",
+                        "format": "double",
+                        "title": "运行时长(h)"
+                    },
+                    "destination_count": {
+                        "type": "integer",
+                        "format": "int32",
+                        "title": "领位带客次数"
+                    },
+                    "task_count": {
+                        "type": "integer",
+                        "format": "int32",
+                        "title": "领位任务数"
+                    }
+                }
+            },
+            "openAnalysisTaskGreeterRspData": {
+                "type": "object",
+                "properties": {
+                    "summary": {
+                        "$ref": "#/components/schemas/openAnalysisTaskGreeterRspItem"
+                    },
+                    "qoq": {
+                        "$ref": "#/components/schemas/openAnalysisTaskGreeterRspItem"
+                    },
+                    "chart": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/openAnalysisTaskGreeterRspChartItem"
+                        },
+                        "title": "折线图的数据"
+                    },
+                    "qoq_chart": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/openAnalysisTaskGreeterRspChartItem"
+                        },
+                        "title": "环比折线图的数据"
+                    }
+                }
+            },
+            "openAnalysisTaskGreeterRspItem": {
+                "type": "object",
+                "properties": {
+                    "mileage": {
+                        "type": "number",
+                        "format": "double",
+                        "title": "运行里程(km)"
+                    },
+                    "duration": {
+                        "type": "number",
+                        "format": "double",
+                        "title": "运行时长(h)"
+                    },
+                    "destination_count": {
+                        "type": "integer",
+                        "format": "int32",
+                        "title": "领位带客次数"
+                    },
+                    "task_count": {
+                        "type": "integer",
+                        "format": "int32",
+                        "title": "领位任务数"
+                    }
+                }
+            },
+            "openAnalysisTaskGridPagingRsp": {
+                "type": "object",
+                "properties": {
+                    "message": {
+                        "type": "string"
+                    },
+                    "data": {
+                        "$ref": "#/components/schemas/openAnalysisTaskGridPagingRspData"
+                    }
+                },
+                "title": "出参:宫格(分页)"
+            },
+            "openAnalysisTaskGridPagingRspData": {
+                "type": "object",
+                "properties": {
+                    "total": {
+                        "type": "integer",
+                        "format": "int32",
+                        "title": "总条目数"
+                    },
+                    "offset": {
+                        "type": "integer",
+                        "format": "int32",
+                        "title": "偏移量"
+                    },
+                    "limit": {
+                        "type": "integer",
+                        "format": "int32",
+                        "title": "每页条目数"
+                    },
+                    "list": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/openAnalysisTaskGridPagingRspItem"
+                        },
+                        "title": "当前页详细数据"
+                    }
+                }
+            },
+            "openAnalysisTaskGridPagingRspItem": {
+                "type": "object",
+                "properties": {
+                    "task_time": {
+                        "type": "string",
+                        "title": "任务结束时归属时段（hour时用Y-m-d H:i:s时间，day时用Y-m-d日期，all时无此字段）"
+                    },
+                    "mac": {
+                        "type": "string",
+                        "title": "MAC"
+                    },
+                    "shop_id": {
+                        "type": "integer",
+                        "format": "int64",
+                        "title": "门店ID"
+                    },
+                    "shop_name": {
+                        "type": "string",
+                        "title": "门店名称"
+                    },
+                    "product_code": {
+                        "type": "string",
+                        "title": "产品枚举；注：按机器分组时有效"
+                    },
+                    "take_me_in_count": {
+                        "type": "integer",
+                        "format": "int32",
+                        "title": "点击次数:带我进店"
+                    },
+                    "featured_item_count": {
+                        "type": "integer",
+                        "format": "int32",
+                        "title": "点击次数:特色商品"
+                    },
+                    "favorable_promotions_count": {
+                        "type": "integer",
+                        "format": "int32",
+                        "title": "点击次数:优惠活动"
+                    },
+                    "guide_to_menu_count": {
+                        "type": "integer",
+                        "format": "int32",
+                        "title": "点击次数:领位"
+                    },
+                    "poster_count": {
+                        "type": "integer",
+                        "format": "int32",
+                        "title": "点击次数:海报"
+                    },
+                    "usher_count": {
+                        "type": "integer",
+                        "format": "int32",
+                        "title": "点击次数:带路"
+                    },
+                    "dance_count": {
+                        "type": "integer",
+                        "format": "int32",
+                        "title": "点击次数:跳舞"
+                    },
+                    "video_poster_count": {
+                        "type": "integer",
+                        "format": "int32",
+                        "title": "点击次数:视频"
+                    },
+                    "sn": {
+                        "type": "string",
+                        "title": "设备SN；注：按机器分组时有效"
+                    },
+                    "run_count": {
+                        "type": "integer",
+                        "format": "int32",
+                        "title": "运行机器人数；注：按门店分组时有效"
+                    },
+                    "bind_count": {
+                        "type": "integer",
+                        "format": "int32",
+                        "title": "绑定机器人数；注：按门店分组时有效"
+                    },
+                    "robot_name": {
+                        "type": "string",
+                        "title": "机器人昵称；注：按机器分组时有效"
+                    },
+                    "work_days": {
+                        "type": "integer",
+                        "format": "int32",
+                        "title": "工作天数(仅all汇总时有效)"
+                    }
+                }
+            },
+            "openAnalysisTaskGridRsp": {
+                "type": "object",
+                "properties": {
+                    "message": {
+                        "type": "string"
+                    },
+                    "data": {
+                        "$ref": "#/components/schemas/openAnalysisTaskGridRspData"
+                    }
+                },
+                "title": "出参:宫格"
+            },
+            "openAnalysisTaskGridRspChartItem": {
+                "type": "object",
+                "properties": {
+                    "task_time": {
+                        "type": "string",
+                        "title": "横坐标时间（hour时用0-24小时，day时用Y-m-d日期）"
+                    },
+                    "take_me_in_count": {
+                        "type": "integer",
+                        "format": "int32",
+                        "title": "点击次数:带我进店"
+                    },
+                    "featured_item_count": {
+                        "type": "integer",
+                        "format": "int32",
+                        "title": "点击次数:特色商品"
+                    },
+                    "favorable_promotions_count": {
+                        "type": "integer",
+                        "format": "int32",
+                        "title": "点击次数:优惠活动"
+                    },
+                    "guide_to_menu_count": {
+                        "type": "integer",
+                        "format": "int32",
+                        "title": "点击次数:领位"
+                    },
+                    "poster_count": {
+                        "type": "integer",
+                        "format": "int32",
+                        "title": "点击次数:海报"
+                    },
+                    "usher_count": {
+                        "type": "integer",
+                        "format": "int32",
+                        "title": "点击次数:带路"
+                    },
+                    "dance_count": {
+                        "type": "integer",
+                        "format": "int32",
+                        "title": "点击次数:跳舞"
+                    },
+                    "video_poster_count": {
+                        "type": "integer",
+                        "format": "int32",
+                        "title": "点击次数:视频"
+                    }
+                }
+            },
+            "openAnalysisTaskGridRspData": {
+                "type": "object",
+                "properties": {
+                    "summary": {
+                        "$ref": "#/components/schemas/openAnalysisTaskGridRspItem"
+                    },
+                    "qoq": {
+                        "$ref": "#/components/schemas/openAnalysisTaskGridRspItem"
+                    },
+                    "chart": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/openAnalysisTaskGridRspChartItem"
+                        },
+                        "title": "折线图的数据"
+                    },
+                    "qoq_chart": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/openAnalysisTaskGridRspChartItem"
+                        },
+                        "title": "环比折线图的数据"
+                    }
+                }
+            },
+            "openAnalysisTaskGridRspItem": {
+                "type": "object",
+                "properties": {
+                    "take_me_in_count": {
+                        "type": "integer",
+                        "format": "int32",
+                        "title": "点击次数:带我进店"
+                    },
+                    "featured_item_count": {
+                        "type": "integer",
+                        "format": "int32",
+                        "title": "点击次数:特色商品"
+                    },
+                    "favorable_promotions_count": {
+                        "type": "integer",
+                        "format": "int32",
+                        "title": "点击次数:优惠活动"
+                    },
+                    "guide_to_menu_count": {
+                        "type": "integer",
+                        "format": "int32",
+                        "title": "点击次数:领位"
+                    },
+                    "poster_count": {
+                        "type": "integer",
+                        "format": "int32",
+                        "title": "点击次数:海报"
+                    },
+                    "usher_count": {
+                        "type": "integer",
+                        "format": "int32",
+                        "title": "点击次数:带路"
+                    },
+                    "dance_count": {
+                        "type": "integer",
+                        "format": "int32",
+                        "title": "点击次数:跳舞"
+                    },
+                    "video_poster_count": {
+                        "type": "integer",
+                        "format": "int32",
+                        "title": "点击次数:视频"
+                    }
+                }
+            },
+            "openAnalysisTaskInteractivePagingRsp": {
+                "type": "object",
+                "properties": {
+                    "message": {
+                        "type": "string"
+                    },
+                    "data": {
+                        "$ref": "#/components/schemas/openAnalysisTaskInteractivePagingRspData"
+                    }
+                },
+                "title": "出参:互动(分页)"
+            },
+            "openAnalysisTaskInteractivePagingRspData": {
+                "type": "object",
+                "properties": {
+                    "total": {
+                        "type": "integer",
+                        "format": "int32",
+                        "title": "总条目数"
+                    },
+                    "offset": {
+                        "type": "integer",
+                        "format": "int32",
+                        "title": "偏移量"
+                    },
+                    "limit": {
+                        "type": "integer",
+                        "format": "int32",
+                        "title": "每页条目数"
+                    },
+                    "list": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/openAnalysisTaskInteractivePagingRspItem"
+                        },
+                        "title": "当前页详细数据"
+                    }
+                }
+            },
+            "openAnalysisTaskInteractivePagingRspItem": {
+                "type": "object",
+                "properties": {
+                    "task_time": {
+                        "type": "string",
+                        "title": "任务结束时归属时段（hour时用Y-m-d H:i:s时间，day时用Y-m-d日期，all时无此字段）"
+                    },
+                    "mac": {
+                        "type": "string",
+                        "title": "MAC"
+                    },
+                    "shop_id": {
+                        "type": "integer",
+                        "format": "int64",
+                        "title": "门店ID"
+                    },
+                    "shop_name": {
+                        "type": "string",
+                        "title": "门店名称"
+                    },
+                    "product_code": {
+                        "type": "string",
+                        "title": "产品枚举；注：按机器分组时有效"
+                    },
+                    "interactive_count": {
+                        "type": "integer",
+                        "format": "int32",
+                        "title": "互动人次"
+                    },
+                    "voice_count": {
+                        "type": "integer",
+                        "format": "int32",
+                        "title": "语音互动人次"
+                    },
+                    "voice_duration": {
+                        "type": "number",
+                        "format": "double",
+                        "title": "语音互动时长(h)"
+                    },
+                    "sn": {
+                        "type": "string",
+                        "title": "设备SN；注：按机器分组时有效"
+                    },
+                    "run_count": {
+                        "type": "integer",
+                        "format": "int32",
+                        "title": "运行机器人数；注：按门店分组时有效"
+                    },
+                    "bind_count": {
+                        "type": "integer",
+                        "format": "int32",
+                        "title": "绑定机器人数；注：按门店分组时有效"
+                    },
+                    "robot_name": {
+                        "type": "string",
+                        "title": "机器人昵称；注：按机器分组时有效"
+                    },
+                    "work_days": {
+                        "type": "integer",
+                        "format": "int32",
+                        "title": "工作天数(仅all汇总时有效)"
+                    }
+                }
+            },
+            "openAnalysisTaskInteractiveRsp": {
+                "type": "object",
+                "properties": {
+                    "message": {
+                        "type": "string"
+                    },
+                    "data": {
+                        "$ref": "#/components/schemas/openAnalysisTaskInteractiveRspData"
+                    }
+                },
+                "title": "出参:互动"
+            },
+            "openAnalysisTaskInteractiveRspChartItem": {
+                "type": "object",
+                "properties": {
+                    "task_time": {
+                        "type": "string",
+                        "title": "横坐标时间（hour时用0-24小时，day时用Y-m-d日期）"
+                    },
+                    "interactive_count": {
+                        "type": "integer",
+                        "format": "int32",
+                        "title": "互动人次"
+                    },
+                    "voice_count": {
+                        "type": "integer",
+                        "format": "int32",
+                        "title": "语音互动人次"
+                    },
+                    "voice_duration": {
+                        "type": "number",
+                        "format": "double",
+                        "title": "语音互动时长(h)"
+                    }
+                }
+            },
+            "openAnalysisTaskInteractiveRspData": {
+                "type": "object",
+                "properties": {
+                    "summary": {
+                        "$ref": "#/components/schemas/openAnalysisTaskInteractiveRspItem"
+                    },
+                    "qoq": {
+                        "$ref": "#/components/schemas/openAnalysisTaskInteractiveRspItem"
+                    },
+                    "chart": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/openAnalysisTaskInteractiveRspChartItem"
+                        },
+                        "title": "折线图的数据"
+                    },
+                    "qoq_chart": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/openAnalysisTaskInteractiveRspChartItem"
+                        },
+                        "title": "环比折线图的数据"
+                    }
+                }
+            },
+            "openAnalysisTaskInteractiveRspItem": {
+                "type": "object",
+                "properties": {
+                    "interactive_count": {
+                        "type": "integer",
+                        "format": "int32",
+                        "title": "互动人次"
+                    },
+                    "voice_count": {
+                        "type": "integer",
+                        "format": "int32",
+                        "title": "语音互动人次"
+                    },
+                    "voice_duration": {
+                        "type": "number",
+                        "format": "double",
+                        "title": "语音互动时长(h)"
+                    }
+                }
+            },
+            "openAnalysisTaskRecoveryPagingRsp": {
+                "type": "object",
+                "properties": {
+                    "message": {
+                        "type": "string"
+                    },
+                    "data": {
+                        "$ref": "#/components/schemas/openAnalysisTaskRecoveryPagingRspData"
+                    }
+                },
+                "title": "出参:回盘(分页)"
+            },
+            "openAnalysisTaskRecoveryPagingRspData": {
+                "type": "object",
+                "properties": {
+                    "total": {
+                        "type": "integer",
+                        "format": "int32",
+                        "title": "总条目数"
+                    },
+                    "offset": {
+                        "type": "integer",
+                        "format": "int32",
+                        "title": "偏移量"
+                    },
+                    "limit": {
+                        "type": "integer",
+                        "format": "int32",
+                        "title": "每页条目数"
+                    },
+                    "list": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/openAnalysisTaskRecoveryPagingRspItem"
+                        },
+                        "title": "当前页详细数据"
+                    }
+                }
+            },
+            "openAnalysisTaskRecoveryPagingRspItem": {
+                "type": "object",
+                "properties": {
+                    "task_time": {
+                        "type": "string",
+                        "title": "任务结束时归属时段（hour时用Y-m-d H:i:s时间，day时用Y-m-d日期，all时无此字段）"
+                    },
+                    "mac": {
+                        "type": "string",
+                        "title": "MAC"
+                    },
+                    "shop_id": {
+                        "type": "integer",
+                        "format": "int64",
+                        "title": "门店ID"
+                    },
+                    "shop_name": {
+                        "type": "string",
+                        "title": "门店名称"
+                    },
+                    "product_code": {
+                        "type": "string",
+                        "title": "产品枚举；注：按机器分组时有效"
+                    },
+                    "mileage": {
+                        "type": "number",
+                        "format": "double",
+                        "title": "运行里程(km)"
+                    },
+                    "duration": {
+                        "type": "number",
+                        "format": "double",
+                        "title": "运行时长(h)"
+                    },
+                    "table_count": {
+                        "type": "integer",
+                        "format": "int32",
+                        "title": "清洁餐桌数"
+                    },
+                    "sn": {
+                        "type": "string",
+                        "title": "设备SN；注：按机器分组时有效"
+                    },
+                    "run_count": {
+                        "type": "integer",
+                        "format": "int32",
+                        "title": "运行机器人数；注：按门店分组时有效"
+                    },
+                    "bind_count": {
+                        "type": "integer",
+                        "format": "int32",
+                        "title": "绑定机器人数；注：按门店分组时有效"
+                    },
+                    "task_count": {
+                        "type": "integer",
+                        "format": "int32",
+                        "title": "回盘任务数"
+                    },
+                    "robot_name": {
+                        "type": "string",
+                        "title": "机器人昵称；注：按机器分组时有效"
+                    },
+                    "work_days": {
+                        "type": "integer",
+                        "format": "int32",
+                        "title": "工作天数(仅all汇总时有效)"
+                    },
+                    "speed": {
+                        "type": "number",
+                        "format": "double",
+                        "title": "平均速度m/s"
+                    }
+                }
+            },
+            "openAnalysisTaskRecoveryRsp": {
+                "type": "object",
+                "properties": {
+                    "message": {
+                        "type": "string"
+                    },
+                    "data": {
+                        "$ref": "#/components/schemas/openAnalysisTaskRecoveryRspData"
+                    }
+                },
+                "title": "出参:回盘"
+            },
+            "openAnalysisTaskRecoveryRspChartItem": {
+                "type": "object",
+                "properties": {
+                    "task_time": {
+                        "type": "string",
+                        "title": "横坐标时间（hour时用0-24小时，day时用Y-m-d日期）"
+                    },
+                    "mileage": {
+                        "type": "number",
+                        "format": "double",
+                        "title": "运行里程(km)"
+                    },
+                    "duration": {
+                        "type": "number",
+                        "format": "double",
+                        "title": "运行时长(h)"
+                    },
+                    "table_count": {
+                        "type": "integer",
+                        "format": "int32",
+                        "title": "清洁餐桌数"
+                    },
+                    "task_count": {
+                        "type": "integer",
+                        "format": "int32",
+                        "title": "回盘任务数"
+                    }
+                }
+            },
+            "openAnalysisTaskRecoveryRspData": {
+                "type": "object",
+                "properties": {
+                    "summary": {
+                        "$ref": "#/components/schemas/openAnalysisTaskRecoveryRspItem"
+                    },
+                    "qoq": {
+                        "$ref": "#/components/schemas/openAnalysisTaskRecoveryRspItem"
+                    },
+                    "chart": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/openAnalysisTaskRecoveryRspChartItem"
+                        },
+                        "title": "折线图的数据"
+                    },
+                    "qoq_chart": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/openAnalysisTaskRecoveryRspChartItem"
+                        },
+                        "title": "环比折线图的数据"
+                    }
+                }
+            },
+            "openAnalysisTaskRecoveryRspItem": {
+                "type": "object",
+                "properties": {
+                    "mileage": {
+                        "type": "number",
+                        "format": "double",
+                        "title": "运行里程(km)"
+                    },
+                    "duration": {
+                        "type": "number",
+                        "format": "double",
+                        "title": "运行时长(h)"
+                    },
+                    "table_count": {
+                        "type": "integer",
+                        "format": "int32",
+                        "title": "清洁餐桌数"
+                    },
+                    "task_count": {
+                        "type": "integer",
+                        "format": "int32",
+                        "title": "回盘任务数"
+                    }
+                }
+            },
+            "openAnalysisTaskSolicitPagingRsp": {
+                "type": "object",
+                "properties": {
+                    "message": {
+                        "type": "string"
+                    },
+                    "data": {
+                        "$ref": "#/components/schemas/openAnalysisTaskSolicitPagingRspData"
+                    }
+                },
+                "title": "出参:揽客(分页)"
+            },
+            "openAnalysisTaskSolicitPagingRspData": {
+                "type": "object",
+                "properties": {
+                    "total": {
+                        "type": "integer",
+                        "format": "int32",
+                        "title": "总条目数"
+                    },
+                    "offset": {
+                        "type": "integer",
+                        "format": "int32",
+                        "title": "偏移量"
+                    },
+                    "limit": {
+                        "type": "integer",
+                        "format": "int32",
+                        "title": "每页条目数"
+                    },
+                    "list": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/openAnalysisTaskSolicitPagingRspItem"
+                        },
+                        "title": "当前页详细数据"
+                    }
+                }
+            },
+            "openAnalysisTaskSolicitPagingRspItem": {
+                "type": "object",
+                "properties": {
+                    "task_time": {
+                        "type": "string",
+                        "title": "任务结束时归属时段（hour时用Y-m-d H:i:s时间，day时用Y-m-d日期，all时无此字段）"
+                    },
+                    "mac": {
+                        "type": "string",
+                        "title": "MAC"
+                    },
+                    "shop_id": {
+                        "type": "integer",
+                        "format": "int64",
+                        "title": "门店ID"
+                    },
+                    "shop_name": {
+                        "type": "string",
+                        "title": "门店名称"
+                    },
+                    "product_code": {
+                        "type": "string",
+                        "title": "产品枚举；注：按机器分组时有效"
+                    },
+                    "duration": {
+                        "type": "number",
+                        "format": "double",
+                        "title": "运行时长(h)"
+                    },
+                    "play_count": {
+                        "type": "integer",
+                        "format": "int32",
+                        "title": "打招呼次数"
+                    },
+                    "attach_persons": {
+                        "type": "integer",
+                        "format": "int32",
+                        "title": "触达人次"
+                    },
+                    "attract_persons": {
+                        "type": "integer",
+                        "format": "int32",
+                        "title": "吸引人次"
+                    },
+                    "interactive_count": {
+                        "type": "integer",
+                        "format": "int32",
+                        "title": "互动人次"
+                    },
+                    "sn": {
+                        "type": "string",
+                        "title": "设备SN；注：按机器分组时有效"
+                    },
+                    "run_count": {
+                        "type": "integer",
+                        "format": "int32",
+                        "title": "运行机器人数；注：按门店分组时有效"
+                    },
+                    "bind_count": {
+                        "type": "integer",
+                        "format": "int32",
+                        "title": "绑定机器人数；注：按门店分组时有效"
+                    },
+                    "task_count": {
+                        "type": "integer",
+                        "format": "int32",
+                        "title": "任务数"
+                    },
+                    "robot_name": {
+                        "type": "string",
+                        "title": "机器人昵称；注：按机器分组时有效"
+                    },
+                    "work_days": {
+                        "type": "integer",
+                        "format": "int32",
+                        "title": "工作天数(仅all汇总时有效)"
+                    }
+                }
+            },
+            "openAnalysisTaskSolicitRsp": {
+                "type": "object",
+                "properties": {
+                    "message": {
+                        "type": "string"
+                    },
+                    "data": {
+                        "$ref": "#/components/schemas/openAnalysisTaskSolicitRspData"
+                    }
+                },
+                "title": "出参:揽客"
+            },
+            "openAnalysisTaskSolicitRspChartItem": {
+                "type": "object",
+                "properties": {
+                    "task_time": {
+                        "type": "string",
+                        "title": "横坐标时间（hour时用0-24小时，day时用Y-m-d日期）"
+                    },
+                    "duration": {
+                        "type": "number",
+                        "format": "double",
+                        "title": "运行时长(h)"
+                    },
+                    "play_count": {
+                        "type": "integer",
+                        "format": "int32",
+                        "title": "打招呼次数"
+                    },
+                    "attach_persons": {
+                        "type": "integer",
+                        "format": "int32",
+                        "title": "触达人次"
+                    },
+                    "attract_persons": {
+                        "type": "integer",
+                        "format": "int32",
+                        "title": "吸引人次"
+                    },
+                    "interactive_count": {
+                        "type": "integer",
+                        "format": "int32",
+                        "title": "互动人次"
+                    },
+                    "task_count": {
+                        "type": "integer",
+                        "format": "int32",
+                        "title": "任务数"
+                    }
+                }
+            },
+            "openAnalysisTaskSolicitRspData": {
+                "type": "object",
+                "properties": {
+                    "summary": {
+                        "$ref": "#/components/schemas/openAnalysisTaskSolicitRspItem"
+                    },
+                    "qoq": {
+                        "$ref": "#/components/schemas/openAnalysisTaskSolicitRspItem"
+                    },
+                    "chart": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/openAnalysisTaskSolicitRspChartItem"
+                        },
+                        "title": "折线图的数据"
+                    },
+                    "qoq_chart": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/openAnalysisTaskSolicitRspChartItem"
+                        },
+                        "title": "环比折线图的数据"
+                    }
+                }
+            },
+            "openAnalysisTaskSolicitRspItem": {
+                "type": "object",
+                "properties": {
+                    "duration": {
+                        "type": "number",
+                        "format": "double",
+                        "title": "运行时长(h)"
+                    },
+                    "play_count": {
+                        "type": "integer",
+                        "format": "int32",
+                        "title": "打招呼次数"
+                    },
+                    "attach_persons": {
+                        "type": "integer",
+                        "format": "int32",
+                        "title": "触达人次"
+                    },
+                    "attract_persons": {
+                        "type": "integer",
+                        "format": "int32",
+                        "title": "吸引人次"
+                    },
+                    "interactive_count": {
+                        "type": "integer",
+                        "format": "int32",
+                        "title": "互动人次"
+                    },
+                    "task_count": {
+                        "type": "integer",
+                        "format": "int32",
+                        "title": "任务数"
+                    }
+                }
+            },
+            "openAnalysisTaskTurnBackPagingRsp": {
+                "type": "object",
+                "properties": {
+                    "message": {
+                        "type": "string"
+                    },
+                    "data": {
+                        "$ref": "#/components/schemas/openAnalysisTaskTurnBackPagingRspData"
+                    }
+                },
+                "title": "出参:返航(分页)"
+            },
+            "openAnalysisTaskTurnBackPagingRspData": {
+                "type": "object",
+                "properties": {
+                    "total": {
+                        "type": "integer",
+                        "format": "int32",
+                        "title": "总条目数"
+                    },
+                    "offset": {
+                        "type": "integer",
+                        "format": "int32",
+                        "title": "偏移量"
+                    },
+                    "limit": {
+                        "type": "integer",
+                        "format": "int32",
+                        "title": "每页条目数"
+                    },
+                    "list": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/openAnalysisTaskTurnBackPagingRspItem"
+                        },
+                        "title": "当前页详细数据"
+                    }
+                }
+            },
+            "openAnalysisTaskTurnBackPagingRspItem": {
+                "type": "object",
+                "properties": {
+                    "task_time": {
+                        "type": "string",
+                        "title": "任务结束时归属时段（hour时用Y-m-d H:i:s时间，day时用Y-m-d日期，all时无此字段）"
+                    },
+                    "mac": {
+                        "type": "string",
+                        "title": "MAC"
+                    },
+                    "shop_id": {
+                        "type": "integer",
+                        "format": "int64",
+                        "title": "门店ID"
+                    },
+                    "shop_name": {
+                        "type": "string",
+                        "title": "门店名称"
+                    },
+                    "product_code": {
+                        "type": "string",
+                        "title": "产品枚举；注：按机器分组时有效"
+                    },
+                    "mileage": {
+                        "type": "number",
+                        "format": "double",
+                        "title": "运行里程(km)"
+                    },
+                    "duration": {
+                        "type": "number",
+                        "format": "double",
+                        "title": "运行时长(h)"
+                    },
+                    "sn": {
+                        "type": "string",
+                        "title": "设备SN；注：按机器分组时有效"
+                    },
+                    "run_count": {
+                        "type": "integer",
+                        "format": "int32",
+                        "title": "运行机器人数；注：按门店分组时有效"
+                    },
+                    "bind_count": {
+                        "type": "integer",
+                        "format": "int32",
+                        "title": "绑定机器人数；注：按门店分组时有效"
+                    },
+                    "task_count": {
+                        "type": "integer",
+                        "format": "int32",
+                        "title": "返航任务数"
+                    },
+                    "robot_name": {
+                        "type": "string",
+                        "title": "机器人昵称；注：按机器分组时有效"
+                    },
+                    "work_days": {
+                        "type": "integer",
+                        "format": "int32",
+                        "title": "工作天数(仅all汇总时有效)"
+                    }
+                }
+            },
+            "openAnalysisTaskTurnBackRsp": {
+                "type": "object",
+                "properties": {
+                    "message": {
+                        "type": "string"
+                    },
+                    "data": {
+                        "$ref": "#/components/schemas/openAnalysisTaskTurnBackRspData"
+                    }
+                },
+                "title": "出参:返航"
+            },
+            "openAnalysisTaskTurnBackRspChartItem": {
+                "type": "object",
+                "properties": {
+                    "task_time": {
+                        "type": "string",
+                        "title": "横坐标时间（hour时用0-24小时，day时用Y-m-d日期）"
+                    },
+                    "mileage": {
+                        "type": "number",
+                        "format": "double",
+                        "title": "运行里程(km)"
+                    },
+                    "duration": {
+                        "type": "number",
+                        "format": "double",
+                        "title": "运行时长(h)"
+                    },
+                    "task_count": {
+                        "type": "integer",
+                        "format": "int32",
+                        "title": "返航任务数"
+                    }
+                }
+            },
+            "openAnalysisTaskTurnBackRspData": {
+                "type": "object",
+                "properties": {
+                    "summary": {
+                        "$ref": "#/components/schemas/openAnalysisTaskTurnBackRspItem"
+                    },
+                    "qoq": {
+                        "$ref": "#/components/schemas/openAnalysisTaskTurnBackRspItem"
+                    },
+                    "chart": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/openAnalysisTaskTurnBackRspChartItem"
+                        },
+                        "title": "折线图的数据"
+                    },
+                    "qoq_chart": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/openAnalysisTaskTurnBackRspChartItem"
+                        },
+                        "title": "环比折线图的数据"
+                    }
+                }
+            },
+            "openAnalysisTaskTurnBackRspItem": {
+                "type": "object",
+                "properties": {
+                    "mileage": {
+                        "type": "number",
+                        "format": "double",
+                        "title": "运行里程(km)"
+                    },
+                    "duration": {
+                        "type": "number",
+                        "format": "double",
+                        "title": "运行时长(h)"
+                    },
+                    "task_count": {
+                        "type": "integer",
+                        "format": "int32",
+                        "title": "返航任务数"
+                    }
+                }
+            },
+            "protobufAny": {
+                "type": "object",
+                "properties": {
+                    "@type": {
+                        "type": "string"
+                    }
+                },
+                "additionalProperties": {}
+            },
+            "rpcStatus": {
+                "type": "object",
+                "properties": {
+                    "code": {
+                        "type": "integer",
+                        "format": "int32"
+                    },
+                    "message": {
+                        "type": "string"
+                    },
+                    "details": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/protobufAny"
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

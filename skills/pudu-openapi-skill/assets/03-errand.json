@@ -1,0 +1,512 @@
+{
+  "openapi": "3.0.3",
+  "info": {
+    "title": "CloudOpenApi - 跑腿任务",
+    "version": "0.0.1"
+  },
+  "paths": {
+    "/open-platform-service/v1/errand/list": {
+      "get": {
+        "tags": [
+          "CloudOpenApi"
+        ],
+        "description": "查询跑腿任务",
+        "operationId": "CloudOpenApi_GetErrandTask",
+        "parameters": [
+          {
+            "name": "sn",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "sessionId",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "shopId",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "offset",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetErrandTaskRsp"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Default error response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Status"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/open-platform-service/v1/errand_action": {
+      "post": {
+        "tags": [
+          "CloudOpenApi"
+        ],
+        "description": "发送跑腿指令",
+        "operationId": "CloudOpenApi_SendErrandAction",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SendErrandActionReq"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SendTaskErrandRsp"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Default error response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Status"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/open-platform-service/v1/task_errand": {
+      "post": {
+        "tags": [
+          "CloudOpenApi"
+        ],
+        "description": "发送跑腿模式",
+        "operationId": "CloudOpenApi_SendTaskErrand",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SendTaskErrandReq"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SendTaskErrandRsp"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Default error response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Status"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "GetErrandTaskRsp": {
+        "type": "object",
+        "properties": {
+          "message": {
+            "type": "string"
+          },
+          "data": {
+            "$ref": "#/components/schemas/GetErrandTaskRsp_Data"
+          }
+        }
+      },
+      "GetErrandTaskRsp_Data": {
+        "type": "object",
+        "properties": {
+          "total": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "list": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/GetErrandTaskRsp_ErrandTask"
+            }
+          }
+        }
+      },
+      "GetErrandTaskRsp_ErrandTask": {
+        "type": "object",
+        "properties": {
+          "sessionId": {
+            "type": "string"
+          },
+          "auth": {
+            "type": "string"
+          },
+          "taskTime": {
+            "type": "number",
+            "format": "double"
+          },
+          "sn": {
+            "type": "string"
+          },
+          "tasks": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/GetErrandTaskRsp_Task"
+            }
+          },
+          "createTime": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "backMode": {
+            "type": "string"
+          }
+        }
+      },
+      "GetErrandTaskRsp_Task": {
+        "type": "object",
+        "properties": {
+          "taskName": {
+            "type": "string"
+          },
+          "taskStatus": {
+            "type": "string"
+          },
+          "taskDesc": {
+            "type": "string"
+          },
+          "pointList": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/GetErrandTaskRsp_TaskPoint"
+            }
+          },
+          "hatchId": {
+            "type": "string"
+          },
+          "taskId": {
+            "type": "string"
+          }
+        }
+      },
+      "GetErrandTaskRsp_TaskPoint": {
+        "type": "object",
+        "properties": {
+          "mapName": {
+            "type": "string"
+          },
+          "mapCode": {
+            "type": "string"
+          },
+          "point": {
+            "type": "string"
+          },
+          "pointType": {
+            "type": "string"
+          },
+          "pointStatus": {
+            "type": "string"
+          },
+          "remark": {
+            "type": "string"
+          },
+          "phoneNum": {
+            "type": "string"
+          },
+          "phoneCode": {
+            "type": "string"
+          },
+          "verificationCode": {
+            "type": "string"
+          }
+        }
+      },
+      "GoogleProtobufAny": {
+        "type": "object",
+        "properties": {
+          "@type": {
+            "type": "string",
+            "description": "The type of the serialized message."
+          }
+        },
+        "additionalProperties": true,
+        "description": "Contains an arbitrary serialized message along with a @type that describes the type of the serialized message."
+      },
+      "Payload_Task": {
+        "type": "object",
+        "properties": {
+          "taskName": {
+            "type": "string",
+            "description": "子任务名称,机器上报状态时会用这个"
+          },
+          "taskDesc": {
+            "type": "string",
+            "description": "子任务描述"
+          },
+          "pointList": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Task_TaskPoint"
+            },
+            "description": "点位集合"
+          },
+          "hatchId": {
+            "type": "string"
+          },
+          "outOrderId": {
+            "type": "string"
+          }
+        }
+      },
+      "ReturnPoint": {
+        "type": "object",
+        "properties": {
+          "mapName": {
+            "type": "string"
+          },
+          "point": {
+            "type": "string"
+          }
+        }
+      },
+      "SendErrandActionReq": {
+        "type": "object",
+        "properties": {
+          "sn": {
+            "type": "string"
+          },
+          "payload": {
+            "$ref": "#/components/schemas/SendErrandActionReq_Payload"
+          }
+        }
+      },
+      "SendErrandActionReq_Payload": {
+        "type": "object",
+        "properties": {
+          "sessionId": {
+            "type": "string"
+          },
+          "action": {
+            "type": "string"
+          },
+          "auth": {
+            "type": "string"
+          },
+          "hatchId": {
+            "type": "string"
+          },
+          "returnPoint": {
+            "$ref": "#/components/schemas/ReturnPoint"
+          }
+        }
+      },
+      "SendTaskErrandReq": {
+        "type": "object",
+        "properties": {
+          "sn": {
+            "type": "string",
+            "description": "机器sn"
+          },
+          "payload": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/SendTaskErrandReq_Payload"
+              }
+            ],
+            "description": "根据command定义结构"
+          },
+          "shopId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "priority": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "robotGroupIds": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "needQueue": {
+            "type": "boolean"
+          },
+          "filterCategoryIds": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        }
+      },
+      "SendTaskErrandReq_Payload": {
+        "type": "object",
+        "properties": {
+          "tasks": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Payload_Task"
+            },
+            "description": "任务列表"
+          },
+          "auth": {
+            "type": "string"
+          },
+          "backMode": {
+            "type": "string"
+          }
+        }
+      },
+      "SendTaskErrandRsp": {
+        "type": "object",
+        "properties": {
+          "message": {
+            "type": "string"
+          },
+          "data": {
+            "$ref": "#/components/schemas/SendTaskErrandRsp_Data"
+          }
+        }
+      },
+      "SendTaskErrandRsp_Data": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "message": {
+            "type": "string"
+          },
+          "sessionId": {
+            "type": "string"
+          },
+          "taskStatus": {
+            "type": "string"
+          },
+          "queueNo": {
+            "type": "integer",
+            "format": "int32"
+          }
+        }
+      },
+      "Status": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "integer",
+            "description": "The status code, which should be an enum value of [google.rpc.Code][google.rpc.Code].",
+            "format": "int32"
+          },
+          "message": {
+            "type": "string",
+            "description": "A developer-facing error message, which should be in English. Any user-facing error message should be localized and sent in the [google.rpc.Status.details][google.rpc.Status.details] field, or localized by the client."
+          },
+          "details": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/GoogleProtobufAny"
+            },
+            "description": "A list of messages that carry the error details.  There is a common set of message types for APIs to use."
+          }
+        },
+        "description": "The `Status` type defines a logical error model that is suitable for different programming environments, including REST APIs and RPC APIs. It is used by [gRPC](https://github.com/grpc). Each `Status` message contains three pieces of data: error code, error message, and error details. You can find out more about this error model and how to work with it in the [API Design Guide](https://cloud.google.com/apis/design/errors)."
+      },
+      "Task_TaskPoint": {
+        "type": "object",
+        "properties": {
+          "mapName": {
+            "type": "string",
+            "description": "地图名称"
+          },
+          "mapCode": {
+            "type": "string",
+            "description": "地图code"
+          },
+          "point": {
+            "type": "string",
+            "description": "点位id/名称"
+          },
+          "pointType": {
+            "type": "string",
+            "description": "点位类型，table...."
+          },
+          "mobile": {
+            "type": "string",
+            "description": "手机号码"
+          },
+          "verificationCode": {
+            "type": "string",
+            "description": "验证码"
+          },
+          "remark": {
+            "type": "string",
+            "description": "备注"
+          },
+          "phoneNum": {
+            "type": "string"
+          },
+          "phoneCode": {
+            "type": "string"
+          }
+        }
+      }
+    }
+  }
+}

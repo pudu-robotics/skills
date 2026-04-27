@@ -1,0 +1,693 @@
+{
+  "openapi": "3.0.3",
+  "info": {
+    "title": "CloudOpenApi - 闪电匣专属功能",
+    "version": "0.0.1"
+  },
+  "paths": {
+    "/open-platform-service/v1/cabinet/pick/state/get": {
+      "get": {
+        "tags": [
+          "CloudOpenApi"
+        ],
+        "description": "查询货柜取货状态(闪电匣)",
+        "operationId": "CloudOpenApi_GetCabinetPickState",
+        "parameters": [
+          {
+            "name": "sn",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetCabinetPickStateRsp"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Default error response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Status"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/open-platform-service/v1/robot/cabinet/pick": {
+      "post": {
+        "tags": [
+          "CloudOpenApi"
+        ],
+        "description": "按货道编号取货(闪电匣)",
+        "operationId": "CloudOpenApi_RobotCabinetPick",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/RobotCabinetPickReq"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RobotCabinetPickRsp"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Default error response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Status"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/open-platform-service/v1/door_state": {
+      "get": {
+        "tags": [
+          "CloudOpenApi"
+        ],
+        "description": "获取指定机器人舱门状态(闪电匣)",
+        "operationId": "CloudOpenApi_GetRobotDoorState",
+        "parameters": [
+          {
+            "name": "sn",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetRobotDoorStateRsp"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Default error response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Status"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/open-platform-service/v1/control_doors": {
+      "post": {
+        "tags": [
+          "CloudOpenApi"
+        ],
+        "description": "控制指定的机器人的舱门(闪电匣)",
+        "operationId": "CloudOpenApi_ControlRobotDoor",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ControlRobotDoorReq"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ControlRobotDoorRsp"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Default error response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Status"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/open-platform-service/v1/cancel_task": {
+      "post": {
+        "tags": [
+          "CloudOpenApi"
+        ],
+        "description": "取消任务(闪电匣)",
+        "operationId": "CloudOpenApi_RobotCancelTask",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/RobotCancelTaskReq"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RobotCancelTaskRsp"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Default error response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Status"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/open-platform-service/v1/robot/map/switch_in_elevator": {
+      "post": {
+        "tags": [
+          "CloudOpenApi"
+        ],
+        "description": ".电梯内切换指定机器人当前使用的楼层地图(V1.0.4，开放梯控)(闪电匣)",
+        "operationId": "CloudOpenApi_RobotSwitchMapInElevator",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/RobotSwitchMapInElevatorReq"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RobotSwitchMapInElevatorRsp"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Default error response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Status"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/open-platform-service/v1/robot/screen/set": {
+      "post": {
+        "tags": [
+          "CloudOpenApi"
+        ],
+        "description": "设置页面显示内容(闪电匣)",
+        "operationId": "CloudOpenApi_SetRobotScreen",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SetRobotScreenReq"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SetRobotScreenRsp"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Default error response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Status"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "ControlRobotDoorPayload": {
+        "type": "object",
+        "properties": {
+          "controlStates": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ControlStates"
+            }
+          }
+        }
+      },
+      "ControlRobotDoorReq": {
+        "type": "object",
+        "properties": {
+          "sn": {
+            "type": "string"
+          },
+          "payload": {
+            "$ref": "#/components/schemas/ControlRobotDoorPayload"
+          }
+        }
+      },
+      "ControlRobotDoorRsp": {
+        "type": "object",
+        "properties": {
+          "message": {
+            "type": "string"
+          },
+          "data": {
+            "$ref": "#/components/schemas/RobotDoorStatePayLoadData"
+          }
+        }
+      },
+      "ControlStates": {
+        "type": "object",
+        "properties": {
+          "operation": {
+            "type": "boolean"
+          },
+          "doorNumber": {
+            "type": "string"
+          }
+        }
+      },
+      "DoorStates": {
+        "type": "object",
+        "properties": {
+          "doorNumber": {
+            "type": "string"
+          },
+          "state": {
+            "type": "string"
+          }
+        }
+      },
+      "GetCabinetPickStateRsp": {
+        "type": "object",
+        "properties": {
+          "message": {
+            "type": "string"
+          },
+          "data": {
+            "$ref": "#/components/schemas/GetCabinetPickStateRspPayload"
+          }
+        }
+      },
+      "GetCabinetPickStateRspData": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "type": "integer",
+            "format": "int32"
+          }
+        }
+      },
+      "GetCabinetPickStateRspPayload": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "message": {
+            "type": "string"
+          },
+          "data": {
+            "$ref": "#/components/schemas/GetCabinetPickStateRspData"
+          }
+        }
+      },
+      "GetRobotDoorStateRsp": {
+        "type": "object",
+        "properties": {
+          "data": {
+            "$ref": "#/components/schemas/RobotDoorStatePayLoadData"
+          },
+          "message": {
+            "type": "string"
+          }
+        }
+      },
+      "GoogleProtobufAny": {
+        "type": "object",
+        "properties": {
+          "@type": {
+            "type": "string",
+            "description": "The type of the serialized message."
+          }
+        },
+        "additionalProperties": true,
+        "description": "Contains an arbitrary serialized message along with a @type that describes the type of the serialized message."
+      },
+      "RobotCabinetPickReq": {
+        "type": "object",
+        "properties": {
+          "sn": {
+            "type": "string"
+          },
+          "payload": {
+            "$ref": "#/components/schemas/RobotCabinetPickReqPayload"
+          }
+        }
+      },
+      "RobotCabinetPickReqPayload": {
+        "type": "object",
+        "properties": {
+          "info": {
+            "$ref": "#/components/schemas/RobotCabinetPickReqPayloadInfo"
+          }
+        }
+      },
+      "RobotCabinetPickReqPayloadInfo": {
+        "type": "object",
+        "properties": {
+          "mac": {
+            "type": "string"
+          },
+          "point": {
+            "type": "string"
+          },
+          "num": {
+            "type": "string"
+          }
+        }
+      },
+      "RobotCabinetPickRsp": {
+        "type": "object",
+        "properties": {
+          "message": {
+            "type": "string"
+          },
+          "data": {
+            "$ref": "#/components/schemas/RobotCabinetPickRspPayload"
+          }
+        }
+      },
+      "RobotCabinetPickRspPayload": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "message": {
+            "type": "string"
+          }
+        }
+      },
+      "RobotCancelTask": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "type": {
+            "type": "string"
+          }
+        }
+      },
+      "RobotCancelTaskReq": {
+        "type": "object",
+        "properties": {
+          "sn": {
+            "type": "string"
+          },
+          "payload": {
+            "$ref": "#/components/schemas/RobotCancelTaskReqPayload"
+          }
+        }
+      },
+      "RobotCancelTaskReqPayload": {
+        "type": "object",
+        "properties": {
+          "tasks": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/RobotCancelTask"
+            }
+          }
+        }
+      },
+      "RobotCancelTaskRsp": {
+        "type": "object",
+        "properties": {
+          "message": {
+            "type": "string"
+          },
+          "data": {
+            "$ref": "#/components/schemas/RobotCancelTaskRspPayload"
+          }
+        }
+      },
+      "RobotCancelTaskRspData": {
+        "type": "object",
+        "properties": {
+          "tasks": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/RobotCancelTaskRspTask"
+            }
+          }
+        }
+      },
+      "RobotCancelTaskRspPayload": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "message": {
+            "type": "string"
+          },
+          "data": {
+            "$ref": "#/components/schemas/RobotCancelTaskRspData"
+          }
+        }
+      },
+      "RobotCancelTaskRspTask": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "type": {
+            "type": "string"
+          },
+          "success": {
+            "type": "boolean"
+          },
+          "failureCode": {
+            "type": "integer",
+            "format": "int32"
+          }
+        }
+      },
+      "RobotDoorStatePayLoadData": {
+        "type": "object",
+        "properties": {
+          "doorStates": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/DoorStates"
+            }
+          }
+        }
+      },
+      "RobotSwitchMapInElevatorReq": {
+        "type": "object",
+        "properties": {
+          "sn": {
+            "type": "string"
+          },
+          "payload": {
+            "$ref": "#/components/schemas/RobotSwitchMapInElevatorReqPayload"
+          }
+        }
+      },
+      "RobotSwitchMapInElevatorReqPayload": {
+        "type": "object",
+        "properties": {
+          "map": {
+            "$ref": "#/components/schemas/RobotSwitchMapInElevatorReqPayloadMap"
+          }
+        }
+      },
+      "RobotSwitchMapInElevatorReqPayloadMap": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "floor": {
+            "type": "string"
+          }
+        }
+      },
+      "RobotSwitchMapInElevatorRsp": {
+        "type": "object",
+        "properties": {
+          "message": {
+            "type": "string"
+          },
+          "data": {
+            "$ref": "#/components/schemas/RobotSwitchMapInElevatorRspPayload"
+          }
+        }
+      },
+      "RobotSwitchMapInElevatorRspPayload": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "message": {
+            "type": "string"
+          }
+        }
+      },
+      "SetRobotScreenReq": {
+        "type": "object",
+        "properties": {
+          "sn": {
+            "type": "string"
+          },
+          "payload": {
+            "$ref": "#/components/schemas/SetRobotScreenReqPayload"
+          }
+        }
+      },
+      "SetRobotScreenReqPayload": {
+        "type": "object",
+        "properties": {
+          "info": {
+            "$ref": "#/components/schemas/SetRobotScreenReqPayloadInfo"
+          }
+        }
+      },
+      "SetRobotScreenReqPayloadInfo": {
+        "type": "object",
+        "properties": {
+          "content": {
+            "type": "string"
+          },
+          "show": {
+            "type": "boolean"
+          }
+        }
+      },
+      "SetRobotScreenRsp": {
+        "type": "object",
+        "properties": {
+          "message": {
+            "type": "string"
+          },
+          "data": {
+            "$ref": "#/components/schemas/SetRobotScreenRspPayload"
+          }
+        }
+      },
+      "SetRobotScreenRspPayload": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "message": {
+            "type": "string"
+          }
+        }
+      },
+      "Status": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "integer",
+            "description": "The status code, which should be an enum value of [google.rpc.Code][google.rpc.Code].",
+            "format": "int32"
+          },
+          "message": {
+            "type": "string",
+            "description": "A developer-facing error message, which should be in English. Any user-facing error message should be localized and sent in the [google.rpc.Status.details][google.rpc.Status.details] field, or localized by the client."
+          },
+          "details": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/GoogleProtobufAny"
+            },
+            "description": "A list of messages that carry the error details.  There is a common set of message types for APIs to use."
+          }
+        },
+        "description": "The `Status` type defines a logical error model that is suitable for different programming environments, including REST APIs and RPC APIs. It is used by [gRPC](https://github.com/grpc). Each `Status` message contains three pieces of data: error code, error message, and error details. You can find out more about this error model and how to work with it in the [API Design Guide](https://cloud.google.com/apis/design/errors)."
+      }
+    }
+  }
+}

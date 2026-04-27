@@ -1,0 +1,5 @@
+.omc/
+.agent/
+.cursor/
+.claude/
+.DS_Store

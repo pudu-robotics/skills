@@ -1,0 +1,956 @@
+{
+  "openapi": "3.0.3",
+  "info": {
+    "title": "CloudOpenApi - 机器人状态与信息查询",
+    "version": "0.0.1"
+  },
+  "paths": {
+    "/open-platform-service/v1/robot/group/list": {
+      "get": {
+        "tags": [
+          "CloudOpenApi"
+        ],
+        "description": "获取绑定的机器人组",
+        "operationId": "CloudOpenApi_ListRobotGroupByDevice",
+        "parameters": [
+          {
+            "name": "device",
+            "in": "query",
+            "description": "设备id",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "shopId",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ListRobotGroupByDeviceRsp"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Default error response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Status"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/open-platform-service/v1/robot/list_by_device_and_group": {
+      "get": {
+        "tags": [
+          "CloudOpenApi"
+        ],
+        "description": "获取机器人组中的机器人",
+        "operationId": "CloudOpenApi_ListRobotByDeviceAndGroup",
+        "parameters": [
+          {
+            "name": "groupId",
+            "in": "query",
+            "description": "机器组id",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ListRobotByDeviceAndGroupRsp"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Default error response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Status"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/open-platform-service/v1/robot/get_position": {
+      "get": {
+        "tags": [
+          "CloudOpenApi"
+        ],
+        "description": "获取机器当前位置",
+        "operationId": "CloudOpenApi_GetRobotCurrentPosition",
+        "parameters": [
+          {
+            "name": "sn",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetRobotCurrentPositionRsp"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Default error response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Status"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/open-platform-service/v1/robot/task/state/get": {
+      "get": {
+        "tags": [
+          "CloudOpenApi"
+        ],
+        "description": "获取当前机器执行任务状态",
+        "operationId": "CloudOpenApi_GetRobotTasksState",
+        "parameters": [
+          {
+            "name": "sn",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetRobotTasksStateRsp"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Default error response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Status"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/open-platform-service/v1/robot/task/state/getInfo": {
+      "get": {
+        "tags": [
+          "CloudOpenApi"
+        ],
+        "description": "获取当前机器执行任务具体信息",
+        "operationId": "CloudOpenApi_GetRobotTasksInfo",
+        "parameters": [
+          {
+            "name": "sn",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetRobotTasksInfoRsp"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Default error response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Status"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/open-platform-service/v1/robot/shadow/function_list": {
+      "post": {
+        "tags": [
+          "CloudOpenApi"
+        ],
+        "description": "按门店id, 找到机器并更新iot设备影子的功能列表",
+        "operationId": "CloudOpenApi_UpdateDeviceShadowFunctionList",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateDeviceShadowFunctionListReq"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UpdateDeviceShadowFunctionListRsp"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Default error response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Status"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/open-platform-service/v1/status/get_by_group_id": {
+      "get": {
+        "tags": [
+          "CloudOpenApi"
+        ],
+        "description": "根据组获取机器人状态",
+        "operationId": "CloudOpenApi_GetRobotCommonStatusByGroupId",
+        "parameters": [
+          {
+            "name": "groupId",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetRobotCommonStatusByGroupIdRsp"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Default error response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Status"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/open-platform-service/v1/status/get_by_sn": {
+      "get": {
+        "tags": [
+          "CloudOpenApi"
+        ],
+        "description": "根据Sn获取机器人状态",
+        "operationId": "CloudOpenApi_GetRobotCommonStatusBySn",
+        "parameters": [
+          {
+            "name": "sn",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "mac",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetRobotCommonStatusBySnRsp"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Default error response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Status"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/open-platform-service/v2/status/get_by_group_id": {
+      "get": {
+        "tags": [
+          "CloudOpenApi"
+        ],
+        "description": "根据组获取机器人状态",
+        "operationId": "CloudOpenApi_GetRobotCommonStatusByGroupIdV2",
+        "parameters": [
+          {
+            "name": "groupId",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetRobotCommonStatusByGroupIdV2Rsp"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Default error response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Status"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/open-platform-service/v2/status/get_by_sn": {
+      "get": {
+        "tags": [
+          "CloudOpenApi"
+        ],
+        "description": "根据Sn获取机器人状态V2 ,将3个状态合并成一个：OFFLINE、DISABLE、BUSY、IDLE",
+        "operationId": "CloudOpenApi_GetRobotCommonStatusBySnV2",
+        "parameters": [
+          {
+            "name": "sn",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "mac",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetRobotCommonStatusBySnV2Rsp"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Default error response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Status"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/open-platform-service/v1/schedule_log/list": {
+      "post": {
+        "tags": [
+          "CloudOpenApi"
+        ],
+        "description": "查询任务调度日志，根据 task_id 列表查询表 schedule_log",
+        "operationId": "CloudOpenApi_GetScheduleLog",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/GetScheduleLogReq"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetScheduleLogRsp"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Default error response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Status"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "Data_Group": {
+        "type": "object",
+        "properties": {
+          "groupId": {
+            "type": "string"
+          },
+          "groupName": {
+            "type": "string"
+          },
+          "shopId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "shopName": {
+            "type": "string"
+          }
+        }
+      },
+      "Data_Robot": {
+        "type": "object",
+        "properties": {
+          "mac": {
+            "type": "string"
+          },
+          "sn": {
+            "type": "string"
+          },
+          "robotName": {
+            "type": "string"
+          },
+          "shopId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "shopName": {
+            "type": "string"
+          }
+        }
+      },
+      "GetRobotCommonStatusByGroupIdRsp": {
+        "type": "object",
+        "properties": {
+          "message": {
+            "type": "string"
+          },
+          "data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/RobotCommonStatus"
+            }
+          }
+        }
+      },
+      "GetRobotCommonStatusByGroupIdV2Rsp": {
+        "type": "object",
+        "properties": {
+          "message": {
+            "type": "string"
+          },
+          "data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/RobotCommonStatusV2"
+            }
+          }
+        }
+      },
+      "GetRobotCommonStatusBySnRsp": {
+        "type": "object",
+        "properties": {
+          "message": {
+            "type": "string"
+          },
+          "data": {
+            "$ref": "#/components/schemas/RobotCommonStatus"
+          }
+        }
+      },
+      "GetRobotCommonStatusBySnV2Rsp": {
+        "type": "object",
+        "properties": {
+          "message": {
+            "type": "string"
+          },
+          "data": {
+            "$ref": "#/components/schemas/RobotCommonStatusV2"
+          }
+        }
+      },
+      "GetRobotCurrentPositionRsp": {
+        "type": "object",
+        "properties": {
+          "message": {
+            "type": "string"
+          },
+          "data": {
+            "$ref": "#/components/schemas/GetRobotCurrentPositionRsp_Data"
+          }
+        }
+      },
+      "GetRobotCurrentPositionRsp_Data": {
+        "type": "object",
+        "properties": {
+          "mapName": {
+            "type": "string"
+          },
+          "floor": {
+            "type": "string"
+          },
+          "position": {
+            "$ref": "#/components/schemas/GetRobotCurrentPositionRsp_Position"
+          }
+        }
+      },
+      "GetRobotCurrentPositionRsp_Position": {
+        "type": "object",
+        "properties": {
+          "x": {
+            "type": "number",
+            "format": "double"
+          },
+          "y": {
+            "type": "number",
+            "format": "double"
+          },
+          "z": {
+            "type": "number",
+            "format": "double"
+          }
+        }
+      },
+      "GetRobotTasksInfoRsp": {
+        "type": "object",
+        "properties": {
+          "message": {
+            "type": "string"
+          },
+          "data": {
+            "type": "string"
+          }
+        }
+      },
+      "GetRobotTasksStateRsp": {
+        "type": "object",
+        "properties": {
+          "message": {
+            "type": "string"
+          },
+          "data": {
+            "$ref": "#/components/schemas/GetRobotTasksStateRspPayload"
+          }
+        }
+      },
+      "GetRobotTasksStateRspPayload": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "message": {
+            "type": "string"
+          },
+          "data": {
+            "$ref": "#/components/schemas/GetRobotTasksStateRspPayloadData"
+          }
+        }
+      },
+      "GetRobotTasksStateRspPayloadData": {
+        "type": "object",
+        "properties": {
+          "tasks": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/GetRobotTasksStateRspPayloadTask"
+            }
+          }
+        }
+      },
+      "GetRobotTasksStateRspPayloadTask": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "type": {
+            "type": "string"
+          },
+          "state": {
+            "type": "string"
+          }
+        }
+      },
+      "GetScheduleLogReq": {
+        "type": "object",
+        "properties": {
+          "taskIds": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        },
+        "description": "查询任务调度日志请求，按 task_id 列表查询 schedule_log 表"
+      },
+      "GetScheduleLogRsp": {
+        "type": "object",
+        "properties": {
+          "message": {
+            "type": "string"
+          },
+          "data": {
+            "$ref": "#/components/schemas/GetScheduleLogRsp_Data"
+          }
+        },
+        "description": "查询任务调度日志响应"
+      },
+      "GetScheduleLogRsp_Data": {
+        "type": "object",
+        "properties": {
+          "list": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/GetScheduleLogRsp_ScheduleLogItem"
+            }
+          }
+        }
+      },
+      "GetScheduleLogRsp_ScheduleLogItem": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "taskId": {
+            "type": "string"
+          },
+          "taskType": {
+            "type": "string"
+          },
+          "statusStr": {
+            "type": "string"
+          },
+          "remark": {
+            "type": "string"
+          },
+          "spendTime": {
+            "type": "string"
+          },
+          "createTime": {
+            "type": "string"
+          }
+        }
+      },
+      "GoogleProtobufAny": {
+        "type": "object",
+        "properties": {
+          "@type": {
+            "type": "string",
+            "description": "The type of the serialized message."
+          }
+        },
+        "additionalProperties": true,
+        "description": "Contains an arbitrary serialized message along with a @type that describes the type of the serialized message."
+      },
+      "ListRobotByDeviceAndGroupRsp": {
+        "type": "object",
+        "properties": {
+          "message": {
+            "type": "string"
+          },
+          "data": {
+            "$ref": "#/components/schemas/ListRobotByDeviceAndGroupRsp_Data"
+          }
+        }
+      },
+      "ListRobotByDeviceAndGroupRsp_Data": {
+        "type": "object",
+        "properties": {
+          "robots": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Data_Robot"
+            }
+          }
+        }
+      },
+      "ListRobotGroupByDeviceRsp": {
+        "type": "object",
+        "properties": {
+          "message": {
+            "type": "string"
+          },
+          "data": {
+            "$ref": "#/components/schemas/ListRobotGroupByDeviceRsp_Data"
+          }
+        }
+      },
+      "ListRobotGroupByDeviceRsp_Data": {
+        "type": "object",
+        "properties": {
+          "groups": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Data_Group"
+            }
+          }
+        }
+      },
+      "RobotCommonStatus": {
+        "type": "object",
+        "properties": {
+          "deviceName": {
+            "type": "string"
+          },
+          "timestamp": {
+            "type": "string"
+          },
+          "scheduleStatus": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "scheduleMsg": {
+            "type": "string"
+          },
+          "workStatus": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "workMsg": {
+            "type": "string"
+          },
+          "battery": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "isOnline": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "isCharging": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "mapName": {
+            "type": "string"
+          },
+          "position": {
+            "$ref": "#/components/schemas/RobotCommonStatusPosition"
+          },
+          "moveState": {
+            "type": "string"
+          },
+          "chargeStage": {
+            "type": "string"
+          },
+          "remainTime": {
+            "type": "integer",
+            "format": "int32"
+          }
+        }
+      },
+      "RobotCommonStatusPosition": {
+        "type": "object",
+        "properties": {
+          "x": {
+            "type": "number",
+            "format": "double"
+          },
+          "y": {
+            "type": "number",
+            "format": "double"
+          },
+          "yaw": {
+            "type": "number",
+            "format": "double"
+          }
+        }
+      },
+      "RobotCommonStatusV2": {
+        "type": "object",
+        "properties": {
+          "sn": {
+            "type": "string"
+          },
+          "mac": {
+            "type": "string"
+          },
+          "timestamp": {
+            "type": "string"
+          },
+          "battery": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "isCharging": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "moveState": {
+            "type": "string"
+          },
+          "chargeStage": {
+            "type": "string"
+          },
+          "remainTime": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "productCode": {
+            "type": "string"
+          },
+          "runState": {
+            "type": "string"
+          },
+          "chargeType": {
+            "type": "integer",
+            "format": "int32"
+          }
+        }
+      },
+      "ShopFunctionListItem": {
+        "type": "object",
+        "properties": {
+          "shopId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "functionList": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        }
+      },
+      "Status": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "integer",
+            "description": "The status code, which should be an enum value of [google.rpc.Code][google.rpc.Code].",
+            "format": "int32"
+          },
+          "message": {
+            "type": "string",
+            "description": "A developer-facing error message, which should be in English. Any user-facing error message should be localized and sent in the [google.rpc.Status.details][google.rpc.Status.details] field, or localized by the client."
+          },
+          "details": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/GoogleProtobufAny"
+            },
+            "description": "A list of messages that carry the error details.  There is a common set of message types for APIs to use."
+          }
+        },
+        "description": "The `Status` type defines a logical error model that is suitable for different programming environments, including REST APIs and RPC APIs. It is used by [gRPC](https://github.com/grpc). Each `Status` message contains three pieces of data: error code, error message, and error details. You can find out more about this error model and how to work with it in the [API Design Guide](https://cloud.google.com/apis/design/errors)."
+      },
+      "UpdateDeviceShadowFunctionListReq": {
+        "type": "object",
+        "properties": {
+          "shopFunctions": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ShopFunctionListItem"
+            }
+          }
+        }
+      },
+      "UpdateDeviceShadowFunctionListRsp": {
+        "type": "object",
+        "properties": {
+          "message": {
+            "type": "string"
+          }
+        }
+      }
+    }
+  }
+}

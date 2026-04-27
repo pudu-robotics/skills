@@ -1,0 +1,257 @@
+{
+  "openapi": "3.0.3",
+  "info": {
+    "title": "DataOpenPlatform - 门店与基础数据查询",
+    "version": "0.0.1"
+  },
+  "paths": {
+    "/data-open-platform-service/v1/api/robot": {
+      "get": {
+        "tags": [
+          "DataOpenPlatform"
+        ],
+        "description": "获取机器列表",
+        "operationId": "DataOpenPlatform_ListRobots",
+        "parameters": [
+          {
+            "name": "limit",
+            "in": "query",
+            "description": "查询限制的数量（默认为10）",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "offset",
+            "in": "query",
+            "description": "偏移量（默认为0）",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "shop_id",
+            "in": "query",
+            "description": "门店id",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ListRobotsRsp"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Default error response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Status"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/data-open-platform-service/v1/api/shop": {
+      "get": {
+        "tags": [
+          "DataOpenPlatform"
+        ],
+        "description": "获取门店列表",
+        "operationId": "DataOpenPlatform_ListShops",
+        "parameters": [
+          {
+            "name": "limit",
+            "in": "query",
+            "description": "查询限制的数量（默认为10）",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "offset",
+            "in": "query",
+            "description": "偏移量（默认为0）",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ListShopsRsp"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Default error response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Status"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "ListRobotsRsp": {
+        "type": "object",
+        "properties": {
+          "message": {
+            "type": "string"
+          },
+          "data": {
+            "$ref": "#/components/schemas/ListRobotsRspData"
+          }
+        }
+      },
+      "ListRobotsRspData": {
+        "type": "object",
+        "properties": {
+          "count": {
+            "type": "integer",
+            "format": "int32",
+            "description": "总数量"
+          },
+          "list": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/RobotItem"
+            },
+            "description": "机器列表"
+          }
+        }
+      },
+      "RobotItem": {
+        "type": "object",
+        "properties": {
+          "sn": {
+            "type": "string",
+            "description": "机器SN"
+          },
+          "mac": {
+            "type": "string",
+            "description": "机器mac"
+          },
+          "shop_id": {
+            "type": "integer",
+            "format": "int32",
+            "description": "机器所属门店id"
+          },
+          "shop_name": {
+            "type": "string",
+            "description": "机器所属门店名称"
+          }
+        }
+      },
+      "ListShopsRsp": {
+        "type": "object",
+        "properties": {
+          "message": {
+            "type": "string"
+          },
+          "data": {
+            "$ref": "#/components/schemas/ListShopsRspData"
+          }
+        }
+      },
+      "ListShopsRspData": {
+        "type": "object",
+        "properties": {
+          "count": {
+            "type": "integer",
+            "format": "int32",
+            "description": "总数量"
+          },
+          "list": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ShopItem"
+            },
+            "description": "门店列表"
+          }
+        }
+      },
+      "ShopItem": {
+        "type": "object",
+        "properties": {
+          "shop_id": {
+            "type": "integer",
+            "format": "int32",
+            "description": "门店id"
+          },
+          "shop_name": {
+            "type": "string",
+            "description": "门店名称"
+          },
+          "company_id": {
+            "type": "integer",
+            "format": "int32",
+            "description": "门店所属代理商id"
+          },
+          "company_name": {
+            "type": "string",
+            "description": "门店所属代理商名称"
+          }
+        }
+      },
+      "Status": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "message": {
+            "type": "string"
+          },
+          "details": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/GoogleProtobufAny"
+            }
+          }
+        }
+      },
+      "GoogleProtobufAny": {
+        "type": "object",
+        "properties": {
+          "@type": {
+            "type": "string"
+          }
+        },
+        "additionalProperties": true
+      }
+    }
+  }
+}

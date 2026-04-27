@@ -1,0 +1,497 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "open/brief.proto",
+        "version": "version not set"
+    },
+    "tags": [
+        {
+            "name": "OpenDataBrief"
+        }
+    ],
+    "paths": {
+        "/data-board/v1/brief/robot": {
+            "get": {
+                "summary": "机器概览",
+                "operationId": "OpenDataBrief_BriefRobot",
+                "responses": {
+                    "200": {
+                        "description": "A successful response.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/openBriefRobotRsp"
+                                }
+                            }
+                        }
+                    },
+                    "default": {
+                        "description": "An unexpected error response.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/rpcStatus"
+                                }
+                            }
+                        }
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "timezone_offset",
+                        "description": "时区偏移小时, 范围 -12 ~ 14，表示 (UTC-12 ~ UTC+14）；默认UTC+8.",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32"
+                        }
+                    },
+                    {
+                        "name": "start_time",
+                        "description": "开始时间戳(s).",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    },
+                    {
+                        "name": "end_time",
+                        "description": "结束时间戳(s).",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    },
+                    {
+                        "name": "shop_id",
+                        "description": "门店ID过滤.",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    }
+                ],
+                "tags": [
+                    "OpenDataBrief"
+                ]
+            }
+        },
+        "/data-board/v1/brief/run": {
+            "get": {
+                "summary": "机器运行概览",
+                "operationId": "OpenDataBrief_BriefRun",
+                "responses": {
+                    "200": {
+                        "description": "A successful response.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/openBriefRunRsp"
+                                }
+                            }
+                        }
+                    },
+                    "default": {
+                        "description": "An unexpected error response.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/rpcStatus"
+                                }
+                            }
+                        }
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "timezone_offset",
+                        "description": "时区偏移小时, 范围 -12 ~ 14，表示 (UTC-12 ~ UTC+14）；默认UTC+8.",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32"
+                        }
+                    },
+                    {
+                        "name": "start_time",
+                        "description": "开始时间戳(s).",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    },
+                    {
+                        "name": "end_time",
+                        "description": "结束时间戳(s).",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    },
+                    {
+                        "name": "shop_id",
+                        "description": "门店ID过滤.",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    }
+                ],
+                "tags": [
+                    "OpenDataBrief"
+                ]
+            }
+        },
+        "/data-board/v1/brief/shop": {
+            "get": {
+                "summary": "门店概览",
+                "operationId": "OpenDataBrief_BriefShop",
+                "responses": {
+                    "200": {
+                        "description": "A successful response.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/openBriefShopRsp"
+                                }
+                            }
+                        }
+                    },
+                    "default": {
+                        "description": "An unexpected error response.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/rpcStatus"
+                                }
+                            }
+                        }
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "timezone_offset",
+                        "description": "时区偏移小时, 范围 -12 ~ 14，表示 (UTC-12 ~ UTC+14）；默认UTC+8.",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32"
+                        }
+                    },
+                    {
+                        "name": "start_time",
+                        "description": "开始时间戳(s).",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    },
+                    {
+                        "name": "end_time",
+                        "description": "结束时间戳(s).",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    },
+                    {
+                        "name": "shop_id",
+                        "description": "门店ID过滤.",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    }
+                ],
+                "tags": [
+                    "OpenDataBrief"
+                ]
+            }
+        }
+    },
+    "components": {
+        "schemas": {
+            "BriefShopRspTopItem": {
+                "type": "object",
+                "properties": {
+                    "shop_id": {
+                        "type": "integer",
+                        "format": "int64",
+                        "title": "门店ID"
+                    },
+                    "shop_name": {
+                        "type": "string",
+                        "title": "门店名称"
+                    },
+                    "run_count": {
+                        "type": "integer",
+                        "format": "int32",
+                        "title": "运行机器人数"
+                    },
+                    "bind_count": {
+                        "type": "integer",
+                        "format": "int32",
+                        "title": "绑定机器人数"
+                    },
+                    "duration": {
+                        "type": "number",
+                        "format": "double",
+                        "title": "运行时长(h)"
+                    },
+                    "stop_duration": {
+                        "type": "number",
+                        "format": "double",
+                        "title": "停运时长(h)"
+                    }
+                }
+            },
+            "openBriefRobotRsp": {
+                "type": "object",
+                "properties": {
+                    "message": {
+                        "type": "string"
+                    },
+                    "data": {
+                        "$ref": "#/components/schemas/openBriefRobotRspData"
+                    }
+                },
+                "title": "出参:机器概览"
+            },
+            "openBriefRobotRspChartItem": {
+                "type": "object",
+                "properties": {
+                    "product_code": {
+                        "type": "string",
+                        "title": "产品枚举"
+                    },
+                    "bind_count": {
+                        "type": "integer",
+                        "format": "int32",
+                        "title": "绑定机器数"
+                    },
+                    "active_count": {
+                        "type": "integer",
+                        "format": "int32",
+                        "title": "激活机器数"
+                    },
+                    "bind_rate": {
+                        "type": "number",
+                        "format": "double",
+                        "title": "绑定占比"
+                    },
+                    "active_rate": {
+                        "type": "number",
+                        "format": "double",
+                        "title": "激活占比"
+                    }
+                }
+            },
+            "openBriefRobotRspData": {
+                "type": "object",
+                "properties": {
+                    "summary": {
+                        "$ref": "#/components/schemas/openBriefRobotRspItem"
+                    },
+                    "qoq": {
+                        "$ref": "#/components/schemas/openBriefRobotRspItem"
+                    },
+                    "chart": {
+                        "type": "object",
+                        "additionalProperties": {
+                            "$ref": "#/components/schemas/openBriefRobotRspChartItem"
+                        },
+                        "title": "饼图的数据"
+                    }
+                }
+            },
+            "openBriefRobotRspItem": {
+                "type": "object",
+                "properties": {
+                    "boot_count": {
+                        "type": "integer",
+                        "format": "int32",
+                        "title": "开机机器数"
+                    },
+                    "total_count": {
+                        "type": "integer",
+                        "format": "int32",
+                        "title": "累计机器数"
+                    },
+                    "bind_count": {
+                        "type": "integer",
+                        "format": "int32",
+                        "title": "绑定机器数"
+                    },
+                    "active_count": {
+                        "type": "integer",
+                        "format": "int32",
+                        "title": "激活机器数"
+                    },
+                    "lively_rate": {
+                        "type": "number",
+                        "format": "double",
+                        "title": "活跃率(开机机器数/累计机器数)"
+                    }
+                }
+            },
+            "openBriefRunRsp": {
+                "type": "object",
+                "properties": {
+                    "message": {
+                        "type": "string"
+                    },
+                    "data": {
+                        "$ref": "#/components/schemas/openBriefRunRspData"
+                    }
+                },
+                "title": "出参:机器运行概览"
+            },
+            "openBriefRunRspData": {
+                "type": "object",
+                "properties": {
+                    "summary": {
+                        "$ref": "#/components/schemas/openBriefRunRspItem"
+                    },
+                    "qoq": {
+                        "$ref": "#/components/schemas/openBriefRunRspItem"
+                    }
+                }
+            },
+            "openBriefRunRspItem": {
+                "type": "object",
+                "properties": {
+                    "duration": {
+                        "type": "number",
+                        "format": "double",
+                        "title": "工作时长(h)"
+                    },
+                    "mileage": {
+                        "type": "number",
+                        "format": "double",
+                        "title": "运行里程(km)"
+                    },
+                    "task_count": {
+                        "type": "integer",
+                        "format": "int32",
+                        "title": "执行任务次数"
+                    },
+                    "area": {
+                        "type": "number",
+                        "format": "double",
+                        "title": "清洁面积(m²)"
+                    }
+                }
+            },
+            "openBriefShopRsp": {
+                "type": "object",
+                "properties": {
+                    "message": {
+                        "type": "string"
+                    },
+                    "data": {
+                        "$ref": "#/components/schemas/openBriefShopRspData"
+                    }
+                },
+                "title": "出参:门店概览"
+            },
+            "openBriefShopRspData": {
+                "type": "object",
+                "properties": {
+                    "summary": {
+                        "$ref": "#/components/schemas/openBriefShopRspItem"
+                    },
+                    "qoq": {
+                        "$ref": "#/components/schemas/openBriefShopRspItem"
+                    },
+                    "lively_top10": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/BriefShopRspTopItem"
+                        },
+                        "title": "活跃门店TOP10"
+                    },
+                    "silent_top10": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/BriefShopRspTopItem"
+                        },
+                        "title": "沉默门店TOP10"
+                    }
+                }
+            },
+            "openBriefShopRspItem": {
+                "type": "object",
+                "properties": {
+                    "lively_count": {
+                        "type": "integer",
+                        "format": "int32",
+                        "title": "活跃门店数"
+                    },
+                    "total_count": {
+                        "type": "integer",
+                        "format": "int32",
+                        "title": "累计门店数"
+                    },
+                    "new_count": {
+                        "type": "integer",
+                        "format": "int32",
+                        "title": "新增门店数"
+                    },
+                    "lively_rate": {
+                        "type": "number",
+                        "format": "double",
+                        "title": "活跃率(活跃门店数/累计门店数)"
+                    }
+                }
+            },
+            "protobufAny": {
+                "type": "object",
+                "properties": {
+                    "@type": {
+                        "type": "string"
+                    }
+                },
+                "additionalProperties": {}
+            },
+            "rpcStatus": {
+                "type": "object",
+                "properties": {
+                    "code": {
+                        "type": "integer",
+                        "format": "int32"
+                    },
+                    "message": {
+                        "type": "string"
+                    },
+                    "details": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/protobufAny"
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

@@ -1,0 +1,1628 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "open/log.proto",
+        "version": "version not set"
+    },
+    "tags": [
+        {
+            "name": "OpenDataLog"
+        }
+    ],
+    "paths": {
+        "/data-board/v1/log/battery/query_list": {
+            "get": {
+                "summary": "电池健康-查询筛选List",
+                "operationId": "OpenDataLog_BatteryQueryList",
+                "responses": {
+                    "200": {
+                        "description": "A successful response.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/openBatteryQueryListRsp"
+                                }
+                            }
+                        }
+                    },
+                    "default": {
+                        "description": "An unexpected error response.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/rpcStatus"
+                                }
+                            }
+                        }
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "timezone_offset",
+                        "description": "时区偏移小时, 范围 -12 ~ 14，表示 (UTC-12 ~ UTC+14）；默认UTC+8.",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32"
+                        }
+                    },
+                    {
+                        "name": "start_time",
+                        "description": "开始时间戳(s).",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    },
+                    {
+                        "name": "end_time",
+                        "description": "结束时间戳(s).",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    },
+                    {
+                        "name": "shop_id",
+                        "description": "门店ID过滤.",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    },
+                    {
+                        "name": "limit",
+                        "description": "每页条目数，1 ~ 20, 默认10.",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32"
+                        }
+                    },
+                    {
+                        "name": "offset",
+                        "description": "偏移量, 从0开始.",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32"
+                        }
+                    },
+                    {
+                        "name": "sn",
+                        "description": "设备SN.",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "min_cycle",
+                        "description": "循环次数(最小值), >=0时筛选生效.",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32"
+                        }
+                    },
+                    {
+                        "name": "max_cycle",
+                        "description": "循环次数(最大值), >0时筛选生效.",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32"
+                        }
+                    },
+                    {
+                        "name": "min_full_capacity",
+                        "description": "满充容量(最小值), >=0时筛选生效.",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32"
+                        }
+                    },
+                    {
+                        "name": "max_full_capacity",
+                        "description": "满充容量(最大值), >0时筛选生效.",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32"
+                        }
+                    }
+                ],
+                "tags": [
+                    "OpenDataLog"
+                ]
+            }
+        },
+        "/data-board/v1/log/boot/query_list": {
+            "get": {
+                "summary": "开机自检-查询筛选List",
+                "operationId": "OpenDataLog_BootQueryList",
+                "responses": {
+                    "200": {
+                        "description": "A successful response.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/openBootQueryListRsp"
+                                }
+                            }
+                        }
+                    },
+                    "default": {
+                        "description": "An unexpected error response.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/rpcStatus"
+                                }
+                            }
+                        }
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "timezone_offset",
+                        "description": "时区偏移小时, 范围 -12 ~ 14，表示 (UTC-12 ~ UTC+14）；默认UTC+8.",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32"
+                        }
+                    },
+                    {
+                        "name": "start_time",
+                        "description": "开始时间戳(s).",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    },
+                    {
+                        "name": "end_time",
+                        "description": "结束时间戳(s).",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    },
+                    {
+                        "name": "shop_id",
+                        "description": "门店ID过滤.",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    },
+                    {
+                        "name": "limit",
+                        "description": "每页条目数，1 ~ 20, 默认10.",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32"
+                        }
+                    },
+                    {
+                        "name": "offset",
+                        "description": "偏移量, 从0开始.",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32"
+                        }
+                    },
+                    {
+                        "name": "check_step",
+                        "description": "自检项目, 如: CheckCAN.",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "is_success",
+                        "description": "全部项目均自检成功：0失败(有异常) 1成功(无异常) -1不过滤.",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32"
+                        }
+                    }
+                ],
+                "tags": [
+                    "OpenDataLog"
+                ]
+            }
+        },
+        "/data-board/v1/log/charge/query_list": {
+            "get": {
+                "summary": "充电记录-查询筛选List",
+                "operationId": "OpenDataLog_ChargeQueryList",
+                "responses": {
+                    "200": {
+                        "description": "A successful response.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/openChargeQueryListRsp"
+                                }
+                            }
+                        }
+                    },
+                    "default": {
+                        "description": "An unexpected error response.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/rpcStatus"
+                                }
+                            }
+                        }
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "timezone_offset",
+                        "description": "时区偏移小时, 范围 -12 ~ 14，表示 (UTC-12 ~ UTC+14）；默认UTC+8.",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32"
+                        }
+                    },
+                    {
+                        "name": "start_time",
+                        "description": "开始时间戳(s).",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    },
+                    {
+                        "name": "end_time",
+                        "description": "结束时间戳(s).",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    },
+                    {
+                        "name": "shop_id",
+                        "description": "门店ID过滤.",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    },
+                    {
+                        "name": "limit",
+                        "description": "每页条目数，1 ~ 20, 默认10.",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32"
+                        }
+                    },
+                    {
+                        "name": "offset",
+                        "description": "偏移量, 从0开始.",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32"
+                        }
+                    }
+                ],
+                "tags": [
+                    "OpenDataLog"
+                ]
+            }
+        },
+        "/data-board/v1/log/clean_task/query": {
+            "get": {
+                "summary": "查询清洁报告详情[优化版]",
+                "operationId": "OpenDataLog_CleanTaskQuery",
+                "responses": {
+                    "200": {
+                        "description": "A successful response.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/openCleanTaskQueryRsp"
+                                }
+                            }
+                        }
+                    },
+                    "default": {
+                        "description": "An unexpected error response.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/rpcStatus"
+                                }
+                            }
+                        }
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "timezone_offset",
+                        "description": "时区偏移小时, 范围 -12 ~ 14，表示 (UTC-12 ~ UTC+14）；默认UTC+8.",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32"
+                        }
+                    },
+                    {
+                        "name": "start_time",
+                        "description": "开始时间戳(s).",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    },
+                    {
+                        "name": "end_time",
+                        "description": "结束时间戳(s).",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    },
+                    {
+                        "name": "shop_id",
+                        "description": "门店ID过滤.",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    },
+                    {
+                        "name": "sn",
+                        "description": "设备SN.",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "report_id",
+                        "description": "报告ID (sn+报告ID唯一,时间戳可加速查询性能).",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "tags": [
+                    "OpenDataLog"
+                ]
+            }
+        },
+        "/data-board/v1/log/clean_task/query_list": {
+            "get": {
+                "summary": "查询清洁报告List[优化版]",
+                "operationId": "OpenDataLog_CleanTaskQueryList",
+                "responses": {
+                    "200": {
+                        "description": "A successful response.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/openCleanTaskQueryListRsp"
+                                }
+                            }
+                        }
+                    },
+                    "default": {
+                        "description": "An unexpected error response.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/rpcStatus"
+                                }
+                            }
+                        }
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "timezone_offset",
+                        "description": "时区偏移小时, 范围 -12 ~ 14，表示 (UTC-12 ~ UTC+14）；默认UTC+8.",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32"
+                        }
+                    },
+                    {
+                        "name": "start_time",
+                        "description": "开始时间戳(s).",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    },
+                    {
+                        "name": "end_time",
+                        "description": "结束时间戳(s).",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    },
+                    {
+                        "name": "shop_id",
+                        "description": "门店ID过滤.",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    },
+                    {
+                        "name": "limit",
+                        "description": "每页条目数，1 ~ 20, 默认10.",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32"
+                        }
+                    },
+                    {
+                        "name": "offset",
+                        "description": "偏移量, 从0开始.",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32"
+                        }
+                    }
+                ],
+                "tags": [
+                    "OpenDataLog"
+                ]
+            }
+        },
+        "/data-board/v1/log/error/query_list": {
+            "get": {
+                "summary": "故障|事件-查询筛选List",
+                "operationId": "OpenDataLog_ErrorQueryList",
+                "responses": {
+                    "200": {
+                        "description": "A successful response.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/openErrorQueryListRsp"
+                                }
+                            }
+                        }
+                    },
+                    "default": {
+                        "description": "An unexpected error response.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/rpcStatus"
+                                }
+                            }
+                        }
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "timezone_offset",
+                        "description": "时区偏移小时, 范围 -12 ~ 14，表示 (UTC-12 ~ UTC+14）；默认UTC+8.",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32"
+                        }
+                    },
+                    {
+                        "name": "start_time",
+                        "description": "开始时间戳(s).",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    },
+                    {
+                        "name": "end_time",
+                        "description": "结束时间戳(s).",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    },
+                    {
+                        "name": "shop_id",
+                        "description": "门店ID过滤.",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    },
+                    {
+                        "name": "limit",
+                        "description": "每页条目数，1 ~ 20, 默认10.",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32"
+                        }
+                    },
+                    {
+                        "name": "offset",
+                        "description": "偏移量, 从0开始.",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32"
+                        }
+                    },
+                    {
+                        "name": "error_levels",
+                        "description": "故障等级筛选(多个用英文逗号分割), 枚举值: Fatal | Error | Warning | Event, 如: Error,Warning.",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "error_types",
+                        "description": "故障类型筛选(多个用英文逗号分割), 如: LostRGBD,LostCAN.",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "tags": [
+                    "OpenDataLog"
+                ]
+            }
+        },
+        "/data-board/v1/log/soh/query_list": {
+            "get": {
+                "summary": "[废弃]电池健康-查询筛选List",
+                "operationId": "OpenDataLog_SohQueryList",
+                "responses": {
+                    "200": {
+                        "description": "A successful response.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/openSohQueryListRsp"
+                                }
+                            }
+                        }
+                    },
+                    "default": {
+                        "description": "An unexpected error response.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/rpcStatus"
+                                }
+                            }
+                        }
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "timezone_offset",
+                        "description": "时区偏移小时, 范围 -12 ~ 14，表示 (UTC-12 ~ UTC+14）；默认UTC+8.",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32"
+                        }
+                    },
+                    {
+                        "name": "start_time",
+                        "description": "开始时间戳(s).",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    },
+                    {
+                        "name": "end_time",
+                        "description": "结束时间戳(s).",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    },
+                    {
+                        "name": "shop_id",
+                        "description": "门店ID过滤.",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    },
+                    {
+                        "name": "limit",
+                        "description": "每页条目数，1 ~ 20, 默认10.",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32"
+                        }
+                    },
+                    {
+                        "name": "offset",
+                        "description": "偏移量, 从0开始.",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32"
+                        }
+                    },
+                    {
+                        "name": "battery_model",
+                        "description": "电池型号：枚举详见 https://pudutech.yuque.com/dfy6gg/egyh38/cgeqzms3gevp8y3m?singleDoc#IyHD6.",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32"
+                        }
+                    },
+                    {
+                        "name": "min_cycle",
+                        "description": "循环次数(最小值), -1表示不筛选.",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32"
+                        }
+                    },
+                    {
+                        "name": "max_cycle",
+                        "description": "循环次数(最大值), -1表示不筛选.",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32"
+                        }
+                    }
+                ],
+                "tags": [
+                    "OpenDataLog"
+                ]
+            }
+        }
+    },
+    "components": {
+        "schemas": {
+            "BootQueryListRspCheckResult": {
+                "type": "object",
+                "properties": {
+                    "check_step": {
+                        "type": "string",
+                        "title": "自检项目(阶段)"
+                    },
+                    "check_state": {
+                        "type": "string",
+                        "title": "自检状态： Success 正常 Fail 异常"
+                    },
+                    "check_description": {
+                        "type": "string",
+                        "title": "自检描述"
+                    }
+                }
+            },
+            "openBatteryQueryListRsp": {
+                "type": "object",
+                "properties": {
+                    "message": {
+                        "type": "string"
+                    },
+                    "data": {
+                        "$ref": "#/components/schemas/openBatteryQueryListRspData"
+                    }
+                },
+                "title": "出参:电池健康-新"
+            },
+            "openBatteryQueryListRspData": {
+                "type": "object",
+                "properties": {
+                    "total": {
+                        "type": "integer",
+                        "format": "int32",
+                        "title": "总条目数"
+                    },
+                    "offset": {
+                        "type": "integer",
+                        "format": "int32",
+                        "title": "偏移量"
+                    },
+                    "limit": {
+                        "type": "integer",
+                        "format": "int32",
+                        "title": "每页条目数"
+                    },
+                    "list": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/openBatteryQueryListRspItem"
+                        },
+                        "title": "当前页详细数据"
+                    }
+                }
+            },
+            "openBatteryQueryListRspItem": {
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "type": "string"
+                    },
+                    "sn": {
+                        "type": "string",
+                        "title": "机器SN"
+                    },
+                    "mac": {
+                        "type": "string",
+                        "title": "机器MAC"
+                    },
+                    "product_code": {
+                        "type": "string",
+                        "title": "机型编码"
+                    },
+                    "upload_time": {
+                        "type": "string",
+                        "title": "日志上云时间"
+                    },
+                    "task_time": {
+                        "type": "string",
+                        "title": "日志生成时间"
+                    },
+                    "soft_version": {
+                        "type": "string",
+                        "title": "软件版本"
+                    },
+                    "hard_version": {
+                        "type": "string",
+                        "title": "固件版本"
+                    },
+                    "os_version": {
+                        "type": "string",
+                        "title": "系统版本"
+                    },
+                    "battery_sn": {
+                        "type": "string",
+                        "title": "电池SN"
+                    },
+                    "cycle": {
+                        "type": "integer",
+                        "format": "int32",
+                        "title": "循环次数"
+                    },
+                    "design_capacity": {
+                        "type": "integer",
+                        "format": "int32",
+                        "title": "设计容量,单位 mAH"
+                    },
+                    "pack_voltage": {
+                        "type": "integer",
+                        "format": "int32",
+                        "title": "电压,单位 mV"
+                    },
+                    "soc": {
+                        "type": "integer",
+                        "format": "int32",
+                        "title": "电量,单位 %"
+                    },
+                    "soh": {
+                        "type": "integer",
+                        "format": "int32",
+                        "title": "健康指数,单位 %"
+                    },
+                    "full_capacity": {
+                        "type": "integer",
+                        "format": "int32",
+                        "title": "满充容量,单位 mAH"
+                    },
+                    "work_status": {
+                        "type": "integer",
+                        "format": "int32",
+                        "title": "电池工作状态 0:放电状态 1:充电状态 2:休眠状态 3:关机状态 0xFF:故障状态"
+                    },
+                    "current": {
+                        "type": "integer",
+                        "format": "int32",
+                        "title": "电流: >0 在充电, <=0 在放电, 单位mA"
+                    },
+                    "cell_temperature": {
+                        "type": "array",
+                        "items": {
+                            "type": "integer",
+                            "format": "int32"
+                        },
+                        "title": "电芯温度-数组形式, 单位 0.1℃"
+                    },
+                    "cell_voltage": {
+                        "type": "array",
+                        "items": {
+                            "type": "integer",
+                            "format": "int32"
+                        },
+                        "title": "电芯电压-数组形式, 单位 mV"
+                    },
+                    "shop_name": {
+                        "type": "string",
+                        "title": "门店名称"
+                    }
+                }
+            },
+            "openBootQueryListRsp": {
+                "type": "object",
+                "properties": {
+                    "message": {
+                        "type": "string"
+                    },
+                    "data": {
+                        "$ref": "#/components/schemas/openBootQueryListRspData"
+                    }
+                },
+                "title": "出参:开机自检"
+            },
+            "openBootQueryListRspData": {
+                "type": "object",
+                "properties": {
+                    "total": {
+                        "type": "integer",
+                        "format": "int32",
+                        "title": "总条目数"
+                    },
+                    "offset": {
+                        "type": "integer",
+                        "format": "int32",
+                        "title": "偏移量"
+                    },
+                    "limit": {
+                        "type": "integer",
+                        "format": "int32",
+                        "title": "每页条目数"
+                    },
+                    "list": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/openBootQueryListRspItem"
+                        },
+                        "title": "当前页详细数据"
+                    }
+                }
+            },
+            "openBootQueryListRspItem": {
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "type": "string"
+                    },
+                    "sn": {
+                        "type": "string",
+                        "title": "机器SN"
+                    },
+                    "mac": {
+                        "type": "string",
+                        "title": "机器MAC"
+                    },
+                    "product_code": {
+                        "type": "string",
+                        "title": "机型编码"
+                    },
+                    "upload_time": {
+                        "type": "string",
+                        "title": "日志上云时间"
+                    },
+                    "task_time": {
+                        "type": "string",
+                        "title": "日志生成时间"
+                    },
+                    "soft_version": {
+                        "type": "string",
+                        "title": "软件版本"
+                    },
+                    "hard_version": {
+                        "type": "string",
+                        "title": "固件版本"
+                    },
+                    "os_version": {
+                        "type": "string",
+                        "title": "系统版本"
+                    },
+                    "ip": {
+                        "type": "string",
+                        "title": "机器IP"
+                    },
+                    "check_result": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/BootQueryListRspCheckResult"
+                        },
+                        "title": "自检明细"
+                    },
+                    "is_success": {
+                        "type": "integer",
+                        "format": "int32",
+                        "title": "全部项目均自检成功：0失败(有异常) 1成功(无异常)"
+                    }
+                }
+            },
+            "openChargeQueryListRsp": {
+                "type": "object",
+                "properties": {
+                    "message": {
+                        "type": "string"
+                    },
+                    "data": {
+                        "$ref": "#/components/schemas/openChargeQueryListRspData"
+                    }
+                },
+                "title": "出参:充电记录"
+            },
+            "openChargeQueryListRspData": {
+                "type": "object",
+                "properties": {
+                    "total": {
+                        "type": "integer",
+                        "format": "int32",
+                        "title": "总条目数"
+                    },
+                    "offset": {
+                        "type": "integer",
+                        "format": "int32",
+                        "title": "偏移量"
+                    },
+                    "limit": {
+                        "type": "integer",
+                        "format": "int32",
+                        "title": "每页条目数"
+                    },
+                    "list": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/openChargeQueryListRspItem"
+                        },
+                        "title": "当前页详细数据"
+                    }
+                }
+            },
+            "openChargeQueryListRspItem": {
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "type": "string"
+                    },
+                    "sn": {
+                        "type": "string",
+                        "title": "机器SN"
+                    },
+                    "mac": {
+                        "type": "string",
+                        "title": "机器MAC"
+                    },
+                    "product_code": {
+                        "type": "string",
+                        "title": "机型编码"
+                    },
+                    "upload_time": {
+                        "type": "string",
+                        "title": "日志上云时间"
+                    },
+                    "task_time": {
+                        "type": "string",
+                        "title": "日志生成时间"
+                    },
+                    "soft_version": {
+                        "type": "string",
+                        "title": "软件版本"
+                    },
+                    "hard_version": {
+                        "type": "string",
+                        "title": "固件版本"
+                    },
+                    "os_version": {
+                        "type": "string",
+                        "title": "系统版本"
+                    },
+                    "charge_power_percent": {
+                        "type": "number",
+                        "format": "double",
+                        "title": "充电电量,百分比"
+                    },
+                    "charge_duration": {
+                        "type": "number",
+                        "format": "double",
+                        "title": "充电时长(s)"
+                    },
+                    "min_power_percent": {
+                        "type": "number",
+                        "format": "double",
+                        "title": "开始充电电量,百分比"
+                    },
+                    "max_power_percent": {
+                        "type": "number",
+                        "format": "double",
+                        "title": "结束充电电量,百分比"
+                    }
+                }
+            },
+            "openCleanTaskQueryListRsp": {
+                "type": "object",
+                "properties": {
+                    "message": {
+                        "type": "string"
+                    },
+                    "data": {
+                        "$ref": "#/components/schemas/openCleanTaskQueryListRspData"
+                    }
+                },
+                "title": "出参:清洁报告List"
+            },
+            "openCleanTaskQueryListRspData": {
+                "type": "object",
+                "properties": {
+                    "total": {
+                        "type": "integer",
+                        "format": "int32",
+                        "title": "总条目数"
+                    },
+                    "offset": {
+                        "type": "integer",
+                        "format": "int32",
+                        "title": "偏移量"
+                    },
+                    "limit": {
+                        "type": "integer",
+                        "format": "int32",
+                        "title": "每页条目数"
+                    },
+                    "list": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/openCleanTaskQueryListRspItem"
+                        },
+                        "title": "当前页详细数据"
+                    }
+                }
+            },
+            "openCleanTaskQueryListRspItem": {
+                "type": "object",
+                "properties": {
+                    "task_name": {
+                        "type": "string",
+                        "title": "任务名称"
+                    },
+                    "report_id": {
+                        "type": "string",
+                        "title": "报告ID"
+                    },
+                    "mode": {
+                        "type": "integer",
+                        "format": "int32",
+                        "title": "清扫模式：1洗地 2扫地"
+                    },
+                    "start_time": {
+                        "type": "integer",
+                        "format": "int64",
+                        "title": "任务开始时间(s)"
+                    },
+                    "end_time": {
+                        "type": "integer",
+                        "format": "int64",
+                        "title": "任务结束时间(s)"
+                    },
+                    "clean_time": {
+                        "type": "integer",
+                        "format": "int64",
+                        "title": "清洁时间(s)"
+                    },
+                    "clean_area": {
+                        "type": "number",
+                        "format": "double",
+                        "title": "清洁面积(m^2)"
+                    },
+                    "create_time": {
+                        "type": "string",
+                        "title": "上报云端时间"
+                    },
+                    "mac": {
+                        "type": "string",
+                        "title": "mac地址"
+                    },
+                    "sn": {
+                        "type": "string",
+                        "title": "机器SN"
+                    },
+                    "status": {
+                        "type": "integer",
+                        "format": "int32",
+                        "title": "状态 0未开始/默认 1清扫中 2任务暂停 3任务中断 4任务结束 5任务异常"
+                    },
+                    "sub_mode": {
+                        "type": "integer",
+                        "format": "int32",
+                        "title": "子模式: 扫地[0自定义 1地毯吸尘 3静音尘推]; 洗地[0自定义 1吸力模式 11刷洗吸 12刷吸 13刷洗 14干刷]"
+                    },
+                    "task_area": {
+                        "type": "number",
+                        "format": "double",
+                        "title": "任务计划清洁面积(m^2)"
+                    }
+                }
+            },
+            "openCleanTaskQueryRsp": {
+                "type": "object",
+                "properties": {
+                    "message": {
+                        "type": "string"
+                    },
+                    "data": {
+                        "$ref": "#/components/schemas/openCleanTaskQueryRspData"
+                    }
+                },
+                "title": "出参:清洁报告详情"
+            },
+            "openCleanTaskQueryRspData": {
+                "type": "object",
+                "properties": {
+                    "task_name": {
+                        "type": "string",
+                        "title": "任务名称"
+                    },
+                    "report_id": {
+                        "type": "string",
+                        "title": "报告ID"
+                    },
+                    "mode": {
+                        "type": "integer",
+                        "format": "int32",
+                        "title": "清扫模式：1洗地 2扫地"
+                    },
+                    "start_time": {
+                        "type": "integer",
+                        "format": "int64",
+                        "title": "任务开始时间(s)"
+                    },
+                    "end_time": {
+                        "type": "integer",
+                        "format": "int64",
+                        "title": "任务结束时间(s)"
+                    },
+                    "clean_time": {
+                        "type": "integer",
+                        "format": "int64",
+                        "title": "清洁时间(s)"
+                    },
+                    "clean_area": {
+                        "type": "number",
+                        "format": "double",
+                        "title": "清洁面积(m^2)"
+                    },
+                    "create_time": {
+                        "type": "string",
+                        "title": "上报云端时间"
+                    },
+                    "mac": {
+                        "type": "string",
+                        "title": "mac地址"
+                    },
+                    "sn": {
+                        "type": "string",
+                        "title": "机器SN"
+                    },
+                    "task_id": {
+                        "type": "string",
+                        "title": "任务ID"
+                    },
+                    "task_version": {
+                        "type": "string",
+                        "title": "任务的版本号"
+                    },
+                    "battery": {
+                        "type": "number",
+                        "format": "double",
+                        "title": "任务结束时电量"
+                    },
+                    "elevator_count": {
+                        "type": "integer",
+                        "format": "int32",
+                        "title": "乘梯次数"
+                    },
+                    "status": {
+                        "type": "integer",
+                        "format": "int32",
+                        "title": "状态 0未开始/默认 1清扫中 2任务暂停 3任务中断 4任务结束 5任务异常"
+                    },
+                    "config": {
+                        "type": "string",
+                        "title": "清扫配置"
+                    },
+                    "floor_list": {
+                        "type": "string",
+                        "title": "楼层列表"
+                    },
+                    "floor_count": {
+                        "type": "integer",
+                        "format": "int32",
+                        "title": "清扫的楼层个数"
+                    },
+                    "break_count": {
+                        "type": "integer",
+                        "format": "int32",
+                        "title": "清扫中断次数"
+                    },
+                    "task_area": {
+                        "type": "number",
+                        "format": "double",
+                        "title": "任务计划清洁面积(m^2)"
+                    },
+                    "average_area": {
+                        "type": "number",
+                        "format": "double",
+                        "title": "实际平均清洁面积(m^2)"
+                    },
+                    "percentage": {
+                        "type": "integer",
+                        "format": "int32",
+                        "title": "百分比"
+                    },
+                    "remaining_time": {
+                        "type": "integer",
+                        "format": "int32",
+                        "title": "剩余时间(s)"
+                    },
+                    "cost_water": {
+                        "type": "integer",
+                        "format": "int32",
+                        "title": "消耗水量(ml）"
+                    },
+                    "cost_battery": {
+                        "type": "integer",
+                        "format": "int32",
+                        "title": "消耗电量，百分比"
+                    },
+                    "charge_count": {
+                        "type": "integer",
+                        "format": "int32",
+                        "title": "充电次数"
+                    },
+                    "sub_mode": {
+                        "type": "integer",
+                        "format": "int32",
+                        "title": "子模式: 扫地[0自定义 1地毯吸尘 3静音尘推]; 洗地[0自定义 1吸力模式 11刷洗吸 12刷吸 13刷洗 14干刷]"
+                    },
+                    "power_consumption": {
+                        "type": "number",
+                        "format": "double",
+                        "title": "耗电量(kW·h)：根据 cost_battery 与机型(product_code)按公式换算得到，为估算值，存在误差，仅供参考"
+                    }
+                }
+            },
+            "openErrorQueryListRsp": {
+                "type": "object",
+                "properties": {
+                    "message": {
+                        "type": "string"
+                    },
+                    "data": {
+                        "$ref": "#/components/schemas/openErrorQueryListRspData"
+                    }
+                },
+                "title": "出参:故障|事件"
+            },
+            "openErrorQueryListRspData": {
+                "type": "object",
+                "properties": {
+                    "total": {
+                        "type": "integer",
+                        "format": "int32",
+                        "title": "总条目数"
+                    },
+                    "offset": {
+                        "type": "integer",
+                        "format": "int32",
+                        "title": "偏移量"
+                    },
+                    "limit": {
+                        "type": "integer",
+                        "format": "int32",
+                        "title": "每页条目数"
+                    },
+                    "list": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/openErrorQueryListRspItem"
+                        },
+                        "title": "当前页详细数据"
+                    }
+                }
+            },
+            "openErrorQueryListRspItem": {
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "type": "string"
+                    },
+                    "sn": {
+                        "type": "string",
+                        "title": "机器SN"
+                    },
+                    "mac": {
+                        "type": "string",
+                        "title": "机器MAC"
+                    },
+                    "product_code": {
+                        "type": "string",
+                        "title": "机型编码"
+                    },
+                    "upload_time": {
+                        "type": "string",
+                        "title": "日志上云时间"
+                    },
+                    "task_time": {
+                        "type": "string",
+                        "title": "日志生成时间"
+                    },
+                    "soft_version": {
+                        "type": "string",
+                        "title": "软件版本"
+                    },
+                    "hard_version": {
+                        "type": "string",
+                        "title": "固件版本"
+                    },
+                    "os_version": {
+                        "type": "string",
+                        "title": "系统版本"
+                    },
+                    "error_level": {
+                        "type": "string",
+                        "title": "故障等级: Fatal | Error | Warning | Event"
+                    },
+                    "error_type": {
+                        "type": "string",
+                        "title": "故障类型"
+                    },
+                    "error_detail": {
+                        "type": "string",
+                        "title": "故障详细描述"
+                    },
+                    "error_id": {
+                        "type": "string",
+                        "title": "故障ID"
+                    }
+                }
+            },
+            "openSohQueryListRsp": {
+                "type": "object",
+                "properties": {
+                    "message": {
+                        "type": "string"
+                    },
+                    "data": {
+                        "$ref": "#/components/schemas/openSohQueryListRspData"
+                    }
+                },
+                "title": "出参:电池健康"
+            },
+            "openSohQueryListRspData": {
+                "type": "object",
+                "properties": {
+                    "total": {
+                        "type": "integer",
+                        "format": "int32",
+                        "title": "总条目数"
+                    },
+                    "offset": {
+                        "type": "integer",
+                        "format": "int32",
+                        "title": "偏移量"
+                    },
+                    "limit": {
+                        "type": "integer",
+                        "format": "int32",
+                        "title": "每页条目数"
+                    },
+                    "list": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/openSohQueryListRspItem"
+                        },
+                        "title": "当前页详细数据"
+                    }
+                }
+            },
+            "openSohQueryListRspItem": {
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "type": "string"
+                    },
+                    "sn": {
+                        "type": "string",
+                        "title": "机器SN"
+                    },
+                    "mac": {
+                        "type": "string",
+                        "title": "机器MAC"
+                    },
+                    "product_code": {
+                        "type": "string",
+                        "title": "机型编码"
+                    },
+                    "upload_time": {
+                        "type": "string",
+                        "title": "日志上云时间"
+                    },
+                    "task_time": {
+                        "type": "string",
+                        "title": "日志生成时间"
+                    },
+                    "soft_version": {
+                        "type": "string",
+                        "title": "软件版本"
+                    },
+                    "hard_version": {
+                        "type": "string",
+                        "title": "固件版本"
+                    },
+                    "os_version": {
+                        "type": "string",
+                        "title": "系统版本"
+                    },
+                    "battery_sn": {
+                        "type": "string",
+                        "title": "电池SN"
+                    },
+                    "battery_model": {
+                        "type": "integer",
+                        "format": "int32",
+                        "title": "电池型号：枚举详见 https://pudutech.yuque.com/dfy6gg/egyh38/cgeqzms3gevp8y3m?singleDoc#IyHD6"
+                    },
+                    "cycle": {
+                        "type": "integer",
+                        "format": "int32",
+                        "title": "循环次数"
+                    },
+                    "design_capacity": {
+                        "type": "integer",
+                        "format": "int32",
+                        "title": "设计容量,单位 mAH"
+                    },
+                    "pack_voltage": {
+                        "type": "integer",
+                        "format": "int32",
+                        "title": "电压,单位 mV"
+                    },
+                    "soc": {
+                        "type": "integer",
+                        "format": "int32",
+                        "title": "电量,单位 %"
+                    },
+                    "soh": {
+                        "type": "integer",
+                        "format": "int32",
+                        "title": "健康指数,单位 %"
+                    },
+                    "battery_model_name": {
+                        "type": "string",
+                        "title": "电池型号(文字版)"
+                    }
+                }
+            },
+            "protobufAny": {
+                "type": "object",
+                "properties": {
+                    "@type": {
+                        "type": "string"
+                    }
+                },
+                "additionalProperties": {}
+            },
+            "rpcStatus": {
+                "type": "object",
+                "properties": {
+                    "code": {
+                        "type": "integer",
+                        "format": "int32"
+                    },
+                    "message": {
+                        "type": "string"
+                    },
+                    "details": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/protobufAny"
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
