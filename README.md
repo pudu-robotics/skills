@@ -6,7 +6,7 @@ A collection of agent skills for AI coding assistants (Claude Code, Gemini CLI, 
 
 ### pudu-openapi-skill
 
-Call [Pudu Robotics](https://www.pudurobotics.com/) cloud OpenAPI to manage robots — task dispatching, status queries, delivery, cruising, calling, and statistical data analysis.
+Call [Pudu Robotics](https://open.pudutech.com/) cloud OpenAPI to manage robots — task dispatching, status queries, delivery, cruising, calling, and statistical data analysis.
 
 **Capabilities:**
 
@@ -29,6 +29,7 @@ Call [Pudu Robotics](https://www.pudurobotics.com/) cloud OpenAPI to manage robo
 | Logs & Records | Boot self-check, battery charging, fault event queries |
 | Task Scheduling | Call, delivery task destination execution details |
 | Store Data | Store list query, machine list query |
+| Map Service | Map list, map details, current map, points, point groups, map images |
 
 **Prerequisites:**
 
