@@ -108,6 +108,7 @@ https://{hostname}/pudu-entry{path}
 | 日志与上报记录 | `assets/15-log.json` | 开机自检、电池充电、故障事件等列表查询 |
 | 任务调度与历史 | `assets/16-tasks.json` | 呼叫、配送等任务的目的地执行明细与时间轴 |
 | 门店与基础数据 | `assets/17-shop-data.json` | 门店列表查询、机器列表查询 |
+| 地图服务 | `assets/18-map-service.json` | 获取地图列表、地图详情、当前地图、点位信息、点位分组、地图底图 |
 
 完整能力范围、典型场景和代表接口请参考：`references/capabilities.md`
 

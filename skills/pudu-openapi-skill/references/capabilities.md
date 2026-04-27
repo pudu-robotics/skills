@@ -464,6 +464,39 @@
 
 ---
 
+## 18. 地图服务
+
+规范文件：`assets/18-map-service.json`
+
+典型场景：
+
+- 获取机器人当前使用的地图信息
+- 获取地图列表
+- 获取地图详情（含元素、区域信息）
+- 获取地图底图图片
+- 获取地图点位信息
+- 获取地图点位分组
+
+常见关键参数：
+
+- `sn`
+- `shopId`
+- `mapName`
+- `needElement`
+- `offset`
+- `limit`
+
+代表接口：
+
+- `GET /map-service/v1/open/current`
+- `GET /map-service/v1/open/list`
+- `GET /map-service/v1/open/map`
+- `POST /map-service/v1/open/image`
+- `GET /map-service/v1/open/point`
+- `POST /map-service/v1/open/group`
+
+---
+
 ## 选型建议
 
 当用户提出需求时，优先按下面的方式判断：
@@ -484,6 +517,8 @@
 - “概览数据” → `14-brief.json`
 - “日志与上报记录” → `15-log.json`
 - “任务调度与历史” → `16-tasks.json`
+- “门店 / 机器列表” → `17-shop-data.json`
+- “地图 / 点位 / 地图底图” → `18-map-service.json`
 
 若一个需求同时涉及查询和控制，优先拆成两步：
 
