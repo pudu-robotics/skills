@@ -1,5 +1,7 @@
 # Agent Skills
 
+[中文说明](./README.zh-CN.md)
+
 A collection of agent skills for AI coding assistants (Claude Code, Gemini CLI, Copilot CLI, etc.).
 
 ## Available Skills
@@ -40,16 +42,24 @@ Call [Pudu Robotics](https://open.pudutech.com/) cloud OpenAPI to manage robots 
 
 ## Installation
 
-Add a skill to your project:
+The `skills` CLI installs skills from a repository source. On GitHub, you can use the `owner/repo` shorthand for this repository.
+
+List available skills in this repository:
 
 ```bash
-npx skills add pudu-robotics/skills <skill-name>
+npx skills add pudu-robotics/skills --list
 ```
 
-For example, to add the Pudu OpenAPI skill:
+Install the Pudu OpenAPI skill into the current project:
 
 ```bash
-npx skills add pudu-robotics/skills pudu-openapi-skill
+npx skills add pudu-robotics/skills --skill pudu-openapi-skill
+```
+
+Install globally for a specific agent in non-interactive mode:
+
+```bash
+npx skills add pudu-robotics/skills --skill pudu-openapi-skill -g -a codex -y
 ```
 
 ## Skill Structure
@@ -70,5 +80,3 @@ skills/<skill-name>/
 2. Create your skill under `skills/<your-skill-name>/`
 3. Include a `SKILL.md` with clear workflow instructions
 4. Submit a pull request
-
-
