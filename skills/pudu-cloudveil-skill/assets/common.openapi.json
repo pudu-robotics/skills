@@ -1,0 +1,1299 @@
+{
+  "openapi": "3.0.3",
+  "info": {
+    "title": "PUDU CloudVeil Common OpenAPI",
+    "version": "2026-05-09",
+    "description": "Grouped from CloudVeil OpenAPI source files. Set CLOUDVEIL_BASE_URL at runtime."
+  },
+  "servers": [
+    {
+      "url": "{CLOUDVEIL_BASE_URL}"
+    }
+  ],
+  "tags": [
+    {
+      "name": "CloudOpenApi"
+    },
+    {
+      "name": "DataOpenAPI"
+    }
+  ],
+  "paths": {
+    "/openapi/data-open-platform-service/v1/api/map/robotCurrentPosition": {
+      "get": {
+        "tags": [
+          "DataOpenAPI"
+        ],
+        "description": "获取机器位置",
+        "operationId": "DataOpenAPI_GetRobotPosition",
+        "parameters": [
+          {
+            "name": "sn",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetRobotPositionRsp"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Default error response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Status"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/openapi/data-open-platform-service/v1/api/maps": {
+      "get": {
+        "tags": [
+          "DataOpenAPI"
+        ],
+        "description": "获取地图列表",
+        "operationId": "DataOpenAPI_GetMapList",
+        "parameters": [
+          {
+            "name": "shopId",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetMapListRsp"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Default error response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Status"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/openapi/data-open-platform-service/v1/api/robot": {
+      "get": {
+        "tags": [
+          "DataOpenAPI"
+        ],
+        "description": "获取机器列表",
+        "operationId": "DataOpenAPI_GetRobotList",
+        "parameters": [
+          {
+            "name": "limit",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "offset",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "shopId",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetRobotListRsp"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Default error response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Status"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/openapi/data-open-platform-service/v1/api/shop": {
+      "get": {
+        "tags": [
+          "DataOpenAPI"
+        ],
+        "description": "获取门店列表",
+        "operationId": "DataOpenAPI_GetShopList",
+        "parameters": [
+          {
+            "name": "limit",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "offset",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetShopListRsp"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Default error response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Status"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/openapi/data-open-platform-service/v2/api/map": {
+      "get": {
+        "tags": [
+          "DataOpenAPI"
+        ],
+        "description": "获取地图详情",
+        "operationId": "DataOpenAPI_GetMapV2",
+        "parameters": [
+          {
+            "name": "shopId",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "mapName",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetMapV2Rsp"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Default error response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Status"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/openapi/map-service/v1/open/current": {
+      "get": {
+        "tags": [
+          "CloudOpenApi"
+        ],
+        "description": "开放平台获取机器当前使用地图",
+        "operationId": "CloudOpenApi_OpenAPIGetCurrentMap",
+        "parameters": [
+          {
+            "name": "sn",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "needElement",
+            "in": "query",
+            "schema": {
+              "type": "boolean"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/OpenAPIGetCurrentMapReply"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Default error response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Status"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/openapi/map-service/v1/open/group": {
+      "post": {
+        "tags": [
+          "CloudOpenApi"
+        ],
+        "description": "获取某张地图的点位分组",
+        "operationId": "CloudOpenApi_OpenAPIGetMapGroup",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/OpenAPIGetMapGroupReq"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/OpenAPIGetMapGroupReply"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Default error response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Status"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/openapi/map-service/v1/open/list": {
+      "get": {
+        "tags": [
+          "CloudOpenApi"
+        ],
+        "description": "开放平台获取地图列表",
+        "operationId": "CloudOpenApi_OpenAPIGetMapList",
+        "parameters": [
+          {
+            "name": "sn",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/OpenAPIGetMapListReply"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Default error response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Status"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/openapi/map-service/v1/open/map": {
+      "get": {
+        "tags": [
+          "DataOpenAPI"
+        ],
+        "description": "获取地图详情 保持跟公网同一个入口，实际实现跟GetMapV2一样",
+        "operationId": "DataOpenAPI_GetOpenMap",
+        "parameters": [
+          {
+            "name": "shopId",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "mapName",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetMapV2Rsp"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Default error response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Status"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/openapi/map-service/v1/open/point": {
+      "get": {
+        "tags": [
+          "CloudOpenApi"
+        ],
+        "description": "开放平台获取机器当前使用地图的点位信息",
+        "operationId": "CloudOpenApi_OpenAPIGetCurrentMapPoint",
+        "parameters": [
+          {
+            "name": "sn",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "offset",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/OpenAPIGetCurrentMapPointReply"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Default error response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Status"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/openapi/open-platform-service/v1/health": {
+      "get": {
+        "tags": [
+          "DataOpenAPI"
+        ],
+        "description": "健康检测接口",
+        "operationId": "DataOpenAPI_OpenHealth",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/OpenHealthRsp"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Default error response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Status"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/openapi/open-platform-service/v1/robot/get_position": {
+      "get": {
+        "tags": [
+          "DataOpenAPI"
+        ],
+        "description": "获取机器当前位置 ，保持跟公网同一个入口，实际实现跟GetRobotPosition一样",
+        "operationId": "DataOpenAPI_GetRobotCurrentPosition",
+        "parameters": [
+          {
+            "name": "sn",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetRobotPositionRsp"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Default error response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Status"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/openapi/open-platform-service/v1/robot/group/list": {
+      "get": {
+        "tags": [
+          "CloudOpenApi"
+        ],
+        "description": "获取绑定的机器人组",
+        "operationId": "CloudOpenApi_ListRobotGroupByDevice",
+        "parameters": [
+          {
+            "name": "device",
+            "in": "query",
+            "description": "设备id",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ListRobotGroupByDeviceRsp"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Default error response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Status"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/openapi/open-platform-service/v1/robot/list_by_device_and_group": {
+      "get": {
+        "tags": [
+          "CloudOpenApi"
+        ],
+        "description": "获取机器人组中的机器人",
+        "operationId": "CloudOpenApi_ListRobotByDeviceAndGroup",
+        "parameters": [
+          {
+            "name": "device",
+            "in": "query",
+            "description": "设备id",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "groupId",
+            "in": "query",
+            "description": "机器组id",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ListRobotByDeviceAndGroupRsp"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Default error response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Status"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "CleanPath": {
+        "type": "object",
+        "properties": {
+          "x": {
+            "type": "number",
+            "format": "double"
+          },
+          "y": {
+            "type": "number",
+            "format": "double"
+          },
+          "z": {
+            "type": "number",
+            "format": "double"
+          }
+        }
+      },
+      "Data_Group": {
+        "type": "object",
+        "properties": {
+          "groupId": {
+            "type": "string"
+          },
+          "groupName": {
+            "type": "string"
+          },
+          "shopId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "shopName": {
+            "type": "string"
+          }
+        }
+      },
+      "Data_Robot": {
+        "type": "object",
+        "properties": {
+          "mac": {
+            "type": "string"
+          },
+          "sn": {
+            "type": "string"
+          },
+          "robotName": {
+            "type": "string"
+          },
+          "shopId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "shopName": {
+            "type": "string"
+          }
+        }
+      },
+      "GetMapListRsp": {
+        "type": "object",
+        "properties": {
+          "message": {
+            "type": "string"
+          },
+          "data": {
+            "$ref": "#/components/schemas/GetMapListRsp_Data"
+          }
+        }
+      },
+      "GetMapListRsp_Data": {
+        "type": "object",
+        "properties": {
+          "count": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "list": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/GetMapListRsp_MapInfo"
+            }
+          }
+        }
+      },
+      "GetMapListRsp_MapInfo": {
+        "type": "object",
+        "properties": {
+          "mapName": {
+            "type": "string"
+          },
+          "mapCode": {
+            "type": "string"
+          },
+          "floor": {
+            "type": "string"
+          },
+          "isUsed": {
+            "type": "integer",
+            "format": "int32"
+          }
+        }
+      },
+      "GetMapV2_Data": {
+        "type": "object",
+        "properties": {
+          "mapName": {
+            "type": "string"
+          },
+          "url": {
+            "type": "string"
+          },
+          "width": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "height": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "resolution": {
+            "type": "number",
+            "format": "double"
+          },
+          "origin": {
+            "type": "array",
+            "items": {
+              "type": "number",
+              "format": "double"
+            }
+          },
+          "elementList": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/GetMapV2_Element"
+            }
+          },
+          "zoneList": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/GetMapV2_Zone"
+            }
+          },
+          "mapCode": {
+            "type": "string"
+          }
+        }
+      },
+      "GetMapV2_Element": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "type": {
+            "type": "string"
+          },
+          "vectorList": {
+            "type": "array",
+            "items": {
+              "type": "number",
+              "format": "double"
+            }
+          },
+          "mode": {
+            "type": "string"
+          },
+          "id": {
+            "type": "string"
+          },
+          "cleanPathList": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/CleanPath"
+            }
+          }
+        }
+      },
+      "GetMapV2_Zone": {
+        "type": "object",
+        "properties": {
+          "type": {
+            "type": "string"
+          },
+          "id": {
+            "type": "string"
+          },
+          "zoneNodeList": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/GetMapV2_Zone_ZoneNode"
+            }
+          }
+        }
+      },
+      "GetMapV2_Zone_ZoneNode": {
+        "type": "object",
+        "properties": {
+          "vectorList": {
+            "type": "array",
+            "items": {
+              "type": "number",
+              "format": "double"
+            }
+          }
+        }
+      },
+      "GetMapV2Rsp": {
+        "type": "object",
+        "properties": {
+          "message": {
+            "type": "string"
+          },
+          "data": {
+            "$ref": "#/components/schemas/GetMapV2_Data"
+          }
+        }
+      },
+      "GetRobotListRsp": {
+        "type": "object",
+        "properties": {
+          "message": {
+            "type": "string"
+          },
+          "data": {
+            "$ref": "#/components/schemas/GetRobotListRsp_Data"
+          }
+        }
+      },
+      "GetRobotListRsp_Data": {
+        "type": "object",
+        "properties": {
+          "count": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "list": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/GetRobotListRsp_RobotInfo"
+            }
+          }
+        }
+      },
+      "GetRobotListRsp_RobotInfo": {
+        "type": "object",
+        "properties": {
+          "shopId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "shopName": {
+            "type": "string"
+          },
+          "sn": {
+            "type": "string"
+          },
+          "mac": {
+            "type": "string"
+          }
+        }
+      },
+      "GetRobotPositionRsp": {
+        "type": "object",
+        "properties": {
+          "message": {
+            "type": "string"
+          },
+          "data": {
+            "$ref": "#/components/schemas/GetRobotPositionRsp_Data"
+          }
+        }
+      },
+      "GetRobotPositionRsp_Data": {
+        "type": "object",
+        "properties": {
+          "mapName": {
+            "type": "string"
+          },
+          "floor": {
+            "type": "string"
+          },
+          "position": {
+            "$ref": "#/components/schemas/GetRobotPositionRsp_Position"
+          }
+        }
+      },
+      "GetRobotPositionRsp_Position": {
+        "type": "object",
+        "properties": {
+          "x": {
+            "type": "number",
+            "format": "double"
+          },
+          "y": {
+            "type": "number",
+            "format": "double"
+          },
+          "z": {
+            "type": "number",
+            "format": "double"
+          }
+        }
+      },
+      "GetShopListRsp": {
+        "type": "object",
+        "properties": {
+          "message": {
+            "type": "string"
+          },
+          "data": {
+            "$ref": "#/components/schemas/GetShopListRsp_Data"
+          }
+        }
+      },
+      "GetShopListRsp_Data": {
+        "type": "object",
+        "properties": {
+          "count": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "list": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/GetShopListRsp_ShopInfo"
+            }
+          }
+        }
+      },
+      "GetShopListRsp_ShopInfo": {
+        "type": "object",
+        "properties": {
+          "shopId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "shopName": {
+            "type": "string"
+          }
+        }
+      },
+      "GoogleProtobufAny": {
+        "type": "object",
+        "properties": {
+          "@type": {
+            "type": "string",
+            "description": "The type of the serialized message."
+          }
+        },
+        "additionalProperties": true,
+        "description": "Contains an arbitrary serialized message along with a @type that describes the type of the serialized message."
+      },
+      "ListRobotByDeviceAndGroupRsp": {
+        "type": "object",
+        "properties": {
+          "message": {
+            "type": "string"
+          },
+          "data": {
+            "$ref": "#/components/schemas/ListRobotByDeviceAndGroupRsp_Data"
+          }
+        }
+      },
+      "ListRobotByDeviceAndGroupRsp_Data": {
+        "type": "object",
+        "properties": {
+          "robots": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Data_Robot"
+            }
+          }
+        }
+      },
+      "ListRobotGroupByDeviceRsp": {
+        "type": "object",
+        "properties": {
+          "message": {
+            "type": "string"
+          },
+          "data": {
+            "$ref": "#/components/schemas/ListRobotGroupByDeviceRsp_Data"
+          }
+        }
+      },
+      "ListRobotGroupByDeviceRsp_Data": {
+        "type": "object",
+        "properties": {
+          "groups": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Data_Group"
+            }
+          }
+        }
+      },
+      "OpenAPIGetCurrentMapPointReply": {
+        "type": "object",
+        "properties": {
+          "message": {
+            "type": "string"
+          },
+          "data": {
+            "$ref": "#/components/schemas/OpenAPIGetCurrentMapPointReply_Data"
+          }
+        }
+      },
+      "OpenAPIGetCurrentMapPointReply_Data": {
+        "type": "object",
+        "properties": {
+          "total": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "list": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/OpenAPIGetCurrentMapPointReply_PointInfo"
+            }
+          }
+        }
+      },
+      "OpenAPIGetCurrentMapPointReply_PointInfo": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "x": {
+            "type": "number",
+            "format": "double"
+          },
+          "y": {
+            "type": "number",
+            "format": "double"
+          },
+          "z": {
+            "type": "number",
+            "format": "double"
+          },
+          "type": {
+            "type": "string"
+          }
+        }
+      },
+      "OpenAPIGetCurrentMapReply": {
+        "type": "object",
+        "properties": {
+          "message": {
+            "type": "string"
+          },
+          "data": {
+            "$ref": "#/components/schemas/OpenAPIGetCurrentMapReply_MapInfo"
+          }
+        }
+      },
+      "OpenAPIGetCurrentMapReply_MapElement": {
+        "type": "object",
+        "properties": {
+          "type": {
+            "type": "string"
+          },
+          "id": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "mode": {
+            "type": "string"
+          },
+          "group": {
+            "type": "string"
+          },
+          "vector": {
+            "type": "array",
+            "items": {
+              "type": "number",
+              "format": "double"
+            }
+          },
+          "width": {
+            "type": "number",
+            "format": "double"
+          },
+          "maxSpeed": {
+            "type": "number",
+            "format": "double"
+          }
+        }
+      },
+      "OpenAPIGetCurrentMapReply_MapInfo": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "floor": {
+            "type": "string"
+          },
+          "elements": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/OpenAPIGetCurrentMapReply_MapElement"
+            }
+          }
+        }
+      },
+      "OpenAPIGetMapGroupReply": {
+        "type": "object",
+        "properties": {
+          "message": {
+            "type": "string"
+          },
+          "data": {
+            "$ref": "#/components/schemas/OpenAPIGetMapGroupReply_Data"
+          }
+        }
+      },
+      "OpenAPIGetMapGroupReply_Data": {
+        "type": "object",
+        "properties": {
+          "groupList": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/OpenAPIGetMapGroupReply_GroupInfo"
+            }
+          }
+        }
+      },
+      "OpenAPIGetMapGroupReply_GroupInfo": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "secondGroupList": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/OpenAPIGetMapGroupReply_SecondGroupInfo"
+            }
+          }
+        }
+      },
+      "OpenAPIGetMapGroupReply_SecondGroupInfo": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "pointList": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        }
+      },
+      "OpenAPIGetMapGroupReq": {
+        "type": "object",
+        "properties": {
+          "sn": {
+            "type": "string"
+          },
+          "mapName": {
+            "type": "string"
+          },
+          "modes": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "shopId": {
+            "type": "integer",
+            "format": "int32"
+          }
+        }
+      },
+      "OpenAPIGetMapListReply": {
+        "type": "object",
+        "properties": {
+          "message": {
+            "type": "string"
+          },
+          "data": {
+            "$ref": "#/components/schemas/OpenAPIGetMapListReply_Data"
+          }
+        }
+      },
+      "OpenAPIGetMapListReply_Data": {
+        "type": "object",
+        "properties": {
+          "list": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/OpenAPIGetMapListReply_MapInfo"
+            }
+          }
+        }
+      },
+      "OpenAPIGetMapListReply_MapInfo": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "floor": {
+            "type": "string"
+          },
+          "isUsed": {
+            "type": "integer",
+            "format": "int32"
+          }
+        }
+      },
+      "OpenHealthRsp": {
+        "type": "object",
+        "properties": {
+          "message": {
+            "type": "string"
+          }
+        }
+      },
+      "Status": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "integer",
+            "description": "The status code, which should be an enum value of [google.rpc.Code][google.rpc.Code].",
+            "format": "int32"
+          },
+          "message": {
+            "type": "string",
+            "description": "A developer-facing error message, which should be in English. Any user-facing error message should be localized and sent in the [google.rpc.Status.details][google.rpc.Status.details] field, or localized by the client."
+          },
+          "details": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/GoogleProtobufAny"
+            },
+            "description": "A list of messages that carry the error details.  There is a common set of message types for APIs to use."
+          }
+        },
+        "description": "The `Status` type defines a logical error model that is suitable for different programming environments, including REST APIs and RPC APIs. It is used by [gRPC](https://github.com/grpc). Each `Status` message contains three pieces of data: error code, error message, and error details. You can find out more about this error model and how to work with it in the [API Design Guide](https://cloud.google.com/apis/design/errors)."
+      }
+    }
+  }
+}

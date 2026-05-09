@@ -1,0 +1,2165 @@
+{
+  "openapi": "3.0.3",
+  "info": {
+    "title": "Pudu Cloud Order-to-Person API",
+    "description": "订单到人（试用版）OpenAPI 接口文档。\n支持机型：PuduT300\n\n包含订单管理、系统配置、机器人管理、拣货操作、批次任务管理、仓库管理等接口。\n",
+    "version": "1.0.0",
+    "contact": {
+      "name": "Pudu Technology",
+      "url": "https://open.pudutech.com"
+    }
+  },
+  "servers": [
+    {
+      "url": "https://open.pudutech.com",
+      "description": "Pudu Cloud API Server"
+    }
+  ],
+  "security": [
+    {
+      "BearerAuth": [
+
+      ]
+    }
+  ],
+  "paths": {
+    "/openapi/order_to_user/v1/order/cancel": {
+      "post": {
+        "tags": [
+          "订单管理接口"
+        ],
+        "summary": "任务取消撤回",
+        "description": "取消指定订单任务。",
+        "operationId": "orderCancel",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": [
+                  "order_id"
+                ],
+                "properties": {
+                  "order_id": {
+                    "type": "string",
+                    "description": "订单编号"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "成功响应",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BaseResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/openapi/order_to_user/v1/order/import": {
+      "post": {
+        "tags": [
+          "订单管理接口"
+        ],
+        "summary": "任务池导入",
+        "description": "批量导入订单到任务池。",
+        "operationId": "orderImport",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": [
+                  "list"
+                ],
+                "properties": {
+                  "list": {
+                    "type": "array",
+                    "items": {
+                      "$ref": "#/components/schemas/OrderImportItem"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "成功响应",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BaseResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/openapi/order_to_user/v1/order/query": {
+      "get": {
+        "tags": [
+          "订单管理接口"
+        ],
+        "summary": "任务状态查询",
+        "description": "查询订单任务状态信息。",
+        "operationId": "orderQuery",
+        "parameters": [
+          {
+            "name": "order_id",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "订单编号"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "成功响应",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    },
+                    "data": {
+                      "$ref": "#/components/schemas/OrderDetail"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/openapi/order_to_user/v1/config/tray": {
+      "get": {
+        "tags": [
+          "系统配置接口"
+        ],
+        "summary": "获取托盘配置",
+        "description": "获取托盘配置信息，包括深度配置等。",
+        "operationId": "getTrayConfig",
+        "parameters": [
+          {
+            "name": "map_name",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            },
+            "description": "地图名称"
+          },
+          {
+            "name": "shop_id",
+            "in": "query",
+            "schema": {
+              "type": "integer"
+            },
+            "description": "门店ID"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "成功响应",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    },
+                    "data": {
+                      "$ref": "#/components/schemas/TrayConfig"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "系统配置接口"
+        ],
+        "summary": "更新托盘配置",
+        "description": "更新托盘配置信息。",
+        "operationId": "updateTrayConfig",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/TrayConfigUpdate"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "成功响应",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BaseResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/openapi/order_to_user/v1/aisle/batch_lock": {
+      "post": {
+        "tags": [
+          "机器人管理接口"
+        ],
+        "summary": "巷道批量锁定/解锁",
+        "description": "批量锁定或解锁指定巷道。",
+        "operationId": "aisleBatchLock",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": [
+                  "map_name",
+                  "shop_id",
+                  "aisle_ids",
+                  "lock"
+                ],
+                "properties": {
+                  "map_name": {
+                    "type": "string",
+                    "description": "地图名称"
+                  },
+                  "shop_id": {
+                    "type": "integer",
+                    "description": "门店ID"
+                  },
+                  "aisle_ids": {
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    },
+                    "description": "巷道ID列表"
+                  },
+                  "lock": {
+                    "type": "boolean",
+                    "description": "true=锁定，false=解锁"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "成功响应",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    },
+                    "data": {
+                      "type": "object",
+                      "properties": {
+                        "success_aisle_ids": {
+                          "type": "array",
+                          "items": {
+                            "type": "string"
+                          }
+                        },
+                        "failed_aisle_ids": {
+                          "type": "array",
+                          "items": {
+                            "type": "string"
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/openapi/order_to_user/v1/aisle/list": {
+      "get": {
+        "tags": [
+          "机器人管理接口"
+        ],
+        "summary": "查询地图内巷道列表",
+        "description": "查询指定地图内的巷道列表及其中的机器人信息。",
+        "operationId": "getAisleList",
+        "parameters": [
+          {
+            "name": "map_name",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "地图名称"
+          },
+          {
+            "name": "shop_id",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            },
+            "description": "门店ID"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "成功响应",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    },
+                    "data": {
+                      "type": "object",
+                      "properties": {
+                        "aisles": {
+                          "type": "array",
+                          "items": {
+                            "$ref": "#/components/schemas/AisleInfo"
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/openapi/order_to_user/v1/early_arrival": {
+      "post": {
+        "tags": [
+          "机器人管理接口"
+        ],
+        "summary": "提前抵达",
+        "description": "机器人提前抵达指定点位。",
+        "operationId": "earlyArrival",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": [
+                  "sn"
+                ],
+                "properties": {
+                  "sn": {
+                    "type": "string",
+                    "description": "机器人SN"
+                  },
+                  "dest_point": {
+                    "type": "string",
+                    "description": "目标点位"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "成功响应",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    },
+                    "data": {
+                      "type": "object",
+                      "properties": {
+                        "sn": {
+                          "type": "string"
+                        },
+                        "success": {
+                          "type": "boolean"
+                        },
+                        "robot_message": {
+                          "type": "string"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/openapi/order_to_user/v1/pda/subscribe_config": {
+      "get": {
+        "tags": [
+          "机器人管理接口"
+        ],
+        "summary": "获取PDA监听区域配置",
+        "description": "获取当前账号的PDA监听区域配置。",
+        "operationId": "getPdaSubscribeConfig",
+        "responses": {
+          "200": {
+            "description": "成功响应",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    },
+                    "data": {
+                      "$ref": "#/components/schemas/PdaSubscribeConfig"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "机器人管理接口"
+        ],
+        "summary": "更新PDA监听区域配置",
+        "description": "更新PDA监听区域配置。",
+        "operationId": "updatePdaSubscribeConfig",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": [
+                  "subscribe_areas"
+                ],
+                "properties": {
+                  "subscribe_areas": {
+                    "type": "array",
+                    "items": {
+                      "$ref": "#/components/schemas/SubscribeArea"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "成功响应",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    },
+                    "data": {
+                      "type": "object",
+                      "properties": {
+                        "config_id": {
+                          "type": "string"
+                        },
+                        "update_time": {
+                          "type": "integer"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/openapi/order_to_user/v1/robot/search": {
+      "post": {
+        "tags": [
+          "机器人管理接口"
+        ],
+        "summary": "区域内机器人搜索",
+        "description": "搜索指定区域内的机器人状态信息。支持按地图点位、巷道ID、仓库货位三种匹配方式搜索。\n匹配优先级：1) map_name+shop_id+map_point  2) map_name+shop_id+aisle_id  3) warehouse_code+warehouse_point\n",
+        "operationId": "robotSearch",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "subscribe_areas": {
+                    "type": "array",
+                    "items": {
+                      "$ref": "#/components/schemas/SearchArea"
+                    }
+                  },
+                  "query_all_active": {
+                    "type": "boolean",
+                    "description": "是否查询所有进行中订单的机器人（true时忽略subscribe_areas）"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "成功响应",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    },
+                    "data": {
+                      "type": "object",
+                      "properties": {
+                        "robots": {
+                          "type": "array",
+                          "items": {
+                            "$ref": "#/components/schemas/RobotSearchResult"
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/openapi/order_to_user/v1/order/sconf_read": {
+      "get": {
+        "tags": [
+          "机器人管理接口"
+        ],
+        "summary": "机器人特殊配置查询",
+        "description": "查询订单到人业务的特殊配置项，返回机器人的各项业务开关配置状态。",
+        "operationId": "sconfRead",
+        "parameters": [
+          {
+            "name": "mac",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "pattern": "^[a-zA-Z0-9:]*$"
+            },
+            "description": "机器人MAC地址"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "成功响应",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    },
+                    "data": {
+                      "$ref": "#/components/schemas/SconfData"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/openapi/order_to_user/v1/current_pick/query": {
+      "get": {
+        "tags": [
+          "拣货操作接口"
+        ],
+        "summary": "当前拣货单查询",
+        "description": "查询当前操作人的拣货单信息，系统自动从Token中识别当前用户。",
+        "operationId": "currentPickQuery",
+        "responses": {
+          "200": {
+            "description": "成功响应",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    },
+                    "data": {
+                      "$ref": "#/components/schemas/PickInfo"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/openapi/order_to_user/v1/pick/assign": {
+      "post": {
+        "tags": [
+          "拣货操作接口"
+        ],
+        "summary": "拣货点领取拣货单",
+        "description": "PDA端领取指定拣货点的拣货单，获取该拣货点的商品信息列表。",
+        "operationId": "pickAssign",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": [
+                  "pick_no"
+                ],
+                "properties": {
+                  "pick_no": {
+                    "type": "string",
+                    "description": "拣货编号"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "成功响应",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    },
+                    "data": {
+                      "$ref": "#/components/schemas/PickInfo"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/openapi/order_to_user/v1/pick/picked": {
+      "post": {
+        "tags": [
+          "拣货操作接口"
+        ],
+        "summary": "拣货点完成拣货",
+        "description": "PDA端完成拣货操作，更新拣货数量。拣货完成后，系统会异步推送拣货信息更新回调（pickInfoUpdate）到客户WMS系统。\n",
+        "operationId": "pickPicked",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": [
+                  "pick_no",
+                  "picked_goods"
+                ],
+                "properties": {
+                  "pick_no": {
+                    "type": "string",
+                    "description": "拣货编号"
+                  },
+                  "picked_goods": {
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "required": [
+                        "barcode",
+                        "count",
+                        "order_id"
+                      ],
+                      "properties": {
+                        "barcode": {
+                          "type": "string",
+                          "description": "货物条码"
+                        },
+                        "count": {
+                          "type": "number",
+                          "format": "float",
+                          "description": "拣货数量"
+                        },
+                        "order_id": {
+                          "type": "string",
+                          "description": "订单编号"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "成功响应",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BaseResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/openapi/order_to_user/v1/batch/assign": {
+      "post": {
+        "tags": [
+          "批次任务管理接口"
+        ],
+        "summary": "批次任务领取",
+        "description": "为机器人分配批次任务（绑箱）。\n场景1：仅扫描容器码，云端自动分配订单。\n场景2：同时扫描波次码和容器码，云端分配指定批次。\n",
+        "operationId": "batchAssign",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": [
+                  "barcode",
+                  "sn"
+                ],
+                "properties": {
+                  "batch_id": {
+                    "type": "string",
+                    "description": "批次任务编号（场景2必填）"
+                  },
+                  "barcode": {
+                    "type": "string",
+                    "description": "容器码"
+                  },
+                  "sn": {
+                    "type": "string",
+                    "description": "机器人SN"
+                  },
+                  "map_name": {
+                    "type": "string",
+                    "description": "地图名"
+                  },
+                  "map_point": {
+                    "type": "string",
+                    "description": "当前机器所在点位"
+                  },
+                  "floor": {
+                    "type": "string",
+                    "description": "机器所在楼层"
+                  },
+                  "position": {
+                    "$ref": "#/components/schemas/Position"
+                  },
+                  "order_count": {
+                    "type": "integer",
+                    "description": "一次接多少个任务（0表示按batch_id分配）"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "成功响应",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    },
+                    "data": {
+                      "type": "object",
+                      "properties": {
+                        "order_list": {
+                          "type": "array",
+                          "items": {
+                            "$ref": "#/components/schemas/BatchOrderItem"
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/openapi/order_to_user/v1/batch/cancel": {
+      "post": {
+        "tags": [
+          "批次任务管理接口"
+        ],
+        "summary": "批次任务取消撤回",
+        "description": "取消整个批次任务，只有非结束态的批次任务才能取消。支持将已取消批次中的订单放回任务池重新分配。",
+        "operationId": "batchCancel",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": [
+                  "batch_id"
+                ],
+                "properties": {
+                  "batch_id": {
+                    "type": "string",
+                    "description": "批次任务编号"
+                  },
+                  "return_to_pool": {
+                    "type": "boolean",
+                    "description": "是否放回任务池"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "成功响应",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BaseResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/openapi/order_to_user/v1/batch/error_stop": {
+      "post": {
+        "tags": [
+          "批次任务管理接口"
+        ],
+        "summary": "手动触发换绑",
+        "description": "手动触发换绑功能，将批次任务状态改为 ErrorStop。\n调用后系统自动走自动换绑流程（呼叫新机器→预约→确认）。\n仅 Assigned 或 Picking 状态允许触发。\n",
+        "operationId": "manualErrorStop",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": [
+                  "batch_id"
+                ],
+                "properties": {
+                  "batch_id": {
+                    "type": "string",
+                    "description": "批次任务编号"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "成功响应",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    },
+                    "data": {
+                      "type": "object",
+                      "properties": {
+                        "batch_id": {
+                          "type": "string"
+                        },
+                        "previous_status": {
+                          "type": "string"
+                        },
+                        "current_status": {
+                          "type": "string",
+                          "enum": [
+                            "ErrorStop"
+                          ]
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/openapi/order_to_user/v1/batch/finish": {
+      "post": {
+        "tags": [
+          "批次任务管理接口"
+        ],
+        "summary": "批次任务完成",
+        "description": "机器人卸货完成后标记批次任务完成，将批次任务和所有订单状态更新为 Finished。",
+        "operationId": "batchFinish",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": [
+                  "batch_id",
+                  "sn"
+                ],
+                "properties": {
+                  "batch_id": {
+                    "type": "string",
+                    "description": "批次任务编号"
+                  },
+                  "sn": {
+                    "type": "string",
+                    "description": "机器人SN"
+                  },
+                  "finish_time": {
+                    "type": "integer",
+                    "description": "完成时间戳（秒）"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "成功响应",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BaseResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/openapi/order_to_user/v1/batch/goods_by_barcode": {
+      "post": {
+        "tags": [
+          "批次任务管理接口"
+        ],
+        "summary": "根据容器号查询商品列表",
+        "description": "通过容器码查询最新已完成波次的商品列表，只返回已完成（Finished）状态的波次商品信息。",
+        "operationId": "goodsByBarcode",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": [
+                  "barcode"
+                ],
+                "properties": {
+                  "barcode": {
+                    "type": "string",
+                    "description": "容器码（容器号）"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "成功响应",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    },
+                    "data": {
+                      "type": "object",
+                      "properties": {
+                        "batch_id": {
+                          "type": "string"
+                        },
+                        "update_time": {
+                          "type": "integer",
+                          "description": "波次完成时间（秒级时间戳）"
+                        },
+                        "goods_list": {
+                          "type": "array",
+                          "items": {
+                            "$ref": "#/components/schemas/GoodsItem"
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/openapi/order_to_user/v1/batch/handover/confirm": {
+      "post": {
+        "tags": [
+          "批次任务管理接口"
+        ],
+        "summary": "批次任务交接确认",
+        "description": "PDA扫码确认完成批次任务交接，将任务从故障机器人转移到新机器人。",
+        "operationId": "batchHandoverConfirm",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": [
+                  "batch_id",
+                  "source_sn",
+                  "target_sn"
+                ],
+                "properties": {
+                  "handover_id": {
+                    "type": "string",
+                    "description": "交接任务编号"
+                  },
+                  "batch_id": {
+                    "type": "string",
+                    "description": "批次任务编号"
+                  },
+                  "source_sn": {
+                    "type": "string",
+                    "description": "故障机器人SN"
+                  },
+                  "target_sn": {
+                    "type": "string",
+                    "description": "新机器人SN"
+                  },
+                  "barcode": {
+                    "type": "string",
+                    "description": "容器码（用于验证）"
+                  },
+                  "confirm_user": {
+                    "type": "string",
+                    "description": "确认操作人"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "成功响应",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    },
+                    "data": {
+                      "type": "object",
+                      "properties": {
+                        "handover_id": {
+                          "type": "string"
+                        },
+                        "batch_id": {
+                          "type": "string"
+                        },
+                        "source_sn": {
+                          "type": "string"
+                        },
+                        "target_sn": {
+                          "type": "string"
+                        },
+                        "status": {
+                          "type": "string",
+                          "enum": [
+                            "Confirmed"
+                          ]
+                        },
+                        "confirm_time": {
+                          "type": "integer"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/openapi/order_to_user/v1/batch/handover/query": {
+      "get": {
+        "tags": [
+          "批次任务管理接口"
+        ],
+        "summary": "查询是否有待交接批次",
+        "description": "查询指定机器人是否有交接中的点位信息，支持查询目标机器和源机器的交接信息。",
+        "operationId": "handoverQuery",
+        "parameters": [
+          {
+            "name": "sn",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "机器人SN"
+          },
+          {
+            "name": "is_source_sn",
+            "in": "query",
+            "schema": {
+              "type": "boolean",
+              "default": false
+            },
+            "description": "是否是原（故障）机器SN"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "成功响应",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    },
+                    "data": {
+                      "type": "object",
+                      "properties": {
+                        "batch_id": {
+                          "type": "string"
+                        },
+                        "map_name": {
+                          "type": "string"
+                        },
+                        "dest": {
+                          "type": "string"
+                        },
+                        "position": {
+                          "$ref": "#/components/schemas/Position"
+                        },
+                        "source_sn": {
+                          "type": "string"
+                        },
+                        "target_sn": {
+                          "type": "string"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/openapi/order_to_user/v1/batch/handover/reserve": {
+      "post": {
+        "tags": [
+          "批次任务管理接口"
+        ],
+        "summary": "批次任务交接预约",
+        "description": "故障机器人预约交接任务，由新机器人接管批次任务。\n预约超时（默认30分钟）未确认，系统会自动取消预约。\n",
+        "operationId": "batchHandoverReserve",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": [
+                  "source_sn",
+                  "target_sn",
+                  "handover_point",
+                  "map_name"
+                ],
+                "properties": {
+                  "batch_id": {
+                    "type": "string",
+                    "description": "批次任务编号"
+                  },
+                  "source_sn": {
+                    "type": "string",
+                    "description": "故障机器人SN"
+                  },
+                  "target_sn": {
+                    "type": "string",
+                    "description": "新机器人SN"
+                  },
+                  "handover_point": {
+                    "type": "string",
+                    "description": "交接点位名称"
+                  },
+                  "map_name": {
+                    "type": "string",
+                    "description": "地图名称"
+                  },
+                  "position": {
+                    "$ref": "#/components/schemas/Position"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "成功响应",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    },
+                    "data": {
+                      "type": "object",
+                      "properties": {
+                        "handover_id": {
+                          "type": "string"
+                        },
+                        "batch_id": {
+                          "type": "string"
+                        },
+                        "source_sn": {
+                          "type": "string"
+                        },
+                        "target_sn": {
+                          "type": "string"
+                        },
+                        "handover_point": {
+                          "type": "string"
+                        },
+                        "status": {
+                          "type": "string",
+                          "enum": [
+                            "Reserved"
+                          ]
+                        },
+                        "reserve_time": {
+                          "type": "integer"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/openapi/order_to_user/v1/batch/query": {
+      "get": {
+        "tags": [
+          "批次任务管理接口"
+        ],
+        "summary": "批次任务状态查询",
+        "description": "查询批次任务的详细状态信息。batch_id 和 sn 至少有一项传值。",
+        "operationId": "batchQuery",
+        "parameters": [
+          {
+            "name": "batch_id",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            },
+            "description": "批次任务编号"
+          },
+          {
+            "name": "sn",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            },
+            "description": "机器SN"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "成功响应",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    },
+                    "data": {
+                      "type": "object",
+                      "properties": {
+                        "order_list": {
+                          "type": "array",
+                          "items": {
+                            "$ref": "#/components/schemas/BatchOrderItem"
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/openapi/order_to_user/v1/warehouse/query_points": {
+      "get": {
+        "tags": [
+          "仓库管理接口"
+        ],
+        "summary": "查询货位地图点映射清单",
+        "description": "查询仓库货位与地图点位的映射关系，支持分页查询。",
+        "operationId": "warehouseQueryPoints",
+        "parameters": [
+          {
+            "name": "warehouse_code",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            },
+            "description": "仓库编码（精准匹配）"
+          },
+          {
+            "name": "warehouse_point",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            },
+            "description": "仓库货位（模糊匹配）"
+          },
+          {
+            "name": "map_name",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            },
+            "description": "地图名称（模糊匹配）"
+          },
+          {
+            "name": "map_point",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            },
+            "description": "地图点位（模糊匹配）"
+          },
+          {
+            "name": "point_type",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "PICK",
+                "BIND",
+                "UNLOAD"
+              ]
+            },
+            "description": "货位类型"
+          },
+          {
+            "name": "aisle_id",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            },
+            "description": "巷道ID（精准匹配，需配合map_name使用）"
+          },
+          {
+            "name": "offset",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "default": 0
+            },
+            "description": "偏移量"
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "default": 100
+            },
+            "description": "每页条目数"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "成功响应",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    },
+                    "data": {
+                      "$ref": "#/components/schemas/WarehousePointsData"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "securitySchemes": {
+      "BearerAuth": {
+        "type": "http",
+        "scheme": "bearer",
+        "bearerFormat": "JWT"
+      }
+    },
+    "schemas": {
+      "BaseResponse": {
+        "type": "object",
+        "properties": {
+          "message": {
+            "type": "string"
+          },
+          "data": {
+            "type": "object"
+          }
+        }
+      },
+      "Position": {
+        "type": "object",
+        "properties": {
+          "x": {
+            "type": "number",
+            "format": "float"
+          },
+          "y": {
+            "type": "number",
+            "format": "float"
+          },
+          "z": {
+            "type": "number",
+            "format": "float"
+          },
+          "yaw": {
+            "type": "number",
+            "format": "float"
+          }
+        }
+      },
+      "OrderImportItem": {
+        "type": "object",
+        "properties": {
+          "order_id": {
+            "type": "string",
+            "description": "订单编号"
+          },
+          "order_name": {
+            "type": "string",
+            "description": "订单名称"
+          },
+          "order_info": {
+            "$ref": "#/components/schemas/OrderInfo"
+          },
+          "tray_index": {
+            "type": "string",
+            "description": "托盘编码"
+          },
+          "priority": {
+            "type": "integer",
+            "description": "优先级"
+          },
+          "deadline_time": {
+            "type": "integer",
+            "description": "截止时间戳（秒）"
+          },
+          "batch_id": {
+            "type": "string",
+            "description": "批次任务编号"
+          },
+          "extra": {
+            "type": "string",
+            "description": "扩展信息"
+          }
+        }
+      },
+      "OrderInfo": {
+        "type": "object",
+        "properties": {
+          "map_name": {
+            "type": "string"
+          },
+          "shop_id": {
+            "type": "integer"
+          },
+          "channel": {
+            "type": "string"
+          },
+          "warehouse_code": {
+            "type": "string"
+          },
+          "dest_list": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/DestItem"
+            }
+          }
+        }
+      },
+      "DestItem": {
+        "type": "object",
+        "properties": {
+          "dest": {
+            "type": "string"
+          },
+          "warehouse_point": {
+            "type": "string"
+          },
+          "goods": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/GoodsInputItem"
+            }
+          }
+        }
+      },
+      "GoodsInputItem": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "count": {
+            "type": "number",
+            "format": "float"
+          },
+          "barcode": {
+            "type": "string"
+          },
+          "weight": {
+            "type": "number",
+            "format": "float"
+          },
+          "img": {
+            "type": "string"
+          },
+          "extra": {
+            "type": "string"
+          }
+        }
+      },
+      "OrderDetail": {
+        "type": "object",
+        "properties": {
+          "batch_id": {
+            "type": "string"
+          },
+          "order_id": {
+            "type": "string"
+          },
+          "order_info": {
+            "$ref": "#/components/schemas/OrderInfo"
+          },
+          "tray_index": {
+            "type": "string"
+          },
+          "priority": {
+            "type": "integer"
+          },
+          "deadline_time": {
+            "type": "integer"
+          },
+          "extra": {
+            "type": "string"
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "NotAssign",
+              "Assigned",
+              "ErrorStop",
+              "Picking",
+              "PickEnd",
+              "Finished",
+              "Abandoned"
+            ]
+          },
+          "barcode": {
+            "type": "string"
+          }
+        }
+      },
+      "TrayConfig": {
+        "type": "object",
+        "properties": {
+          "total_trays": {
+            "type": "integer"
+          },
+          "row_count": {
+            "type": "integer"
+          },
+          "column_count": {
+            "type": "integer"
+          },
+          "depth_config": {
+            "$ref": "#/components/schemas/DepthConfig"
+          },
+          "extra": {
+            "type": "string"
+          }
+        }
+      },
+      "DepthConfig": {
+        "type": "object",
+        "properties": {
+          "scope": {
+            "type": "string"
+          },
+          "global_depth": {
+            "type": "integer"
+          },
+          "row_settings": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "row_index": {
+                  "type": "integer"
+                },
+                "depth": {
+                  "type": "integer"
+                }
+              }
+            }
+          }
+        }
+      },
+      "TrayConfigUpdate": {
+        "type": "object",
+        "required": [
+          "total_trays",
+          "row_count",
+          "column_count"
+        ],
+        "properties": {
+          "map_name": {
+            "type": "string"
+          },
+          "shop_id": {
+            "type": "integer"
+          },
+          "total_trays": {
+            "type": "integer"
+          },
+          "row_count": {
+            "type": "integer"
+          },
+          "column_count": {
+            "type": "integer"
+          },
+          "depth_config": {
+            "type": "object",
+            "required": [
+              "scope"
+            ],
+            "properties": {
+              "scope": {
+                "type": "string"
+              },
+              "global_depth": {
+                "type": "integer"
+              },
+              "row_settings": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "row_index": {
+                      "type": "integer"
+                    },
+                    "depth": {
+                      "type": "integer"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "extra": {
+            "type": "string"
+          }
+        }
+      },
+      "AisleInfo": {
+        "type": "object",
+        "properties": {
+          "aisle_id": {
+            "type": "string"
+          },
+          "is_locked": {
+            "type": "boolean"
+          },
+          "robot_count": {
+            "type": "integer"
+          },
+          "robots": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "mac": {
+                  "type": "string"
+                },
+                "sn": {
+                  "type": "string"
+                },
+                "robot_name": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      },
+      "PdaSubscribeConfig": {
+        "type": "object",
+        "properties": {
+          "config_id": {
+            "type": "string"
+          },
+          "account": {
+            "type": "string"
+          },
+          "subscribe_areas": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/SubscribeArea"
+            }
+          },
+          "update_time": {
+            "type": "integer"
+          },
+          "create_time": {
+            "type": "integer"
+          }
+        }
+      },
+      "SubscribeArea": {
+        "type": "object",
+        "properties": {
+          "map_name": {
+            "type": "string"
+          },
+          "shop_id": {
+            "type": "integer"
+          },
+          "map_point": {
+            "type": "string"
+          },
+          "warehouse_code": {
+            "type": "string"
+          },
+          "warehouse_point": {
+            "type": "string"
+          },
+          "aisle_id": {
+            "type": "string"
+          }
+        }
+      },
+      "SearchArea": {
+        "type": "object",
+        "properties": {
+          "map_name": {
+            "type": "string"
+          },
+          "shop_id": {
+            "type": "integer"
+          },
+          "map_point": {
+            "type": "string"
+          },
+          "warehouse_code": {
+            "type": "string"
+          },
+          "warehouse_point": {
+            "type": "string"
+          },
+          "aisle_id": {
+            "type": "string"
+          }
+        }
+      },
+      "RobotSearchResult": {
+        "type": "object",
+        "properties": {
+          "sn": {
+            "type": "string"
+          },
+          "robot_name": {
+            "type": "string"
+          },
+          "map_name": {
+            "type": "string"
+          },
+          "shop_id": {
+            "type": "integer"
+          },
+          "current_point": {
+            "type": "string"
+          },
+          "position": {
+            "$ref": "#/components/schemas/Position"
+          },
+          "dest_point": {
+            "type": "string"
+          },
+          "estimate_mileage": {
+            "type": "number",
+            "format": "float",
+            "description": "预计里程（米）"
+          },
+          "estimate_time": {
+            "type": "integer",
+            "description": "预计时间（秒）"
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "Start",
+              "OnTheWay",
+              "Arrive"
+            ]
+          },
+          "batch_id": {
+            "type": "string"
+          },
+          "barcode": {
+            "type": "string"
+          },
+          "aisle_id": {
+            "type": "string"
+          }
+        }
+      },
+      "SconfData": {
+        "type": "object",
+        "properties": {
+          "box_enable": {
+            "type": "boolean"
+          },
+          "device_code_enable": {
+            "type": "boolean"
+          },
+          "device_pick_disable": {
+            "type": "boolean"
+          },
+          "bluetooth_enable": {
+            "type": "boolean"
+          },
+          "pick_checkable": {
+            "type": "boolean"
+          },
+          "auto_pick": {
+            "type": "boolean"
+          },
+          "auto_unload": {
+            "type": "boolean"
+          },
+          "auto_lifting": {
+            "type": "boolean"
+          },
+          "manual_handover_enable": {
+            "type": "boolean"
+          },
+          "onsite_bind_enable": {
+            "type": "boolean"
+          }
+        }
+      },
+      "PickInfo": {
+        "type": "object",
+        "properties": {
+          "pick_no": {
+            "type": "string"
+          },
+          "goods": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/PickGoodsItem"
+            }
+          },
+          "dest": {
+            "type": "string"
+          },
+          "batch_id": {
+            "type": "string"
+          },
+          "pick_status": {
+            "type": "string",
+            "enum": [
+              "PickWait",
+              "PickAssigned",
+              "PickPicking",
+              "PickFinished"
+            ]
+          },
+          "op_user": {
+            "type": "string"
+          }
+        }
+      },
+      "PickGoodsItem": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "count": {
+            "type": "number",
+            "format": "float"
+          },
+          "barcode": {
+            "type": "string"
+          },
+          "weight": {
+            "type": "number",
+            "format": "float",
+            "description": "重量（g）"
+          },
+          "finish_count": {
+            "type": "number",
+            "format": "float"
+          },
+          "img": {
+            "type": "string"
+          },
+          "extra": {
+            "type": "string"
+          },
+          "order_id": {
+            "type": "string"
+          },
+          "tray_index": {
+            "type": "string"
+          }
+        }
+      },
+      "BatchOrderItem": {
+        "type": "object",
+        "properties": {
+          "batch_id": {
+            "type": "string"
+          },
+          "order_id": {
+            "type": "string"
+          },
+          "order_info": {
+            "type": "object"
+          },
+          "status": {
+            "type": "string"
+          },
+          "barcode": {
+            "type": "string"
+          },
+          "deadline_time": {
+            "type": "integer"
+          },
+          "extra": {
+            "type": "string"
+          },
+          "tray_index": {
+            "type": "string"
+          },
+          "sn": {
+            "type": "string"
+          }
+        }
+      },
+      "GoodsItem": {
+        "type": "object",
+        "properties": {
+          "barcode": {
+            "type": "string"
+          },
+          "order_id": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "dest": {
+            "type": "string"
+          },
+          "count": {
+            "type": "integer"
+          },
+          "finish_count": {
+            "type": "integer"
+          },
+          "img": {
+            "type": "string"
+          },
+          "warehouse_point": {
+            "type": "string"
+          }
+        }
+      },
+      "WarehousePointsData": {
+        "type": "object",
+        "properties": {
+          "total": {
+            "type": "integer"
+          },
+          "offset": {
+            "type": "integer"
+          },
+          "limit": {
+            "type": "integer"
+          },
+          "list": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/WarehousePointItem"
+            }
+          }
+        }
+      },
+      "WarehousePointItem": {
+        "type": "object",
+        "properties": {
+          "channel": {
+            "type": "string"
+          },
+          "warehouse_code": {
+            "type": "string"
+          },
+          "warehouse_point": {
+            "type": "string"
+          },
+          "map_name": {
+            "type": "string"
+          },
+          "shop_id": {
+            "type": "integer"
+          },
+          "map_point": {
+            "type": "string"
+          },
+          "point_type": {
+            "type": "string",
+            "enum": [
+              "PICK",
+              "BIND",
+              "UNLOAD"
+            ]
+          },
+          "extra": {
+            "type": "string"
+          },
+          "shop_name": {
+            "type": "string"
+          },
+          "regex_enable": {
+            "type": "integer",
+            "enum": [
+              0,
+              1
+            ]
+          },
+          "aisle_id": {
+            "type": "string"
+          }
+        }
+      }
+    }
+  }
+}

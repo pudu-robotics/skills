@@ -1,0 +1,2158 @@
+{
+  "openapi": "3.0.3",
+  "info": {
+    "title": "PUDU CloudVeil Robot Tasks OpenAPI",
+    "version": "2026-05-09",
+    "description": "Grouped from CloudVeil OpenAPI source files. Set CLOUDVEIL_BASE_URL at runtime."
+  },
+  "servers": [
+    {
+      "url": "{CLOUDVEIL_BASE_URL}"
+    }
+  ],
+  "tags": [
+    {
+      "name": "CloudOpenApi"
+    }
+  ],
+  "paths": {
+    "/openapi/open-platform-service/v1/call/list": {
+      "get": {
+        "tags": [
+          "CloudOpenApi"
+        ],
+        "description": "查询呼叫任务",
+        "operationId": "CloudOpenApi_GetCallTask",
+        "parameters": [
+          {
+            "name": "sn",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "taskId",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "shopId",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "offset",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "status",
+            "in": "query",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetCallTaskRsp"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Default error response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Status"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/openapi/open-platform-service/v1/custom_call": {
+      "post": {
+        "tags": [
+          "CloudOpenApi"
+        ],
+        "description": "自定义呼叫机器",
+        "operationId": "CloudOpenApi_CustomCall",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CustomCallReq"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CustomCallRsp"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Default error response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Status"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/openapi/open-platform-service/v1/custom_call/cancel": {
+      "post": {
+        "tags": [
+          "CloudOpenApi"
+        ],
+        "description": "自定义呼叫取消",
+        "operationId": "CloudOpenApi_CustomCallCancel",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CustomCallCancelReq"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CustomCallCancelRsp"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Default error response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Status"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/openapi/open-platform-service/v1/custom_call/complete": {
+      "post": {
+        "tags": [
+          "CloudOpenApi"
+        ],
+        "description": "完成自定义呼叫",
+        "operationId": "CloudOpenApi_CustomCallCompleted",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CustomCallCompleteReq"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CustomCallCompleteRsp"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Default error response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Status"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/openapi/open-platform-service/v1/custom_content": {
+      "post": {
+        "tags": [
+          "CloudOpenApi"
+        ],
+        "description": "发送自定义展示内容",
+        "operationId": "CloudOpenApi_SendCustomContentToRobot",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SendCustomContentToRobotReq"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SendCustomContentToRobotRsp"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Default error response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Status"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/openapi/open-platform-service/v1/delivery_action": {
+      "post": {
+        "tags": [
+          "CloudOpenApi"
+        ],
+        "description": "给机器人发送操作指令",
+        "operationId": "CloudOpenApi_SendDeliveryAction",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SendDeliveryActionReq"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SendDeliveryActionRsp"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Default error response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Status"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/openapi/open-platform-service/v1/delivery_task": {
+      "post": {
+        "tags": [
+          "CloudOpenApi"
+        ],
+        "description": "给机器人发送配送任务",
+        "operationId": "CloudOpenApi_SendDeliveryTask",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SendDeliveryTaskReq"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SendDeliveryTaskRsp"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Default error response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Status"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/openapi/open-platform-service/v1/delivery/list": {
+      "get": {
+        "tags": [
+          "CloudOpenApi"
+        ],
+        "description": "查询配送任务",
+        "operationId": "CloudOpenApi_GetDeliveryTask",
+        "parameters": [
+          {
+            "name": "sn",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "taskId",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "offset",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetDeliveryTaskRsp"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Default error response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Status"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/openapi/open-platform-service/v1/errand_action": {
+      "post": {
+        "tags": [
+          "CloudOpenApi"
+        ],
+        "description": "发送跑腿指令",
+        "operationId": "CloudOpenApi_SendErrandAction",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SendErrandActionReq"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SendTaskErrandRsp"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Default error response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Status"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/openapi/open-platform-service/v1/errand/list": {
+      "get": {
+        "tags": [
+          "CloudOpenApi"
+        ],
+        "description": "查询跑腿任务",
+        "operationId": "CloudOpenApi_GetErrandTask",
+        "parameters": [
+          {
+            "name": "sn",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "sessionId",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "offset",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetErrandTaskRsp"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Default error response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Status"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/openapi/open-platform-service/v1/guide_task": {
+      "post": {
+        "tags": [
+          "CloudOpenApi"
+        ],
+        "description": "给机器发送领位任务",
+        "operationId": "CloudOpenApi_SendGuideTask",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SendGuideTaskReq"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SendGuideTaskRsp"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Default error response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Status"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/openapi/open-platform-service/v1/lifting_action": {
+      "post": {
+        "tags": [
+          "CloudOpenApi"
+        ],
+        "description": "给机器发送顶升指令",
+        "operationId": "CloudOpenApi_SendLiftingAction",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SendLiftingActionReq"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SendLiftingActionRsp"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Default error response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Status"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/openapi/open-platform-service/v1/lifting_task": {
+      "post": {
+        "tags": [
+          "CloudOpenApi"
+        ],
+        "description": "给机器发送顶升任务",
+        "operationId": "CloudOpenApi_SendLiftingTask",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SendLiftingTaskReq"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SendLiftingTaskRsp"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Default error response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Status"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/openapi/open-platform-service/v1/lifting/list": {
+      "get": {
+        "tags": [
+          "CloudOpenApi"
+        ],
+        "description": "查询顶升任务",
+        "operationId": "CloudOpenApi_GetLiftingTask",
+        "parameters": [
+          {
+            "name": "sn",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "taskId",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "offset",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetLiftingTaskRsp"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Default error response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Status"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/openapi/open-platform-service/v1/task_errand": {
+      "post": {
+        "tags": [
+          "CloudOpenApi"
+        ],
+        "description": "发送跑腿模式",
+        "operationId": "CloudOpenApi_SendTaskErrand",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SendTaskErrandReq"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SendTaskErrandRsp"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Default error response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Status"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/openapi/open-platform-service/v1/transport_action": {
+      "post": {
+        "tags": [
+          "CloudOpenApi"
+        ],
+        "description": "给机器人发送运送操作指令",
+        "operationId": "CloudOpenApi_SendTransportAction",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SendDeliveryActionReq"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SendDeliveryActionRsp"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Default error response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Status"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/openapi/open-platform-service/v1/transport_task": {
+      "post": {
+        "tags": [
+          "CloudOpenApi"
+        ],
+        "description": "给机器人发送运送任务。支持出发点，优先级，以及3个以上目标点",
+        "operationId": "CloudOpenApi_SendTransportTask",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SendTransportTaskReq"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SendDeliveryTaskRsp"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Default error response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Status"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/openapi/open-platform-service/v1/tray_order": {
+      "post": {
+        "tags": [
+          "CloudOpenApi"
+        ],
+        "description": "给机器人托盘推送订单",
+        "operationId": "CloudOpenApi_TrayOrderToRobot",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/TrayOrderToRobotReq"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TrayOrderToRobotRsp"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Default error response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Status"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "CustomCallCancelReq": {
+        "type": "object",
+        "properties": {
+          "taskId": {
+            "type": "string"
+          },
+          "callDeviceName": {
+            "type": "string"
+          }
+        },
+        "description": "取消呼叫"
+      },
+      "CustomCallCancelRsp": {
+        "type": "object",
+        "properties": {
+          "message": {
+            "type": "string"
+          }
+        },
+        "description": "取消呼叫返回"
+      },
+      "CustomCallCompleteReq": {
+        "type": "object",
+        "properties": {
+          "taskId": {
+            "type": "string"
+          },
+          "callDeviceName": {
+            "type": "string"
+          },
+          "nextCallTask": {
+            "$ref": "#/components/schemas/CustomCallReq"
+          }
+        },
+        "description": "完成呼叫"
+      },
+      "CustomCallCompleteRsp": {
+        "type": "object",
+        "properties": {
+          "message": {
+            "type": "string"
+          },
+          "data": {
+            "$ref": "#/components/schemas/CustomCallCompleteRsp_Data"
+          }
+        },
+        "description": "完成呼叫返回"
+      },
+      "CustomCallCompleteRsp_Data": {
+        "type": "object",
+        "properties": {
+          "nextCallResult": {
+            "$ref": "#/components/schemas/CustomCallCompleteRsp_NextCallResult"
+          }
+        }
+      },
+      "CustomCallCompleteRsp_NextCallResult": {
+        "type": "object",
+        "properties": {
+          "message": {
+            "type": "string",
+            "description": "下次任务的返回结果"
+          },
+          "taskId": {
+            "type": "string"
+          }
+        }
+      },
+      "CustomCallReq": {
+        "type": "object",
+        "properties": {
+          "sn": {
+            "type": "string"
+          },
+          "shopId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "mapName": {
+            "type": "string"
+          },
+          "point": {
+            "type": "string"
+          },
+          "pointType": {
+            "type": "string"
+          },
+          "callDeviceName": {
+            "type": "string"
+          },
+          "callMode": {
+            "type": "string"
+          },
+          "modeData": {
+            "$ref": "#/components/schemas/CustomContentModeData"
+          }
+        },
+        "description": "自定义呼叫入参"
+      },
+      "CustomCallRsp": {
+        "type": "object",
+        "properties": {
+          "message": {
+            "type": "string"
+          },
+          "data": {
+            "$ref": "#/components/schemas/CustomCallRsp_Data"
+          }
+        },
+        "description": "自定义呼叫出参"
+      },
+      "CustomCallRsp_Data": {
+        "type": "object",
+        "properties": {
+          "taskId": {
+            "type": "string"
+          },
+          "queue": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "state": {
+            "type": "string"
+          },
+          "remark": {
+            "type": "string"
+          }
+        }
+      },
+      "CustomContentModeData": {
+        "type": "object",
+        "properties": {
+          "urls": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "switchTime": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "playCount": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "cancelBtnTime": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "showTimeout": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "qrcode": {
+            "type": "string"
+          },
+          "text": {
+            "type": "string"
+          }
+        }
+      },
+      "GetCallTaskRsp": {
+        "type": "object",
+        "properties": {
+          "message": {
+            "type": "string"
+          },
+          "data": {
+            "$ref": "#/components/schemas/GetCallTaskRsp_Data"
+          }
+        }
+      },
+      "GetCallTaskRsp_CallTask": {
+        "type": "object",
+        "properties": {
+          "taskId": {
+            "type": "string"
+          },
+          "shopId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "mapName": {
+            "type": "string"
+          },
+          "point": {
+            "type": "string"
+          },
+          "sn": {
+            "type": "string"
+          },
+          "queue": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "createTime": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "finishTime": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "status": {
+            "type": "string"
+          },
+          "remark": {
+            "type": "string"
+          },
+          "productCode": {
+            "type": "string"
+          }
+        }
+      },
+      "GetCallTaskRsp_Data": {
+        "type": "object",
+        "properties": {
+          "total": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "list": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/GetCallTaskRsp_CallTask"
+            }
+          }
+        }
+      },
+      "GetDeliveryTaskRsp": {
+        "type": "object",
+        "properties": {
+          "message": {
+            "type": "string"
+          },
+          "data": {
+            "$ref": "#/components/schemas/GetDeliveryTaskRsp_Data"
+          }
+        }
+      },
+      "GetDeliveryTaskRsp_Data": {
+        "type": "object",
+        "properties": {
+          "total": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "list": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/GetDeliveryTaskRsp_DeliveryTask"
+            }
+          }
+        }
+      },
+      "GetDeliveryTaskRsp_DeliveryDestinations": {
+        "type": "object",
+        "properties": {
+          "destination": {
+            "type": "string"
+          },
+          "id": {
+            "type": "string"
+          },
+          "phoneNum": {
+            "type": "string"
+          },
+          "phoneCode": {
+            "type": "string"
+          },
+          "type": {
+            "type": "string"
+          },
+          "estimatedTime": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "spendTime": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "status": {
+            "type": "string"
+          },
+          "completeType": {
+            "type": "string"
+          },
+          "timeout": {
+            "type": "boolean"
+          },
+          "mapInfo": {
+            "$ref": "#/components/schemas/LiftingMapInfo"
+          }
+        }
+      },
+      "GetDeliveryTaskRsp_DeliveryTask": {
+        "type": "object",
+        "properties": {
+          "taskId": {
+            "type": "string"
+          },
+          "type": {
+            "type": "string"
+          },
+          "deliverySort": {
+            "type": "string"
+          },
+          "executeTask": {
+            "type": "boolean"
+          },
+          "sn": {
+            "type": "string"
+          },
+          "trays": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/GetDeliveryTaskRsp_Trays"
+            }
+          },
+          "taskStatus": {
+            "type": "string"
+          },
+          "createTime": {
+            "type": "integer",
+            "format": "int32"
+          }
+        }
+      },
+      "GetDeliveryTaskRsp_Trays": {
+        "type": "object",
+        "properties": {
+          "destinations": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/GetDeliveryTaskRsp_DeliveryDestinations"
+            }
+          }
+        }
+      },
+      "GetErrandTaskRsp": {
+        "type": "object",
+        "properties": {
+          "message": {
+            "type": "string"
+          },
+          "data": {
+            "$ref": "#/components/schemas/GetErrandTaskRsp_Data"
+          }
+        }
+      },
+      "GetErrandTaskRsp_Data": {
+        "type": "object",
+        "properties": {
+          "total": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "list": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/GetErrandTaskRsp_ErrandTask"
+            }
+          }
+        }
+      },
+      "GetErrandTaskRsp_ErrandTask": {
+        "type": "object",
+        "properties": {
+          "sessionId": {
+            "type": "string"
+          },
+          "auth": {
+            "type": "string"
+          },
+          "taskTime": {
+            "type": "number",
+            "format": "double"
+          },
+          "sn": {
+            "type": "string"
+          },
+          "tasks": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/GetErrandTaskRsp_Task"
+            }
+          },
+          "createTime": {
+            "type": "integer",
+            "format": "int32"
+          }
+        }
+      },
+      "GetErrandTaskRsp_Task": {
+        "type": "object",
+        "properties": {
+          "taskName": {
+            "type": "string"
+          },
+          "taskStatus": {
+            "type": "string"
+          },
+          "taskDesc": {
+            "type": "string"
+          },
+          "pointList": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/GetErrandTaskRsp_TaskPoint"
+            }
+          }
+        }
+      },
+      "GetErrandTaskRsp_TaskPoint": {
+        "type": "object",
+        "properties": {
+          "mapName": {
+            "type": "string"
+          },
+          "mapCode": {
+            "type": "string"
+          },
+          "point": {
+            "type": "string"
+          },
+          "pointType": {
+            "type": "string"
+          },
+          "pointStatus": {
+            "type": "string"
+          },
+          "remark": {
+            "type": "string"
+          },
+          "phoneNum": {
+            "type": "string"
+          },
+          "phoneCode": {
+            "type": "string"
+          },
+          "verificationCode": {
+            "type": "string"
+          }
+        }
+      },
+      "GetLiftingTaskRsp": {
+        "type": "object",
+        "properties": {
+          "message": {
+            "type": "string"
+          },
+          "data": {
+            "$ref": "#/components/schemas/GetLiftingTaskRsp_Data"
+          }
+        }
+      },
+      "GetLiftingTaskRsp_Data": {
+        "type": "object",
+        "properties": {
+          "total": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "list": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/GetLiftingTaskRsp_LiftingTaskInfo"
+            }
+          }
+        }
+      },
+      "GetLiftingTaskRsp_LiftingTaskInfo": {
+        "type": "object",
+        "properties": {
+          "taskId": {
+            "type": "string"
+          },
+          "type": {
+            "type": "string"
+          },
+          "progress": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "taskStatus": {
+            "type": "string"
+          },
+          "sn": {
+            "type": "string"
+          },
+          "tasks": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/LiftingTask"
+            }
+          },
+          "createTime": {
+            "type": "integer",
+            "format": "int32"
+          }
+        }
+      },
+      "GoogleProtobufAny": {
+        "type": "object",
+        "properties": {
+          "@type": {
+            "type": "string",
+            "description": "The type of the serialized message."
+          }
+        },
+        "additionalProperties": true,
+        "description": "Contains an arbitrary serialized message along with a @type that describes the type of the serialized message."
+      },
+      "LiftingFailAction": {
+        "type": "object",
+        "properties": {
+          "action": {
+            "type": "string"
+          },
+          "data": {
+            "$ref": "#/components/schemas/LiftingFailAction_LiftingFailActionData"
+          }
+        }
+      },
+      "LiftingFailAction_LiftingFailActionData": {
+        "type": "object",
+        "properties": {
+          "pointName": {
+            "type": "string"
+          },
+          "pointType": {
+            "type": "string"
+          },
+          "pointAttr": {
+            "type": "string"
+          },
+          "mapInfo": {
+            "$ref": "#/components/schemas/LiftingMapInfo"
+          }
+        }
+      },
+      "LiftingMapInfo": {
+        "type": "object",
+        "properties": {
+          "mapName": {
+            "type": "string"
+          },
+          "mapCode": {
+            "type": "string"
+          }
+        }
+      },
+      "LiftingPoint": {
+        "type": "object",
+        "properties": {
+          "pointName": {
+            "type": "string"
+          },
+          "pointType": {
+            "type": "string"
+          },
+          "pointAttr": {
+            "type": "string"
+          },
+          "mapInfo": {
+            "$ref": "#/components/schemas/LiftingMapInfo"
+          },
+          "failAction": {
+            "$ref": "#/components/schemas/LiftingFailAction"
+          },
+          "pointStatus": {
+            "type": "string"
+          }
+        }
+      },
+      "LiftingTask": {
+        "type": "object",
+        "properties": {
+          "pointList": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/LiftingPoint"
+            }
+          },
+          "status": {
+            "type": "string"
+          }
+        }
+      },
+      "Payload_Task": {
+        "type": "object",
+        "properties": {
+          "taskName": {
+            "type": "string",
+            "description": "子任务名称,机器上报状态时会用这个"
+          },
+          "taskDesc": {
+            "type": "string",
+            "description": "子任务描述"
+          },
+          "pointList": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Task_TaskPoint"
+            },
+            "description": "点位集合"
+          },
+          "hatchId": {
+            "type": "string"
+          }
+        }
+      },
+      "SendCustomContentToRobotPayload": {
+        "type": "object",
+        "properties": {
+          "callMode": {
+            "type": "string"
+          },
+          "taskId": {
+            "type": "string"
+          },
+          "modeData": {
+            "$ref": "#/components/schemas/CustomContentModeData"
+          }
+        }
+      },
+      "SendCustomContentToRobotReq": {
+        "type": "object",
+        "properties": {
+          "sn": {
+            "type": "string"
+          },
+          "payload": {
+            "$ref": "#/components/schemas/SendCustomContentToRobotPayload"
+          }
+        }
+      },
+      "SendCustomContentToRobotRsp": {
+        "type": "object",
+        "properties": {
+          "message": {
+            "type": "string"
+          },
+          "data": {
+            "$ref": "#/components/schemas/SendCustomContentToRobotRspData"
+          }
+        }
+      },
+      "SendCustomContentToRobotRspData": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "message": {
+            "type": "string"
+          }
+        }
+      },
+      "SendDeliveryActionPayload": {
+        "type": "object",
+        "properties": {
+          "action": {
+            "type": "string"
+          }
+        }
+      },
+      "SendDeliveryActionReq": {
+        "type": "object",
+        "properties": {
+          "sn": {
+            "type": "string"
+          },
+          "payload": {
+            "$ref": "#/components/schemas/SendDeliveryActionPayload"
+          }
+        }
+      },
+      "SendDeliveryActionRsp": {
+        "type": "object",
+        "properties": {
+          "message": {
+            "type": "string"
+          },
+          "data": {
+            "$ref": "#/components/schemas/SendDeliveryActionRspData"
+          }
+        }
+      },
+      "SendDeliveryActionRspData": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "message": {
+            "type": "string"
+          },
+          "taskId": {
+            "type": "string"
+          }
+        }
+      },
+      "SendDeliveryTaskPayload": {
+        "type": "object",
+        "properties": {
+          "type": {
+            "type": "string"
+          },
+          "deliverySort": {
+            "type": "string"
+          },
+          "executeTask": {
+            "type": "boolean"
+          },
+          "trays": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Trays"
+            }
+          }
+        }
+      },
+      "SendDeliveryTaskReq": {
+        "type": "object",
+        "properties": {
+          "sn": {
+            "type": "string"
+          },
+          "payload": {
+            "$ref": "#/components/schemas/SendDeliveryTaskPayload"
+          }
+        }
+      },
+      "SendDeliveryTaskRsp": {
+        "type": "object",
+        "properties": {
+          "message": {
+            "type": "string"
+          },
+          "data": {
+            "$ref": "#/components/schemas/SendDeliveryTaskRspData"
+          }
+        }
+      },
+      "SendDeliveryTaskRspData": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "message": {
+            "type": "string"
+          },
+          "taskId": {
+            "type": "string"
+          }
+        }
+      },
+      "SendErrandActionReq": {
+        "type": "object",
+        "properties": {
+          "sn": {
+            "type": "string"
+          },
+          "payload": {
+            "$ref": "#/components/schemas/SendErrandActionReq_Payload"
+          }
+        }
+      },
+      "SendErrandActionReq_Payload": {
+        "type": "object",
+        "properties": {
+          "sessionId": {
+            "type": "string"
+          },
+          "action": {
+            "type": "string"
+          },
+          "auth": {
+            "type": "string"
+          },
+          "hatchId": {
+            "type": "string"
+          }
+        }
+      },
+      "SendGuideTaskReq": {
+        "type": "object",
+        "properties": {
+          "sn": {
+            "type": "string"
+          },
+          "payload": {
+            "$ref": "#/components/schemas/SendGuideTaskReq_SendGuideTaskReqPayload"
+          }
+        }
+      },
+      "SendGuideTaskReq_Destination": {
+        "type": "object",
+        "properties": {
+          "destination": {
+            "type": "string"
+          },
+          "id": {
+            "type": "string"
+          }
+        }
+      },
+      "SendGuideTaskReq_SendGuideTaskReqPayload": {
+        "type": "object",
+        "properties": {
+          "type": {
+            "type": "string"
+          },
+          "trays": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/SendGuideTaskReq_Trays"
+            }
+          }
+        }
+      },
+      "SendGuideTaskReq_Trays": {
+        "type": "object",
+        "properties": {
+          "destinations": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/SendGuideTaskReq_Destination"
+            }
+          }
+        }
+      },
+      "SendGuideTaskRsp": {
+        "type": "object",
+        "properties": {
+          "message": {
+            "type": "string"
+          },
+          "data": {
+            "$ref": "#/components/schemas/SendGuideTaskRsp_Data"
+          }
+        }
+      },
+      "SendGuideTaskRsp_Data": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "message": {
+            "type": "string"
+          }
+        }
+      },
+      "SendLiftingActionReq": {
+        "type": "object",
+        "properties": {
+          "sn": {
+            "type": "string"
+          },
+          "taskId": {
+            "type": "string"
+          },
+          "action": {
+            "type": "string"
+          }
+        }
+      },
+      "SendLiftingActionRsp": {
+        "type": "object",
+        "properties": {
+          "message": {
+            "type": "string"
+          },
+          "data": {
+            "$ref": "#/components/schemas/SendLiftingActionRsp_Data"
+          }
+        }
+      },
+      "SendLiftingActionRsp_Data": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "message": {
+            "type": "string"
+          }
+        }
+      },
+      "SendLiftingTaskPayload": {
+        "type": "object",
+        "properties": {
+          "tasks": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/LiftingTask"
+            }
+          },
+          "type": {
+            "type": "string"
+          }
+        }
+      },
+      "SendLiftingTaskReq": {
+        "type": "object",
+        "properties": {
+          "sn": {
+            "type": "string"
+          },
+          "payload": {
+            "$ref": "#/components/schemas/SendLiftingTaskPayload"
+          }
+        }
+      },
+      "SendLiftingTaskRsp": {
+        "type": "object",
+        "properties": {
+          "message": {
+            "type": "string"
+          },
+          "data": {
+            "$ref": "#/components/schemas/SendLiftingTaskRsp_Data"
+          }
+        }
+      },
+      "SendLiftingTaskRsp_Data": {
+        "type": "object",
+        "properties": {
+          "taskId": {
+            "type": "string"
+          },
+          "code": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "message": {
+            "type": "string"
+          }
+        }
+      },
+      "SendTaskErrandReq": {
+        "type": "object",
+        "properties": {
+          "sn": {
+            "type": "string",
+            "description": "机器sn"
+          },
+          "payload": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/SendTaskErrandReq_Payload"
+              }
+            ],
+            "description": "根据command定义结构"
+          }
+        }
+      },
+      "SendTaskErrandReq_Payload": {
+        "type": "object",
+        "properties": {
+          "tasks": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Payload_Task"
+            },
+            "description": "任务列表"
+          },
+          "auth": {
+            "type": "string"
+          },
+          "backMode": {
+            "type": "string"
+          }
+        }
+      },
+      "SendTaskErrandRsp": {
+        "type": "object",
+        "properties": {
+          "message": {
+            "type": "string"
+          },
+          "data": {
+            "$ref": "#/components/schemas/SendTaskErrandRsp_Data"
+          }
+        }
+      },
+      "SendTaskErrandRsp_Data": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "message": {
+            "type": "string"
+          },
+          "sessionId": {
+            "type": "string"
+          }
+        }
+      },
+      "SendTransportTaskPayload": {
+        "type": "object",
+        "properties": {
+          "taskId": {
+            "type": "string"
+          },
+          "type": {
+            "type": "string"
+          },
+          "deliverySort": {
+            "type": "string"
+          },
+          "executeTask": {
+            "type": "boolean"
+          },
+          "trays": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/TransportTrays"
+            }
+          },
+          "startPoint": {
+            "$ref": "#/components/schemas/TransportStartPoint"
+          },
+          "startWaitTime": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "endWaitTime": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "taskRemark": {
+            "type": "string"
+          },
+          "priority": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "extend1": {
+            "type": "string"
+          },
+          "extend2": {
+            "type": "string"
+          },
+          "extend3": {
+            "type": "string"
+          }
+        }
+      },
+      "SendTransportTaskReq": {
+        "type": "object",
+        "properties": {
+          "sn": {
+            "type": "string"
+          },
+          "payload": {
+            "$ref": "#/components/schemas/SendTransportTaskPayload"
+          }
+        }
+      },
+      "Status": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "integer",
+            "description": "The status code, which should be an enum value of [google.rpc.Code][google.rpc.Code].",
+            "format": "int32"
+          },
+          "message": {
+            "type": "string",
+            "description": "A developer-facing error message, which should be in English. Any user-facing error message should be localized and sent in the [google.rpc.Status.details][google.rpc.Status.details] field, or localized by the client."
+          },
+          "details": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/GoogleProtobufAny"
+            },
+            "description": "A list of messages that carry the error details.  There is a common set of message types for APIs to use."
+          }
+        },
+        "description": "The `Status` type defines a logical error model that is suitable for different programming environments, including REST APIs and RPC APIs. It is used by [gRPC](https://github.com/grpc). Each `Status` message contains three pieces of data: error code, error message, and error details. You can find out more about this error model and how to work with it in the [API Design Guide](https://cloud.google.com/apis/design/errors)."
+      },
+      "Task_TaskPoint": {
+        "type": "object",
+        "properties": {
+          "mapName": {
+            "type": "string",
+            "description": "地图名称"
+          },
+          "mapCode": {
+            "type": "string",
+            "description": "地图code"
+          },
+          "point": {
+            "type": "string",
+            "description": "点位id/名称"
+          },
+          "pointType": {
+            "type": "string",
+            "description": "点位类型，table...."
+          },
+          "mobile": {
+            "type": "string",
+            "description": "手机号码"
+          },
+          "verificationCode": {
+            "type": "string",
+            "description": "验证码"
+          },
+          "remark": {
+            "type": "string",
+            "description": "备注"
+          },
+          "phoneNum": {
+            "type": "string"
+          },
+          "phoneCode": {
+            "type": "string"
+          }
+        }
+      },
+      "TransportStartPoint": {
+        "type": "object",
+        "properties": {
+          "destination": {
+            "type": "string"
+          },
+          "contentType": {
+            "type": "string"
+          },
+          "contentData": {
+            "type": "string"
+          }
+        },
+        "description": "运送任务的起始点的信息，点位以及展示的图片视频二维码等"
+      },
+      "TransportTrays": {
+        "type": "object",
+        "properties": {
+          "destinations": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/TransportTraysDestinations"
+            }
+          }
+        }
+      },
+      "TransportTraysDestinations": {
+        "type": "object",
+        "properties": {
+          "points": {
+            "type": "string"
+          },
+          "id": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "amount": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "contentType": {
+            "type": "string"
+          },
+          "contentData": {
+            "type": "string"
+          },
+          "trayIndex": {
+            "type": "integer",
+            "format": "int32"
+          }
+        }
+      },
+      "TrayOrderToRobotOrders": {
+        "type": "object",
+        "properties": {
+          "tableNo": {
+            "type": "string"
+          },
+          "tableName": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "amount": {
+            "type": "number",
+            "format": "float"
+          },
+          "id": {
+            "type": "string"
+          }
+        }
+      },
+      "TrayOrderToRobotReq": {
+        "type": "object",
+        "properties": {
+          "sn": {
+            "type": "string"
+          },
+          "payload": {
+            "$ref": "#/components/schemas/TrayOrderToRobotReqPayload"
+          }
+        }
+      },
+      "TrayOrderToRobotReqPayload": {
+        "type": "object",
+        "properties": {
+          "orders": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/TrayOrderToRobotOrders"
+            }
+          },
+          "trayIndex": {
+            "type": "integer",
+            "format": "int32"
+          }
+        }
+      },
+      "TrayOrderToRobotRsp": {
+        "type": "object",
+        "properties": {
+          "message": {
+            "type": "string"
+          },
+          "data": {
+            "$ref": "#/components/schemas/TrayOrderToRobotRspPayload"
+          }
+        }
+      },
+      "TrayOrderToRobotRspPayload": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "message": {
+            "type": "string"
+          }
+        }
+      },
+      "Trays": {
+        "type": "object",
+        "properties": {
+          "destinations": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/TraysDestinations"
+            }
+          }
+        }
+      },
+      "TraysDestinations": {
+        "type": "object",
+        "properties": {
+          "points": {
+            "type": "string"
+          },
+          "id": {
+            "type": "string"
+          },
+          "phoneNum": {
+            "type": "string"
+          },
+          "phoneCode": {
+            "type": "string"
+          },
+          "mapInfo": {
+            "$ref": "#/components/schemas/LiftingMapInfo"
+          },
+          "destination": {
+            "type": "string"
+          }
+        }
+      }
+    }
+  }
+}
