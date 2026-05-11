@@ -64,11 +64,9 @@ function redactSensitiveValue(value) {
 
 function buildTokenHeaders(accessToken, env = process.env) {
   const headerName = env.CLOUDVEIL_TOKEN_HEADER || "Authorization";
-  const prefix =
-    env.CLOUDVEIL_TOKEN_PREFIX === undefined ? "Bearer " : env.CLOUDVEIL_TOKEN_PREFIX;
 
   return {
-    [headerName]: `${prefix}${accessToken}`,
+    [headerName]: accessToken,
   };
 }
 

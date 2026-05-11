@@ -17,7 +17,7 @@
   ],
   "security": [
     {
-      "BearerAuth": [
+      "CloudVeilToken": [
 
       ]
     }
@@ -1495,10 +1495,11 @@
   },
   "components": {
     "securitySchemes": {
-      "BearerAuth": {
-        "type": "http",
-        "scheme": "bearer",
-        "bearerFormat": "JWT"
+      "CloudVeilToken": {
+        "type": "apiKey",
+        "in": "header",
+        "name": "Authorization",
+        "description": "Raw CloudVeil access_token without any prefix."
       }
     },
     "schemas": {
