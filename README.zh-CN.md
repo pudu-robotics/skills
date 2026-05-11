@@ -12,30 +12,6 @@
 https://gitee.com/pudu-robotics/skills
 ```
 
-## 安装前先理解一个关键点
-
-`npx skills add` 的第一个参数是 **技能来源仓库**，不是“仓库 + 技能名”两个位置参数。
-
-也就是说，本仓库推荐写法是：
-
-```bash
-npx skills add <仓库地址> --skill <技能名>
-```
-
-而不是：
-
-```bash
-npx skills add pudu-robotics/skills pudu-openapi-skill
-```
-
-另外，`pudu-robotics/skills` 这类 `owner/repo` 写法属于 GitHub 简写。在中文环境下如果仓库实际托管在 Gitee，建议始终使用完整 Gitee URL，避免解析到错误的平台。
-
-推荐使用：
-
-```bash
-https://gitee.com/pudu-robotics/skills
-```
-
 ## 可用技能
 
 ### `pudu-openapi-skill`
@@ -72,6 +48,18 @@ https://gitee.com/pudu-robotics/skills
 - Java
 - C#
 
+### `pudu-cloudveil-skill`
+
+用于调用 PUDU CloudVeil / 云隐 OpenAPI，覆盖 SSO + SM2 登录、机器人地图、机器人状态、机器人任务、机器人控制、回调说明、调度能力、订单到人和数据看板统计。
+
+适用场景：
+
+- 需要通过 CloudVeil 账号密码完成鉴权并获取 access token
+- 需要查询地图、点位、门店、机器人组、机器人状态
+- 需要下发呼叫、配送、运送、跑腿、顶升、托盘、领位等任务
+- 需要执行切图、回充、位置上报等控制操作
+- 需要读取看板、分析报表、任务明细、日志或订单到人相关接口
+
 ## 常用安装方式
 
 ### 1. 先查看仓库里有哪些技能
@@ -97,6 +85,12 @@ npx skills add https://gitee.com/pudu-robotics/skills --skill pudu-openapi-skill
 - 只在当前项目里使用
 - 希望技能跟随项目一起管理
 
+安装 `pudu-cloudveil-skill`：
+
+```bash
+npx skills add https://gitee.com/pudu-robotics/skills --skill pudu-cloudveil-skill
+```
+
 ### 3. 安装到全局环境
 
 ```bash
@@ -120,6 +114,12 @@ npx skills add https://gitee.com/pudu-robotics/skills --skill pudu-openapi-skill
 - `claude-code`
 - `cursor`
 - `gemini-cli`
+
+安装 `pudu-cloudveil-skill` 到指定 Agent：
+
+```bash
+npx skills add https://gitee.com/pudu-robotics/skills --skill pudu-cloudveil-skill -a codex
+```
 
 ### 5. 非交互安装，适合脚本或 CI
 
@@ -159,11 +159,17 @@ npx skills add https://gitee.com/pudu-robotics/skills --list
 # 安装到当前项目
 npx skills add https://gitee.com/pudu-robotics/skills --skill pudu-openapi-skill
 
+# 安装 pudu-cloudveil-skill 到当前项目
+npx skills add https://gitee.com/pudu-robotics/skills --skill pudu-cloudveil-skill
+
 # 安装到全局
 npx skills add https://gitee.com/pudu-robotics/skills --skill pudu-openapi-skill -g
 
 # 安装到指定 Agent
 npx skills add https://gitee.com/pudu-robotics/skills --skill pudu-openapi-skill -a codex
+
+# 安装 pudu-cloudveil-skill 到指定 Agent
+npx skills add https://gitee.com/pudu-robotics/skills --skill pudu-cloudveil-skill -a codex
 
 # 非交互安装
 npx skills add https://gitee.com/pudu-robotics/skills --skill pudu-openapi-skill -g -a codex -y

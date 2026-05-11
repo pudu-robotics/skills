@@ -40,6 +40,23 @@ Call [Pudu Robotics](https://open.pudutech.com/) cloud OpenAPI to manage robots 
 
 **Included request scripts:** JavaScript, Python, Go, Java, C#
 
+### pudu-cloudveil-skill
+
+Use PUDU CloudVeil / 云隐 OpenAPI for SSO + SM2 authentication, robot maps, robot status, robot tasks, robot control, callbacks, dispatch, order-to-person workflows, and data board statistics.
+
+**Capabilities:**
+
+| Category | Description |
+|----------|-------------|
+| Authentication | SSO secret retrieval, SM2 credential encryption, access token login |
+| Common Services | Store, map, robot group, and position queries |
+| Robot Info | Robot status and task status queries |
+| Robot Tasks | Calling, delivery, transport, errand, lifting, tray, and guide tasks |
+| Control | Position reporting, map switching, recharge, card swiping, device shadow |
+| Statistics | Dashboard metrics, analysis reports, task details, and logs |
+| Order-to-Person | Orders, tray configuration, aisles, picking, batches, and warehouses |
+| Callbacks & Dispatch | Callback payload reference and dispatch-related workflows |
+
 ## Installation
 
 The `skills` CLI installs skills from a repository source. On GitHub, you can use the `owner/repo` shorthand for this repository.
@@ -56,10 +73,22 @@ Install the Pudu OpenAPI skill into the current project:
 npx skills add pudu-robotics/skills --skill pudu-openapi-skill
 ```
 
+Install the Pudu CloudVeil skill into the current project:
+
+```bash
+npx skills add pudu-robotics/skills --skill pudu-cloudveil-skill
+```
+
 Install globally for a specific agent in non-interactive mode:
 
 ```bash
 npx skills add pudu-robotics/skills --skill pudu-openapi-skill -g -a codex -y
+```
+
+Install the Pudu CloudVeil skill globally for a specific agent in non-interactive mode:
+
+```bash
+npx skills add pudu-robotics/skills --skill pudu-cloudveil-skill -g -a codex -y
 ```
 
 ## Skill Structure
