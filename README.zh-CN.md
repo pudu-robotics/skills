@@ -65,7 +65,7 @@ https://gitee.com/pudu-robotics/skills
 ### 1. 先查看仓库里有哪些技能
 
 ```bash
-npx skills add https://gitee.com/pudu-robotics/skills --list
+npx skills add https://gitee.com/pudu-robotics/skills.git --list
 ```
 
 适用场景：
@@ -77,7 +77,7 @@ npx skills add https://gitee.com/pudu-robotics/skills --list
 ### 2. 安装单个技能到当前项目
 
 ```bash
-npx skills add https://gitee.com/pudu-robotics/skills --skill pudu-openapi-skill
+npx skills add https://gitee.com/pudu-robotics/skills.git --skill pudu-openapi-skill
 ```
 
 适用场景：
@@ -88,13 +88,13 @@ npx skills add https://gitee.com/pudu-robotics/skills --skill pudu-openapi-skill
 安装 `pudu-cloudveil-skill`：
 
 ```bash
-npx skills add https://gitee.com/pudu-robotics/skills --skill pudu-cloudveil-skill
+npx skills add https://gitee.com/pudu-robotics/skills.git --skill pudu-cloudveil-skill
 ```
 
 ### 3. 安装到全局环境
 
 ```bash
-npx skills add https://gitee.com/pudu-robotics/skills --skill pudu-openapi-skill -g
+npx skills add https://gitee.com/pudu-robotics/skills.git --skill pudu-openapi-skill -g
 ```
 
 适用场景：
@@ -105,7 +105,7 @@ npx skills add https://gitee.com/pudu-robotics/skills --skill pudu-openapi-skill
 ### 4. 给指定 Agent 安装
 
 ```bash
-npx skills add https://gitee.com/pudu-robotics/skills --skill pudu-openapi-skill -a codex
+npx skills add https://gitee.com/pudu-robotics/skills.git --skill pudu-openapi-skill -a codex
 ```
 
 常见 `-a` 取值示例：
@@ -118,13 +118,13 @@ npx skills add https://gitee.com/pudu-robotics/skills --skill pudu-openapi-skill
 安装 `pudu-cloudveil-skill` 到指定 Agent：
 
 ```bash
-npx skills add https://gitee.com/pudu-robotics/skills --skill pudu-cloudveil-skill -a codex
+npx skills add https://gitee.com/pudu-robotics/skills.git --skill pudu-cloudveil-skill -a codex
 ```
 
 ### 5. 非交互安装，适合脚本或 CI
 
 ```bash
-npx skills add https://gitee.com/pudu-robotics/skills --skill pudu-openapi-skill -g -a codex -y
+npx skills add https://gitee.com/pudu-robotics/skills.git --skill pudu-openapi-skill -g -a codex -y
 ```
 
 其中：
@@ -143,7 +143,7 @@ npx skills add <source> [options]
 
 | 参数 | 说明 |
 | --- | --- |
-| `<source>` | 技能来源仓库，中文环境下建议使用 `https://gitee.com/pudu-robotics/skills` |
+| `<source>` | 技能来源仓库，中文环境下建议使用 `https://gitee.com/pudu-robotics/skills.git` |
 | `--list` | 只列出仓库中的技能，不执行安装 |
 | `--skill <name>` | 指定要安装的技能名，可重复传多个 |
 | `-g, --global` | 安装到用户级目录，而不是当前项目 |
@@ -154,25 +154,25 @@ npx skills add <source> [options]
 
 ```bash
 # 查看仓库中的技能
-npx skills add https://gitee.com/pudu-robotics/skills --list
+npx skills add https://gitee.com/pudu-robotics/skills.git --list
 
 # 安装到当前项目
-npx skills add https://gitee.com/pudu-robotics/skills --skill pudu-openapi-skill
+npx skills add https://gitee.com/pudu-robotics/skills.git --skill pudu-openapi-skill
 
 # 安装 pudu-cloudveil-skill 到当前项目
-npx skills add https://gitee.com/pudu-robotics/skills --skill pudu-cloudveil-skill
+npx skills add https://gitee.com/pudu-robotics/skills.git --skill pudu-cloudveil-skill
 
 # 安装到全局
-npx skills add https://gitee.com/pudu-robotics/skills --skill pudu-openapi-skill -g
+npx skills add https://gitee.com/pudu-robotics/skills.git --skill pudu-openapi-skill -g
 
 # 安装到指定 Agent
-npx skills add https://gitee.com/pudu-robotics/skills --skill pudu-openapi-skill -a codex
+npx skills add https://gitee.com/pudu-robotics/skills.git --skill pudu-openapi-skill -a codex
 
 # 安装 pudu-cloudveil-skill 到指定 Agent
-npx skills add https://gitee.com/pudu-robotics/skills --skill pudu-cloudveil-skill -a codex
+npx skills add https://gitee.com/pudu-robotics/skills.git --skill pudu-cloudveil-skill -a codex
 
 # 非交互安装
-npx skills add https://gitee.com/pudu-robotics/skills --skill pudu-openapi-skill -g -a codex -y
+npx skills add https://gitee.com/pudu-robotics/skills.git --skill pudu-openapi-skill -g -a codex -y
 ```
 
 ## 技能目录结构
