@@ -32,6 +32,8 @@ Call [Pudu Robotics](https://open.pudutech.com/) cloud OpenAPI to manage robots 
 | Task Scheduling | Call, delivery task destination execution details |
 | Store Data | Store list query, machine list query |
 | Map Service | Map list, map details, current map, points, point groups, map images |
+| Ad Playback & Config | Ad list, details, creation, update, deletion, scene menus |
+| Cabinet Tasks & SKU | Product SKU sync, SKU query, cabinet list, cabinet delivery orders |
 
 **Prerequisites:**
 
