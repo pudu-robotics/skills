@@ -464,6 +464,30 @@
 
 ---
 
+## 17. 门店与基础数据
+
+规范文件：`assets/17-shop-data.json`
+
+典型场景：
+
+- 查询门店列表
+- 查询门店下的机器列表
+- 获取门店、机器基础标识，用于后续业务接口调用
+
+常见关键参数：
+
+- `shopId`
+- `shopIds`
+- `offset`
+- `limit`
+
+代表接口：
+
+- `GET /data-open-platform-service/v1/api/shop`
+- `GET /data-open-platform-service/v1/api/robot`
+
+---
+
 ## 18. 地图服务
 
 规范文件：`assets/18-map-service.json`
@@ -497,6 +521,66 @@
 
 ---
 
+## 19. 广告播放与配置
+
+规范文件：`assets/19-ad.json`
+
+典型场景：
+
+- 根据门店和机器人 SN 获取广告列表
+- 获取单条广告详情
+- 新增、更新或删除广告配置
+- 获取广告场景列表
+
+常见关键参数：
+
+- `shop_id`
+- `sn`
+- `id`
+- `kind`
+- `scene_ids`
+- `ad_list`
+
+代表接口：
+
+- `POST /biz-service/openPlatform/api/v1/gg/list`
+- `GET /biz-service/openPlatform/api/v1/gg/get`
+- `POST /biz-service/openPlatform/api/v1/gg/create`
+- `POST /biz-service/openPlatform/api/v1/gg/update`
+- `POST /biz-service/openPlatform/api/v1/gg/delete`
+- `POST /biz-service/openPlatform/api/v1/gg/scenesMenu/list`
+
+---
+
+## 20. 货柜任务与货柜 SKU
+
+规范文件：`assets/20-cabinet-sku.json`
+
+典型场景：
+
+- 新建或修改商品 SKU，同步客户商品 SKU 到 PUDU 商品 SKU
+- 查询已创建的商品 SKU 信息
+- 查询客户门店货柜列表（当前仅支持驰哲货柜）
+- 将客户侧已支付订单创建为机器人配送订单
+
+常见关键参数：
+
+- `shop_id`
+- `sku_code`
+- `sku_name`
+- `target`
+- `order_id`
+- `sku_list`
+
+代表接口：
+
+- `POST /community-open-service/api/product_sku/v2/upsert`
+- `GET /community-open-service/api/product_sku/v2/get_sku`
+- `GET /community-open-service/api/cabinet/v1/list`
+- `POST /community-open-service/api/cabinet/send_task`
+
+---
+
 ## 选型建议
 
 当用户提出需求时，优先按下面的方式判断：
@@ -518,7 +602,9 @@
 - “日志与上报记录” → `15-log.json`
 - “任务调度与历史” → `16-tasks.json`
 - “门店 / 机器列表” → `17-shop-data.json`
-- “地图 / 点位 / 地图底图” → `18-map-service.json`
+- “地图 / 点位 / 点位分组 / 地图底图” → `18-map-service.json`
+- “广告播放 / 广告配置 / 广告场景” → `19-ad.json`
+- “货柜 SKU / 商品 SKU / 货柜配送订单 / 货柜列表” → `20-cabinet-sku.json`
 
 若一个需求同时涉及查询和控制，优先拆成两步：
 

@@ -4,7 +4,8 @@ description: >-
   调用普渡机器人 (Pudu) 云端 OpenAPI，支持机器人任务下发、状态查询、配送、巡航、呼叫以及统计数据分析等操作。
   使用时先检查凭证和集群环境变量，若缺失则提示用户补充，再根据用户意图调用对应接口并展示结果。
   触发场景：用户提到"普渡机器人"、"pudu"、"机器人下发任务"、"查询机器人状态"、"配送任务"、
-  "巡航任务"、"呼叫机器人"、"顶升任务"、"跑腿"、"闪电匣"、"统计数据"、"大盘概览"、"OpenAPI"等关键词时使用此 skill。
+  "巡航任务"、"呼叫机器人"、"顶升任务"、"跑腿"、"闪电匣"、"广告播放"、"广告配置"、
+  "货柜任务"、"货柜 SKU"、"商品 SKU"、"统计数据"、"大盘概览"、"OpenAPI"等关键词时使用此 skill。
 ---
 
 # Pudu OpenAPI Skill
@@ -109,6 +110,8 @@ https://{hostname}/pudu-entry{path}
 | 任务调度与历史 | `assets/16-tasks.json` | 呼叫、配送等任务的目的地执行明细与时间轴 |
 | 门店与基础数据 | `assets/17-shop-data.json` | 门店列表查询、机器列表查询 |
 | 地图服务 | `assets/18-map-service.json` | 获取地图列表、地图详情、当前地图、点位信息、点位分组、地图底图 |
+| 广告播放与配置 | `assets/19-ad.json` | 广告列表、详情、创建、更新、删除、场景菜单 |
+| 货柜任务与货柜 SKU | `assets/20-cabinet-sku.json` | 商品 SKU 同步、SKU 查询、货柜列表、货柜配送下单 |
 
 完整能力范围、典型场景和代表接口请参考：`references/capabilities.md`
 
@@ -258,6 +261,16 @@ POST /open-platform-service/v1/custom_call
 # 查询机器运行概览和分析
 GET /data-board/v1/brief/run?shopId={shopId}
 GET /data-board/v1/analysis/run?shopId={shopId}
+
+# 广告播放与配置
+POST /biz-service/openPlatform/api/v1/gg/list
+GET /biz-service/openPlatform/api/v1/gg/get?id={id}&shop_id={shop_id}
+POST /biz-service/openPlatform/api/v1/gg/create
+
+# 货柜任务与货柜 SKU
+POST /community-open-service/api/product_sku/v2/upsert
+GET /community-open-service/api/cabinet/v1/list?shop_id={shop_id}
+POST /community-open-service/api/cabinet/send_task
 ```
 
 ---

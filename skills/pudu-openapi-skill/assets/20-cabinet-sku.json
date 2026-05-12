@@ -1,0 +1,434 @@
+{
+  "openapi": "3.0.3",
+  "info": {
+    "title": "普渡云开放接口 - 货柜任务和货柜SKU",
+    "description": "普渡机器人云开放平台货柜任务和货柜SKU相关接口，支持商品SKU的新增修改、查询，门店货柜列表查询，以及下单机器人配送订单。适用机型：闪电匣系列",
+    "version": "1.0.0",
+    "contact": {
+      "name": "普渡开放平台",
+      "url": "https://open.pudutech.com"
+    }
+  },
+  "servers": [
+    {
+      "url": "https://open.pudutech.com",
+      "description": "普渡开放平台"
+    }
+  ],
+  "tags": [
+    {
+      "name": "货柜任务和货柜SKU",
+      "description": "货柜任务与货柜SKU管理接口"
+    }
+  ],
+  "paths": {
+    "/community-open-service/api/product_sku/v2/upsert": {
+      "post": {
+        "tags": ["货柜任务和货柜SKU"],
+        "summary": "商品SKU新增和修改",
+        "description": "PUDU新建/修改商品SKU同步；客户商品SKU与PUDU商品SKU为1:1。适用机型：闪电匣系列",
+        "operationId": "upsertProductSku",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": ["shop_id", "sku_code", "sku_name"],
+                "properties": {
+                  "shop_id": {
+                    "type": "integer",
+                    "format": "int32",
+                    "description": "门店id"
+                  },
+                  "sku_code": {
+                    "type": "string",
+                    "description": "sku唯一编码"
+                  },
+                  "sku_name": {
+                    "type": "string",
+                    "description": "sku名称"
+                  },
+                  "cover_url": {
+                    "type": "string",
+                    "description": "资源的请求地址（选填）"
+                  }
+                }
+              },
+              "example": {
+                "shop_id": 123,
+                "sku_code": "SKU-10001",
+                "sku_name": "可乐330ml",
+                "cover_url": "https://example.com/images/sku-10001.png"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "成功响应",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "trace_id": {
+                      "type": "string",
+                      "description": "请求链路追踪ID"
+                    },
+                    "message": {
+                      "type": "string",
+                      "description": "返回错误码，成功为SUCCESS"
+                    }
+                  }
+                },
+                "example": {
+                  "trace_id": "YourApiAppKey_405eb004-7f09-4d86-bff1-4657cdec2717",
+                  "message": "SUCCESS"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/community-open-service/api/product_sku/v2/get_sku": {
+      "get": {
+        "tags": ["货柜任务和货柜SKU"],
+        "summary": "商品SKU查询",
+        "description": "查询已创建的商品SKU信息。适用机型：闪电匣系列",
+        "operationId": "getProductSku",
+        "parameters": [
+          {
+            "name": "sku_code",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "description": "sku唯一编码"
+          },
+          {
+            "name": "shop_id",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "description": "门店id"
+          },
+          {
+            "name": "page_no",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "format": "int32",
+              "default": 1
+            },
+            "description": "分页页码(默认1)"
+          },
+          {
+            "name": "page_size",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "format": "int32",
+              "default": 20
+            },
+            "description": "分页大小(默认20)"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "成功响应",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "trace_id": {
+                      "type": "string",
+                      "description": "请求链路追踪ID"
+                    },
+                    "message": {
+                      "type": "string",
+                      "description": "返回错误码，成功为SUCCESS"
+                    },
+                    "data": {
+                      "type": "object",
+                      "description": "分页数据",
+                      "properties": {
+                        "total": {
+                          "type": "integer",
+                          "format": "int32",
+                          "description": "总数量"
+                        },
+                        "list": {
+                          "type": "array",
+                          "description": "sku数据列表",
+                          "items": {
+                            "type": "object",
+                            "properties": {
+                              "sku_code": {
+                                "type": "string",
+                                "description": "sku唯一编码"
+                              },
+                              "sku_name": {
+                                "type": "string",
+                                "description": "sku名称"
+                              },
+                              "cover_url": {
+                                "type": "string",
+                                "description": "sku封面图"
+                              },
+                              "status": {
+                                "type": "integer",
+                                "format": "int32",
+                                "description": "1 正常；2 禁用",
+                                "enum": [1, 2]
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                },
+                "example": {
+                  "trace_id": "YourApiAppKey_405eb004-7f09-4d86-bff1-4657cdec2717",
+                  "message": "SUCCESS",
+                  "data": {
+                    "total": 1,
+                    "list": [
+                      {
+                        "sku_code": "SKU-10001",
+                        "sku_name": "可乐330ml",
+                        "cover_url": "https://example.com/images/sku-10001.png",
+                        "status": 1
+                      }
+                    ]
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/community-open-service/api/cabinet/v1/list": {
+      "get": {
+        "tags": ["货柜任务和货柜SKU"],
+        "summary": "门店货柜列表",
+        "description": "查询客户门店货柜列表。当前仅支持驰哲货柜。适用机型：闪电匣系列",
+        "operationId": "listCabinets",
+        "parameters": [
+          {
+            "name": "shop_id",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "description": "门店id"
+          },
+          {
+            "name": "page_no",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "format": "int32",
+              "default": 1
+            },
+            "description": "分页页码,默认1"
+          },
+          {
+            "name": "page_size",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "format": "int32",
+              "default": 20
+            },
+            "description": "分页大小，默认20"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "成功响应",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "trace_id": {
+                      "type": "string",
+                      "description": "请求链路追踪ID"
+                    },
+                    "message": {
+                      "type": "string",
+                      "description": "返回错误码，成功为SUCCESS"
+                    },
+                    "data": {
+                      "type": "object",
+                      "description": "分页数据",
+                      "properties": {
+                        "total": {
+                          "type": "integer",
+                          "format": "int32",
+                          "description": "总数量"
+                        },
+                        "list": {
+                          "type": "array",
+                          "description": "货柜列表",
+                          "items": {
+                            "type": "object",
+                            "properties": {
+                              "cabinet_id": {
+                                "type": "string",
+                                "description": "货柜设备编号"
+                              },
+                              "shop_id": {
+                                "type": "integer",
+                                "format": "int32",
+                                "description": "门店ID"
+                              },
+                              "shop_name": {
+                                "type": "string",
+                                "description": "门店名称"
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                },
+                "example": {
+                  "trace_id": "YourApiAppKey_405eb004-7f09-4d86-bff1-4657cdec2717",
+                  "message": "SUCCESS",
+                  "data": {
+                    "total": 1,
+                    "list": [
+                      {
+                        "cabinet_id": "CAB-10001",
+                        "shop_id": 1001,
+                        "shop_name": "示例门店"
+                      }
+                    ]
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/community-open-service/api/cabinet/send_task": {
+      "post": {
+        "tags": ["货柜任务和货柜SKU"],
+        "summary": "下单机器人配送订单",
+        "description": "客户侧已支付订单向PUDU云创建机器人配送订单；下单成功判断货柜商品数量，满足订单商品数量执行\"货柜配送\"，不满足的执行\"跑腿任务\"。适用机型：闪电匣系列",
+        "operationId": "sendCabinetTask",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": ["shop_id", "target", "order_id", "sku_list"],
+                "properties": {
+                  "shop_id": {
+                    "type": "integer",
+                    "format": "int32",
+                    "description": "门店id"
+                  },
+                  "target": {
+                    "type": "string",
+                    "description": "目的地"
+                  },
+                  "order_id": {
+                    "type": "string",
+                    "description": "订单编号"
+                  },
+                  "mobile": {
+                    "type": "string",
+                    "description": "手机号"
+                  },
+                  "sku_list": {
+                    "type": "array",
+                    "description": "SKU列表",
+                    "items": {
+                      "type": "object",
+                      "required": ["sku_code", "count"],
+                      "properties": {
+                        "sku_code": {
+                          "type": "string",
+                          "description": "sku编号"
+                        },
+                        "count": {
+                          "type": "integer",
+                          "format": "int32",
+                          "description": "数量"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "成功响应",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "trace_id": {
+                      "type": "string",
+                      "description": "请求链路追踪ID"
+                    },
+                    "message": {
+                      "type": "string",
+                      "description": "返回错误码，成功为SUCCESS"
+                    },
+                    "data": {
+                      "type": "object",
+                      "description": "结果数据",
+                      "properties": {
+                        "status": {
+                          "type": "string",
+                          "description": "成功/失败"
+                        },
+                        "fail_reason": {
+                          "type": "string",
+                          "description": "失败原因（无可用机器人）"
+                        },
+                        "order_id": {
+                          "type": "string",
+                          "description": "订单编号"
+                        },
+                        "sn": {
+                          "type": "string",
+                          "description": "机器人编号"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
