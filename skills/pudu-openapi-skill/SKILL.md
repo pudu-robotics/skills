@@ -5,7 +5,8 @@ description: >-
   使用时先检查凭证和集群环境变量，若缺失则提示用户补充，再根据用户意图调用对应接口并展示结果。
   触发场景：用户提到"普渡机器人"、"pudu"、"机器人下发任务"、"查询机器人状态"、"配送任务"、
   "巡航任务"、"呼叫机器人"、"顶升任务"、"跑腿"、"闪电匣"、"广告播放"、"广告配置"、
-  "货柜任务"、"货柜 SKU"、"商品 SKU"、"统计数据"、"大盘概览"、"OpenAPI"等关键词时使用此 skill。
+  "货柜任务"、"货柜 SKU"、"商品 SKU"、"舱门拍照"、"交管区"、"地图列表"、"统计数据"、
+  "大盘概览"、"OpenAPI"等关键词时使用此 skill。
 ---
 
 # Pudu OpenAPI Skill
@@ -98,9 +99,9 @@ https://{hostname}/pudu-entry{path}
 | 顶升与托盘任务 | `assets/04-lifting-tray.json` | 顶升机器人任务、托盘订单 |
 | 巡航与领位任务 | `assets/05-cruise-guide.json` | 巡逻、迎宾引导 |
 | 呼叫任务 | `assets/06-call.json` | 自定义呼叫机器人 |
-| 闪电匣专属功能 | `assets/07-flash-cabinet.json` | 货柜取货、舱门控制 |
+| 闪电匣专属功能 | `assets/07-flash-cabinet.json` | 货柜取货、舱门控制、舱门拍照 |
 | 内容、语音与媒体 | `assets/08-media-content.json` | 屏幕展示、语音播报、音量 |
-| 基础控制与数据上报 | `assets/09-control-reporting.json` | 充电、切换地图、位置上报、交通管控 |
+| 基础控制与数据上报 | `assets/09-control-reporting.json` | 充电、切换地图、位置上报、交通管控、交管区列表 |
 | 清洁统计分析 | `assets/10-analysis-clean.json` | 洗地、扫地等清洁模式图表及分页数据 |
 | 通用统计分析 | `assets/11-analysis-common.json` | 机器概览、门店概览与运行分析数据 |
 | 配送统计分析 | `assets/12-analysis-delivery.json` | 配送、呼叫、巡航等模式明细与图表数据 |
@@ -109,7 +110,7 @@ https://{hostname}/pudu-entry{path}
 | 日志与上报记录 | `assets/15-log.json` | 开机自检、电池充电、故障事件等列表查询 |
 | 任务调度与历史 | `assets/16-tasks.json` | 呼叫、配送等任务的目的地执行明细与时间轴 |
 | 门店与基础数据 | `assets/17-shop-data.json` | 门店列表查询、机器列表查询 |
-| 地图服务 | `assets/18-map-service.json` | 获取地图列表、地图详情、当前地图、点位信息、点位分组、地图底图 |
+| 地图服务 | `assets/18-map-service.json` | 获取地图列表、门店下地图列表、地图详情、当前地图、点位信息、点位分组、地图底图 |
 | 广告播放与配置 | `assets/19-ad.json` | 广告列表、详情、创建、更新、删除、场景菜单 |
 | 货柜任务与货柜 SKU | `assets/20-cabinet-sku.json` | 商品 SKU 同步、SKU 查询、货柜列表、货柜配送下单 |
 
@@ -258,6 +259,10 @@ GET /open-platform-service/v2/recharge?sn={sn}
 # 呼叫机器人
 POST /open-platform-service/v1/custom_call
 
+# 地图与交管区
+GET /data-open-platform-service/v1/api/maps?shop_id={shop_id}
+POST /map-service/v1/open/traffic_control/list
+
 # 查询机器运行概览和分析
 GET /data-board/v1/brief/run?shopId={shopId}
 GET /data-board/v1/analysis/run?shopId={shopId}
@@ -271,6 +276,9 @@ POST /biz-service/openPlatform/api/v1/gg/create
 POST /community-open-service/api/product_sku/v2/upsert
 GET /community-open-service/api/cabinet/v1/list?shop_id={shop_id}
 POST /community-open-service/api/cabinet/send_task
+
+# 闪电匣舱门拍照
+POST /biz-open-service/v1/robotDoor/task_list
 ```
 
 ---

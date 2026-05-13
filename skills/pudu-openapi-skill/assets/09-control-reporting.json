@@ -448,6 +448,57 @@
           }
         }
       }
+    },
+    "/map-service/v1/open/traffic_control/list": {
+      "post": {
+        "tags": [
+          "MapRestful"
+        ],
+        "description": "交管区列表查询",
+        "operationId": "MapRestful_OpenTrafficControlList",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/TrafficControlListReq"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TrafficControlListRsp"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "参数错误或服务端异常",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TrafficControlListErrorRsp"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Default error response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Status"
+                }
+              }
+            }
+          }
+        }
+      }
     }
   },
   "components": {
@@ -718,6 +769,70 @@
           },
           "message": {
             "type": "string"
+          }
+        }
+      },
+      "TrafficControlListReq": {
+        "type": "object",
+        "required": [
+          "shop_id"
+        ],
+        "properties": {
+          "shop_id": {
+            "type": "integer",
+            "format": "int32",
+            "description": "门店ID"
+          }
+        }
+      },
+      "TrafficControlListRsp": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "integer",
+            "format": "int32",
+            "description": "业务状态码，成功固定为200"
+          },
+          "data": {
+            "$ref": "#/components/schemas/TrafficControlListRspData"
+          }
+        }
+      },
+      "TrafficControlListRspData": {
+        "type": "object",
+        "properties": {
+          "area_list": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/TrafficControlArea"
+            },
+            "description": "交管区列表"
+          }
+        }
+      },
+      "TrafficControlArea": {
+        "type": "object",
+        "properties": {
+          "map_name": {
+            "type": "string",
+            "description": "地图名称"
+          },
+          "area_id": {
+            "type": "string",
+            "description": "区域ID，来源于地图 zones.id"
+          },
+          "area_name": {
+            "type": "string",
+            "description": "区域名称，来源于 zones.extension_attributes.area_name"
+          }
+        }
+      },
+      "TrafficControlListErrorRsp": {
+        "type": "object",
+        "properties": {
+          "message": {
+            "type": "string",
+            "description": "错误码，常见值：MAP_PARAM_ERROR、Map_DB_ERROR、MAP_UNKONW_ERROR"
           }
         }
       }

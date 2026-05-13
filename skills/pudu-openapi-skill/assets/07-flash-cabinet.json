@@ -289,6 +289,47 @@
           }
         }
       }
+    },
+    "/biz-open-service/v1/robotDoor/task_list": {
+      "post": {
+        "tags": [
+          "BizOpenService"
+        ],
+        "description": "通过sn获取机器舱门拍照信息(闪电匣)",
+        "operationId": "BizOpenService_ListRobotDoorPhotoTasks",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ListRobotDoorPhotoTasksReq"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ListRobotDoorPhotoTasksRsp"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Default error response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Status"
+                }
+              }
+            }
+          }
+        }
+      }
     }
   },
   "components": {
@@ -687,6 +728,167 @@
           }
         },
         "description": "The `Status` type defines a logical error model that is suitable for different programming environments, including REST APIs and RPC APIs. It is used by [gRPC](https://github.com/grpc). Each `Status` message contains three pieces of data: error code, error message, and error details. You can find out more about this error model and how to work with it in the [API Design Guide](https://cloud.google.com/apis/design/errors)."
+      },
+      "ListRobotDoorPhotoTasksReq": {
+        "type": "object",
+        "required": [
+          "pid"
+        ],
+        "properties": {
+          "pid": {
+            "type": "string",
+            "description": "机器sn"
+          },
+          "offset": {
+            "type": "integer",
+            "format": "int32",
+            "description": "偏移量，不填默认为0"
+          },
+          "limit": {
+            "type": "integer",
+            "format": "int32",
+            "description": "每页条目数，不填默认为10"
+          }
+        }
+      },
+      "ListRobotDoorPhotoTasksRsp": {
+        "type": "object",
+        "properties": {
+          "trace_id": {
+            "type": "string",
+            "description": "此次请求的唯一id"
+          },
+          "message": {
+            "type": "string",
+            "description": "SUCCESS为成功"
+          },
+          "data": {
+            "$ref": "#/components/schemas/ListRobotDoorPhotoTasksData"
+          }
+        }
+      },
+      "ListRobotDoorPhotoTasksData": {
+        "type": "object",
+        "properties": {
+          "count": {
+            "type": "integer",
+            "format": "int32",
+            "description": "总条目数"
+          },
+          "shop_id": {
+            "type": "integer",
+            "format": "int32",
+            "description": "门店id"
+          },
+          "shop_name": {
+            "type": "string",
+            "description": "门店名称"
+          },
+          "pid": {
+            "type": "string",
+            "description": "机器sn"
+          },
+          "mac": {
+            "type": "string",
+            "description": "机器mac"
+          },
+          "items": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/RobotDoorPhotoTaskItem"
+            },
+            "description": "详细数据"
+          }
+        }
+      },
+      "RobotDoorPhotoTaskItem": {
+        "type": "object",
+        "properties": {
+          "mac": {
+            "type": "string",
+            "description": "机器mac"
+          },
+          "task_name": {
+            "type": "string",
+            "description": "任务名称"
+          },
+          "task_id": {
+            "type": "string",
+            "description": "任务id"
+          },
+          "auth_code": {
+            "type": "string",
+            "description": "授权code，仅配送模式有"
+          },
+          "door_index": {
+            "type": "integer",
+            "format": "int32",
+            "description": "舱门位置"
+          },
+          "door_type": {
+            "type": "string",
+            "description": "舱门类型"
+          },
+          "image_list": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/RobotDoorPhotoImage"
+            },
+            "description": "舱门拍照图片列表"
+          },
+          "put_in": {
+            "$ref": "#/components/schemas/RobotDoorPhotoAuthInfo"
+          },
+          "take_out": {
+            "$ref": "#/components/schemas/RobotDoorPhotoAuthInfo"
+          },
+          "task_type": {
+            "type": "string",
+            "description": "任务类型，legwork跑腿、delivery配送"
+          },
+          "create_time": {
+            "type": "string",
+            "description": "创建时间，时间戳秒"
+          },
+          "update_time": {
+            "type": "string",
+            "description": "更新时间，时间戳秒"
+          }
+        }
+      },
+      "RobotDoorPhotoImage": {
+        "type": "object",
+        "properties": {
+          "phone_time": {
+            "type": "string",
+            "description": "拍照时间"
+          },
+          "url": {
+            "type": "string",
+            "description": "图片URL"
+          },
+          "op_type": {
+            "type": "string",
+            "description": "操作类型，如 take_out"
+          },
+          "op_type_value": {
+            "type": "string",
+            "description": "操作类型附加值"
+          }
+        }
+      },
+      "RobotDoorPhotoAuthInfo": {
+        "type": "object",
+        "properties": {
+          "auth_code": {
+            "type": "string",
+            "description": "授权码"
+          },
+          "time": {
+            "type": "string",
+            "description": "授权码时间"
+          }
+        }
       }
     }
   }

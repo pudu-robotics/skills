@@ -257,6 +257,49 @@
           }
         }
       }
+    },
+    "/data-open-platform-service/v1/api/maps": {
+      "get": {
+        "tags": [
+          "DataOpenPlatform"
+        ],
+        "description": "获取门店下所有地图名称列表",
+        "operationId": "DataOpenPlatform_ListShopMaps",
+        "parameters": [
+          {
+            "name": "shop_id",
+            "in": "query",
+            "description": "门店id",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ListShopMapsRsp"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Default error response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Status"
+                }
+              }
+            }
+          }
+        }
+      }
     }
   },
   "components": {
@@ -410,6 +453,89 @@
           }
         },
         "description": "The `Status` type defines a logical error model that is suitable for different programming environments, including REST APIs and RPC APIs. It is used by [gRPC](https://github.com/grpc). Each `Status` message contains three pieces of data: error code, error message, and error details. You can find out more about this error model and how to work with it in the [API Design Guide](https://cloud.google.com/apis/design/errors)."
+      },
+      "ListShopMapsRsp": {
+        "type": "object",
+        "properties": {
+          "message": {
+            "type": "string",
+            "description": "SUCCESS成功"
+          },
+          "trace_id": {
+            "type": "string",
+            "description": "此次请求的唯一id"
+          },
+          "data": {
+            "$ref": "#/components/schemas/ListShopMapsRspData"
+          }
+        }
+      },
+      "ListShopMapsRspData": {
+        "type": "object",
+        "properties": {
+          "count": {
+            "type": "integer",
+            "format": "int32",
+            "description": "总数量"
+          },
+          "list": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ShopMapItem"
+            },
+            "description": "地图列表"
+          }
+        }
+      },
+      "ShopMapItem": {
+        "type": "object",
+        "properties": {
+          "map_name": {
+            "type": "string",
+            "description": "地图名称"
+          }
+        }
+      },
+      "GetOpenMap_Data": {
+        "type": "object",
+        "description": "地图详情数据，字段以接口实际返回为准",
+        "additionalProperties": true
+      },
+      "OpenAPIGetCurrentMapPointReply_Data": {
+        "type": "object",
+        "description": "当前地图点位信息数据，字段以接口实际返回为准",
+        "additionalProperties": true
+      },
+      "OpenAPIGetCurrentMapReply_MapInfo": {
+        "type": "object",
+        "description": "机器人当前使用地图信息，字段以接口实际返回为准",
+        "additionalProperties": true
+      },
+      "OpenAPIGetMapGroupReply_Data": {
+        "type": "object",
+        "description": "地图点位分组数据，字段以接口实际返回为准",
+        "additionalProperties": true
+      },
+      "OpenAPIGetMapListReply_Data": {
+        "type": "object",
+        "description": "机器可用地图列表数据，字段以接口实际返回为准",
+        "additionalProperties": true
+      },
+      "OpenGetMapImageReply_Data": {
+        "type": "object",
+        "description": "地图底图信息数据，字段以接口实际返回为准",
+        "additionalProperties": true
+      },
+      "GoogleProtobufAny": {
+        "type": "object",
+        "properties": {
+          "@type": {
+            "type": "string",
+            "description": "The type of the serialized message."
+          }
+        },
+        "additionalProperties": true,
+        "description": "Contains an arbitrary serialized message along with a @type that describes the type of the serialized message."
       }
     }
   }

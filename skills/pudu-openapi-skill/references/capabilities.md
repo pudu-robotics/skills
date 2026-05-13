@@ -202,12 +202,16 @@
 - 控制舱门开关
 - 按货道编号取货
 - 查询舱门状态
+- 查询舱门拍照信息
 - 电梯内切换楼层地图
 - 设置机器人屏幕内容
 
 常见关键参数：
 
 - `sn`
+- `pid`
+- `limit`
+- `offset`
 - `payload.info`
 - `payload.controlStates`
 - `payload.tasks`
@@ -222,6 +226,7 @@
 - `POST /open-platform-service/v1/cancel_task`
 - `POST /open-platform-service/v1/robot/map/switch_in_elevator`
 - `POST /open-platform-service/v1/robot/screen/set`
+- `POST /biz-open-service/v1/robotDoor/task_list`
 
 ---
 
@@ -269,6 +274,7 @@
 - 开启/关闭雷达上报
 - 查询刷卡记录
 - 上报交管区配置或结果
+- 查询门店下交管区列表
 
 常见关键参数：
 
@@ -277,6 +283,7 @@
 - `interval`
 - `times`
 - `shopId`
+- `shop_id`
 - `areaId`
 - `taskId`
 
@@ -290,6 +297,7 @@
 - `POST /open-platform-service/v1/laser_closed`
 - `GET /open-platform-service/v1/swipe_card`
 - `POST /open-platform-service/v1/traffic_control/config`
+- `POST /map-service/v1/open/traffic_control/list`
 - `POST /open-platform-service/v1/traffic_control/action_result`
 
 ---
@@ -496,6 +504,7 @@
 
 - 获取机器人当前使用的地图信息
 - 获取地图列表
+- 获取门店下地图名称列表
 - 获取地图详情（含元素、区域信息）
 - 获取地图底图图片
 - 获取地图点位信息
@@ -505,6 +514,7 @@
 
 - `sn`
 - `shopId`
+- `shop_id`
 - `mapName`
 - `needElement`
 - `offset`
@@ -514,6 +524,7 @@
 
 - `GET /map-service/v1/open/current`
 - `GET /map-service/v1/open/list`
+- `GET /data-open-platform-service/v1/api/maps`
 - `GET /map-service/v1/open/map`
 - `POST /map-service/v1/open/image`
 - `GET /map-service/v1/open/point`
@@ -592,8 +603,9 @@
 - “巡航 / 领位” → `05-cruise-guide.json`
 - “呼叫机器人” → `06-call.json`
 - “闪电匣 / 货柜 / 舱门” → `07-flash-cabinet.json`
+- “舱门拍照 / 舱门照片” → `07-flash-cabinet.json`
 - “语音 / 屏幕 / 媒体内容” → `08-media-content.json`
-- “回充 / 切图 / 位置上报 / 雷达 / 交管” → `09-control-reporting.json`
+- “回充 / 切图 / 位置上报 / 雷达 / 交管 / 交管区列表” → `09-control-reporting.json`
 - “清洁统计分析” → `10-analysis-clean.json`
 - “通用统计分析” → `11-analysis-common.json`
 - “配送统计分析” → `12-analysis-delivery.json`
@@ -602,7 +614,7 @@
 - “日志与上报记录” → `15-log.json`
 - “任务调度与历史” → `16-tasks.json`
 - “门店 / 机器列表” → `17-shop-data.json`
-- “地图 / 点位 / 点位分组 / 地图底图” → `18-map-service.json`
+- “地图 / 点位 / 点位分组 / 地图底图 / 门店下地图” → `18-map-service.json`
 - “广告播放 / 广告配置 / 广告场景” → `19-ad.json`
 - “货柜 SKU / 商品 SKU / 货柜配送订单 / 货柜列表” → `20-cabinet-sku.json`
 
