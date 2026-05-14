@@ -567,6 +567,29 @@
 
 ---
 
+## 21. 机器避险
+
+规范文件：`assets/21-risk-avoidance.json`
+
+典型场景：
+
+- 向机器人组下发灾害避险任务
+- 解除/取消已下发的灾害避险任务
+
+适用机型：T300
+
+常见关键参数：
+
+- `shop_id`
+- `group_ids`
+
+代表接口：
+
+- `POST /open-platform-service/v1/disaster/evacuate`
+- `POST /open-platform-service/v1/disaster/cancel`
+
+---
+
 ## 选型建议
 
 当用户提出需求时，优先按下面的方式判断：
@@ -592,6 +615,7 @@
 - “地图 / 点位 / 点位分组 / 地图底图 / 门店下地图” → `18-map-service.json`
 - “广告播放 / 广告配置 / 广告场景” → `19-ad.json`
 - “货柜 SKU / 商品 SKU / 货柜配送订单 / 货柜列表” → `20-cabinet-sku.json`
+- “避险 / 灾害避险 / 避险任务” → `21-risk-avoidance.json`
 
 若一个需求同时涉及查询和控制，优先拆成两步：
 
