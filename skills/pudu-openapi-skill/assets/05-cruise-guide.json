@@ -5,47 +5,6 @@
     "version": "0.0.1"
   },
   "paths": {
-    "/open-platform-service/v1/cruise_action": {
-      "post": {
-        "tags": [
-          "CloudOpenApi"
-        ],
-        "description": "下发巡航指令",
-        "operationId": "CloudOpenApi_CruiseAction",
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/CruiseActionReq"
-              }
-            }
-          },
-          "required": true
-        },
-        "responses": {
-          "200": {
-            "description": "OK",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/CruiseActionRsp"
-                }
-              }
-            }
-          },
-          "default": {
-            "description": "Default error response",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Status"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
     "/open-platform-service/v1/cruise_task": {
       "post": {
         "tags": [
@@ -110,47 +69,6 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/GetCruiseLineRsp"
-                }
-              }
-            }
-          },
-          "default": {
-            "description": "Default error response",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Status"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/open-platform-service/v1/guide_task": {
-      "post": {
-        "tags": [
-          "CloudOpenApi"
-        ],
-        "description": "给机器发送领位任务",
-        "operationId": "CloudOpenApi_SendGuideTask",
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/SendGuideTaskReq"
-              }
-            }
-          },
-          "required": true
-        },
-        "responses": {
-          "200": {
-            "description": "OK",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/SendGuideTaskRsp"
                 }
               }
             }

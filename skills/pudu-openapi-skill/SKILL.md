@@ -17,8 +17,9 @@ description: >-
 1. 检查凭证        → 读取 / 提示 ApiAppKey & ApiAppSecret
 2. 确认集群        → 读取 PUDU_API_CLUSTER；若缺失，必须询问用户选择，禁止默认任意集群 → 确定 BASE_URL
 3. 理解用户意图    → 定位功能组 → 读取对应 assets/*.json
-4. 构建并执行请求  → 按环境优先级执行脚本 (js -> py -> go -> java -> cs)
-5. 展示结果        → 200 且 message=SUCCESS 美化输出，否则输出错误原因
+4. 归一化参数名    → 将用户输入字段映射为接口规范中的真实字段名
+5. 构建并执行请求  → 按环境优先级执行脚本 (js -> py -> go -> java -> cs)
+6. 展示结果        → 200 且 message=SUCCESS 美化输出，否则输出错误原因
 ```
 
 ---
@@ -118,7 +119,25 @@ https://{hostname}/pudu-entry{path}
 
 ---
 
-## 第四步：构建并执行请求
+## 第四步：参数名归一化
+
+用户输入的参数名可能使用驼峰、下划线或中划线格式。构建 `params` 前，必须根据当前接口规范中的 `parameters` 和 `requestBody` schema，将用户字段自动映射为接口要求的真实字段名：
+
+- `shopId` / `shop_id` / `shop-id` → 按当前接口规范转换为 `shopId` 或 `shop_id`
+- `groupId` / `group_id` / `group-id` → 按当前接口规范转换为 `groupId` 或 `group_id`
+- `payload.startPoint` / `payload.start_point` / `payload.start-point` → 按 schema 转换为真实嵌套字段名
+
+归一化规则：
+
+- 用当前接口规范构建字段名白名单；不要凭常识自行决定最终字段名
+- 匹配时忽略大小写，并忽略 `_` 和 `-`，但最终输出必须保留规范中的原始字段名格式
+- 对 request body 的对象、数组对象也要递归应用同样规则
+- 只转换字段名，不改变字段值
+- 如果同一个输入字段可匹配多个规范字段，或字段不在规范中，先向用户确认；不要把未知字段直接发给接口
+
+---
+
+## 第五步：构建并执行请求
 
 构建参数并执行请求脚本。脚本执行优先级如下，当因为环境问题无法执行当前脚本时（如没有安装 Node.js），则依次向下尝试下一个脚本：
 1. `scripts/pudu-request.js`
@@ -153,12 +172,12 @@ if (result.ok) {
 - `request()` 会优先读取环境变量中的 `PUDU_API_APP_KEY`、`PUDU_API_APP_SECRET`、`PUDU_API_CLUSTER`
 - 若显式传入 `apiAppKey` / `apiAppSecret` / `cluster` / `hostname`，则以显式参数为准
 - `path` 需包含 `/pudu-entry` 前缀，例如：`/pudu-entry/open-platform-service/v2/status/get_by_sn` （如果接口是针对 `/data-board` 的统计接口，路径也会是类似 `/pudu-entry/data-board/v1/analysis/run` 等，具体以规范文件为准）
-- `params` 需要根据用户 prompt 和 OpenAPI 规范文件共同构建，不能只靠自然语言猜测字段
+- `params` 需要根据用户 prompt 和 OpenAPI 规范文件共同构建，不能只靠自然语言猜测字段；发出请求前必须完成参数名归一化，确保所有字段名与规范完全一致
 - 当接口需要 `sn` 时，若用户传入的值形如 `14:80:CC:89:27:A6`，应判断为 MAC 地址而非 SN，并主动提醒用户改为提供真实机器人 SN
 
 ---
 
-## 第五步：展示结果
+## 第六步：展示结果
 
 ### 成功判定规则
 
@@ -285,7 +304,7 @@ POST /biz-open-service/v1/robotDoor/task_list
 
 ## 注意事项
 
-- v2 接口优先于 v1（`status/get_by_sn`、`recharge`），状态字段更简洁
+- v2 接口优先于旧版本（`status/get_by_sn`），`recharge` 请优先使用 v2，状态字段更简洁
 - 标注 `(闪电匣)` 的接口仅适用于带货柜的机器人型号
 - `sn` 为机器人序列号，`shopId` 为门店 ID，是最常用的标识字段
 - MAC 地址常见格式为 `14:80:CC:89:27:A6`；若接口要求 `sn`，不能直接用 MAC 地址替代

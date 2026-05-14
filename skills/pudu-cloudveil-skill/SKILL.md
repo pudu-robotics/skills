@@ -11,8 +11,9 @@ description: Use when working with PUDU CloudVeil / 云隐 OpenAPI, SSO, SM2, da
 1. 检查环境        → 确认 CLOUDVEIL_BASE_URL / CLOUDVEIL_ACCOUNT / CLOUDVEIL_PASSWORD
 2. 认证            → 使用 SSO getSecret + SM2 加密 + accountLogin 获取 access_token
 3. 理解意图        → 定位功能组 → 读取 references/capabilities.md 和命中的分组文档
-4. 构建并执行请求  → 从 assets/*.openapi.json 读取 method、query、requestBody、schema
-5. 展示结果        → 200 且 message === "SUCCESS" 视为成功，否则按失败展示
+4. 归一化参数名    → 将用户输入字段映射为接口规范中的真实字段名
+5. 构建并执行请求  → 从 assets/*.openapi.json 读取 method、query、requestBody、schema
+6. 展示结果        → 200 且 message === "SUCCESS" 视为成功，否则按失败展示
 ```
 
 ---
@@ -57,9 +58,25 @@ CloudVeil 使用 SSO/SM2 登录流程：
 
 标记为 Not covered 的分组没有 bundled OpenAPI asset。不要编造路径、参数、回调或请求体。
 
-## 第四步：构建并执行请求
+## 第四步：参数名归一化
 
-从对应 `assets/*.openapi.json` 读取精确 method、query 参数、JSON requestBody、Schema 和响应结构。不要只靠自然语言猜字段名。
+用户输入的参数名可能使用驼峰、下划线或中划线格式。构建 query 或 JSON request body 前，必须根据当前接口规范中的 `parameters` 和 `requestBody` schema，将用户字段自动映射为接口要求的真实字段名：
+
+- `shopId` / `shop_id` / `shop-id` → 按当前接口规范转换为 `shopId` 或 `shop_id`
+- `groupId` / `group_id` / `group-id` → 按当前接口规范转换为 `groupId` 或 `group_id`
+- `payload.startPoint` / `payload.start_point` / `payload.start-point` → 按 schema 转换为真实嵌套字段名
+
+归一化规则：
+
+- 用当前接口规范构建字段名白名单；不要凭常识自行决定最终字段名
+- 匹配时忽略大小写，并忽略 `_` 和 `-`，但最终输出必须保留规范中的原始字段名格式
+- 对 request body 的对象、数组对象也要递归应用同样规则
+- 只转换字段名，不改变字段值
+- 如果同一个输入字段可匹配多个规范字段，或字段不在规范中，先向用户确认；不要把未知字段直接发给接口
+
+## 第五步：构建并执行请求
+
+从对应 `assets/*.openapi.json` 读取精确 method、query 参数、JSON requestBody、Schema 和响应结构。不要只靠自然语言猜字段名；发出请求前必须完成参数名归一化，确保所有字段名与规范完全一致。
 
 大范围查找时优先用 `jq` 或 `rg`，不要把整份 asset 加载进上下文：
 
@@ -76,7 +93,7 @@ jq '.paths["/openapi/order_to_user/v1/order/import"].post.requestBody' assets/or
 node scripts/cloudveil-request.js --path <api-path> [--method GET|POST] [--param key=value] [--body-json '<json>']
 ```
 
-## 第五步：展示结果
+## 第六步：展示结果
 
 成功必须同时满足：
 

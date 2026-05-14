@@ -175,87 +175,6 @@
         }
       }
     },
-    "/open-platform-service/v1/robot/task/state/getInfo": {
-      "get": {
-        "tags": [
-          "CloudOpenApi"
-        ],
-        "description": "获取当前机器执行任务具体信息",
-        "operationId": "CloudOpenApi_GetRobotTasksInfo",
-        "parameters": [
-          {
-            "name": "sn",
-            "in": "query",
-            "schema": {
-              "type": "string"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/GetRobotTasksInfoRsp"
-                }
-              }
-            }
-          },
-          "default": {
-            "description": "Default error response",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Status"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/open-platform-service/v1/robot/shadow/function_list": {
-      "post": {
-        "tags": [
-          "CloudOpenApi"
-        ],
-        "description": "按门店id, 找到机器并更新iot设备影子的功能列表",
-        "operationId": "CloudOpenApi_UpdateDeviceShadowFunctionList",
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/UpdateDeviceShadowFunctionListReq"
-              }
-            }
-          },
-          "required": true
-        },
-        "responses": {
-          "200": {
-            "description": "OK",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/UpdateDeviceShadowFunctionListRsp"
-                }
-              }
-            }
-          },
-          "default": {
-            "description": "Default error response",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Status"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
     "/open-platform-service/v1/status/get_by_group_id": {
       "get": {
         "tags": [
@@ -413,47 +332,6 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/GetRobotCommonStatusBySnV2Rsp"
-                }
-              }
-            }
-          },
-          "default": {
-            "description": "Default error response",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Status"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/open-platform-service/v1/schedule_log/list": {
-      "post": {
-        "tags": [
-          "CloudOpenApi"
-        ],
-        "description": "查询任务调度日志，根据 task_id 列表查询表 schedule_log",
-        "operationId": "CloudOpenApi_GetScheduleLog",
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/GetScheduleLogReq"
-              }
-            }
-          },
-          "required": true
-        },
-        "responses": {
-          "200": {
-            "description": "OK",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/GetScheduleLogRsp"
                 }
               }
             }

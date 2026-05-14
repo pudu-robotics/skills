@@ -27,7 +27,6 @@
 - 查询机器人当前位置
 - 查询机器人正在执行的任务
 - 查询机器人组及组内机器人
-- 查询任务调度日志
 
 常见关键参数：
 
@@ -44,7 +43,6 @@
 - `GET /open-platform-service/v1/robot/get_position`
 - `GET /open-platform-service/v1/robot/task/state/get`
 - `GET /open-platform-service/v1/robot/group/list`
-- `POST /open-platform-service/v1/schedule_log/list`
 
 ---
 
@@ -57,7 +55,6 @@
 - 下发标准配送任务
 - 下发多目标点运送任务
 - 取消、继续或干预配送/运送任务
-- 查询配送任务列表
 
 常见关键参数：
 
@@ -70,7 +67,6 @@
 
 代表接口：
 
-- `GET /open-platform-service/v1/delivery/list`
 - `POST /open-platform-service/v1/delivery_task`
 - `POST /open-platform-service/v1/delivery_action`
 - `POST /open-platform-service/v1/transport_task`
@@ -85,7 +81,6 @@
 典型场景：
 
 - 下发跑腿模式任务
-- 查询跑腿任务
 - 对跑腿任务执行操作
 
 常见关键参数：
@@ -99,7 +94,6 @@
 
 代表接口：
 
-- `GET /open-platform-service/v1/errand/list`
 - `POST /open-platform-service/v1/task_errand`
 - `POST /open-platform-service/v1/errand_action`
 
@@ -112,7 +106,6 @@
 典型场景：
 
 - 下发顶升任务
-- 查询顶升任务
 - 对顶升任务发送操作指令
 - 给机器人托盘推送订单
 
@@ -127,14 +120,13 @@
 
 代表接口：
 
-- `GET /open-platform-service/v1/lifting/list`
 - `POST /open-platform-service/v1/lifting_task`
 - `POST /open-platform-service/v1/lifting_action`
 - `POST /open-platform-service/v1/tray_order`
 
 ---
 
-## 5. 巡航与领位任务
+## 5. 巡航任务
 
 规范文件：`assets/05-cruise-guide.json`
 
@@ -142,8 +134,6 @@
 
 - 下发巡航任务
 - 获取巡航线路
-- 执行巡航操作
-- 下发领位任务
 
 常见关键参数：
 
@@ -151,14 +141,11 @@
 - `taskId`
 - `mapCruiseId`
 - `mapCruiseName`
-- `payload.trays`
 
 代表接口：
 
 - `POST /open-platform-service/v1/cruise_task`
-- `POST /open-platform-service/v1/cruise_action`
 - `GET /open-platform-service/v1/get_cruise_line`
-- `POST /open-platform-service/v1/guide_task`
 
 ---
 
@@ -219,8 +206,6 @@
 
 代表接口：
 
-- `GET /open-platform-service/v1/cabinet/pick/state/get`
-- `POST /open-platform-service/v1/robot/cabinet/pick`
 - `GET /open-platform-service/v1/door_state`
 - `POST /open-platform-service/v1/control_doors`
 - `POST /open-platform-service/v1/cancel_task`
@@ -272,8 +257,6 @@
 - 切换地图
 - 开启/关闭位置上报
 - 开启/关闭雷达上报
-- 查询刷卡记录
-- 上报交管区配置或结果
 - 查询门店下交管区列表
 
 常见关键参数：
@@ -292,13 +275,7 @@
 - `GET /open-platform-service/v2/recharge`
 - `POST /open-platform-service/v1/switch_map`
 - `POST /open-platform-service/v1/position_command`
-- `POST /open-platform-service/v1/position_closed`
-- `POST /open-platform-service/v1/laser`
-- `POST /open-platform-service/v1/laser_closed`
-- `GET /open-platform-service/v1/swipe_card`
-- `POST /open-platform-service/v1/traffic_control/config`
 - `POST /map-service/v1/open/traffic_control/list`
-- `POST /open-platform-service/v1/traffic_control/action_result`
 
 ---
 
@@ -431,7 +408,7 @@
 典型场景：
 
 - 开机自检记录查询
-- 电池健康筛选及充电记录查询
+- 充电记录查询
 - 故障与事件列表查询
 
 常见关键参数：
@@ -444,7 +421,6 @@
 代表接口：
 
 - `GET /data-board/v1/log/boot/query_list`
-- `GET /data-board/v1/log/battery/query_list`
 - `GET /data-board/v1/log/charge/query_list`
 
 ---
@@ -455,7 +431,7 @@
 
 典型场景：
 
-- 呼叫、巡航、配送、领位、顶升、回盘等任务的目的地执行明细
+- 呼叫、配送、迎宾、顶升、回盘等任务的目的地执行明细
 - 追溯具体任务在各个业务点的详细时间轴及结果
 
 常见关键参数：
@@ -467,7 +443,6 @@
 代表接口：
 
 - `GET /data-board/v1/task/call`
-- `GET /data-board/v1/task/cruise`
 - `GET /data-board/v1/task/delivery`
 
 ---
