@@ -98,11 +98,11 @@ https://{hostname}/pudu-entry{path}
 | 配送与运送任务 | `assets/02-delivery-transport.json` | 下发配送任务、多点运送 |
 | 跑腿任务 | `assets/03-errand.json` | 跑腿模式任务 |
 | 顶升与托盘任务 | `assets/04-lifting-tray.json` | 顶升机器人任务、托盘订单 |
-| 巡航与领位任务 | `assets/05-cruise-guide.json` | 巡逻、迎宾引导 |
+| 巡航任务 | `assets/05-cruise-guide.json` | 巡航任务下发、巡航线路查询 |
 | 呼叫任务 | `assets/06-call.json` | 自定义呼叫机器人 |
-| 闪电匣专属功能 | `assets/07-flash-cabinet.json` | 货柜取货、舱门控制、舱门拍照 |
+| 闪电匣专属功能 | `assets/07-flash-cabinet.json` | 舱门状态/控制、舱门拍照任务、电梯内切图 |
 | 内容、语音与媒体 | `assets/08-media-content.json` | 屏幕展示、语音播报、音量 |
-| 基础控制与数据上报 | `assets/09-control-reporting.json` | 充电、切换地图、位置上报、交通管控、交管区列表 |
+| 基础控制与数据上报 | `assets/09-control-reporting.json` | 充电、切换地图、位置上报、交管区上报与查询 |
 | 清洁统计分析 | `assets/10-analysis-clean.json` | 洗地、扫地等清洁模式图表及分页数据 |
 | 通用统计分析 | `assets/11-analysis-common.json` | 机器概览、门店概览与运行分析数据 |
 | 配送统计分析 | `assets/12-analysis-delivery.json` | 配送、呼叫、巡航等模式明细与图表数据 |
@@ -308,5 +308,5 @@ POST /biz-open-service/v1/robotDoor/task_list
 - 标注 `(闪电匣)` 的接口仅适用于带货柜的机器人型号
 - `sn` 为机器人序列号，`shopId` 为门店 ID，是最常用的标识字段
 - MAC 地址常见格式为 `14:80:CC:89:27:A6`；若接口要求 `sn`，不能直接用 MAC 地址替代
-- 巡航、顶升等任务有对应的 `*_action` 接口用于暂停/继续/取消
+- 配送、运送、跑腿、顶升等任务有对应的 `*_action` 接口用于暂停/继续/取消
 - 如果用户有编写Open API请求 sdk 的意图，根据用户指定的编程语言，参考 `references/request-sdk.md`，输出对应语言的标准实现范例。

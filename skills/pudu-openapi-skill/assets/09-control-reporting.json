@@ -127,6 +127,47 @@
         }
       }
     },
+    "/open-platform-service/v1/traffic_control/action_result": {
+      "post": {
+        "tags": [
+          "CloudOpenApi"
+        ],
+        "description": "客户上报交管区占用（释放）结果",
+        "operationId": "CloudOpenApi_TrafficAreaActionResult",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/TrafficAreaActionResultReq"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TrafficAreaActionResultRsp"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Default error response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Status"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/map-service/v1/open/traffic_control/list": {
       "post": {
         "tags": [

@@ -138,7 +138,6 @@
 常见关键参数：
 
 - `sn`
-- `taskId`
 - `mapCruiseId`
 - `mapCruiseName`
 
@@ -185,10 +184,8 @@
 
 典型场景：
 
-- 查询货柜取货状态
-- 控制舱门开关
-- 按货道编号取货
 - 查询舱门状态
+- 控制舱门开关
 - 查询舱门拍照信息
 - 电梯内切换楼层地图
 - 设置机器人屏幕内容
@@ -201,7 +198,6 @@
 - `offset`
 - `payload.info`
 - `payload.controlStates`
-- `payload.tasks`
 - `payload.map`
 
 代表接口：
@@ -255,8 +251,8 @@
 
 - 机器人一键回充
 - 切换地图
-- 开启/关闭位置上报
-- 开启/关闭雷达上报
+- 触发机器人位置上报
+- 上报交管区占用（释放）结果
 - 查询门店下交管区列表
 
 常见关键参数：
@@ -275,6 +271,7 @@
 - `GET /open-platform-service/v2/recharge`
 - `POST /open-platform-service/v1/switch_map`
 - `POST /open-platform-service/v1/position_command`
+- `POST /open-platform-service/v1/traffic_control/action_result`
 - `POST /map-service/v1/open/traffic_control/list`
 
 ---
@@ -444,6 +441,9 @@
 
 - `GET /data-board/v1/task/call`
 - `GET /data-board/v1/task/delivery`
+- `GET /data-board/v1/task/greeter`
+- `GET /data-board/v1/task/lifting`
+- `GET /data-board/v1/task/recovery`
 
 ---
 
@@ -575,12 +575,12 @@
 - “下发配送 / 运送 / 多点任务” → `02-delivery-transport.json`
 - “跑腿模式” → `03-errand.json`
 - “顶升 / 托盘订单” → `04-lifting-tray.json`
-- “巡航 / 领位” → `05-cruise-guide.json`
+- “巡航 / 巡航线路” → `05-cruise-guide.json`
 - “呼叫机器人” → `06-call.json`
-- “闪电匣 / 货柜 / 舱门” → `07-flash-cabinet.json`
+- “闪电匣 / 舱门 / 舱门拍照” → `07-flash-cabinet.json`
 - “舱门拍照 / 舱门照片” → `07-flash-cabinet.json`
 - “语音 / 屏幕 / 媒体内容” → `08-media-content.json`
-- “回充 / 切图 / 位置上报 / 雷达 / 交管 / 交管区列表” → `09-control-reporting.json`
+- “回充 / 切图 / 位置上报 / 交管区 / 交管区列表” → `09-control-reporting.json`
 - “清洁统计分析” → `10-analysis-clean.json`
 - “通用统计分析” → `11-analysis-common.json`
 - “配送统计分析” → `12-analysis-delivery.json`

@@ -18,11 +18,11 @@ Call [Pudu Robotics](https://open.pudutech.com/) cloud OpenAPI to manage robots 
 | Delivery & Transport | Dispatch delivery tasks, multi-point transport |
 | Errand Tasks | Errand-mode task management |
 | Lifting & Tray | Lifting robot tasks, tray orders |
-| Cruise & Guide | Patrol, reception and guidance |
+| Cruise Tasks | Patrol task dispatch and cruise route queries |
 | Call Tasks | Custom robot calling |
-| Flash Cabinet | Cabinet pickup, compartment control |
+| Flash Cabinet | Compartment state/control, door photo tasks, elevator map switching |
 | Media & Content | Screen display, voice broadcast, volume |
-| Control & Reporting | Charging, map switching, position reporting, traffic control |
+| Control & Reporting | Charging, map switching, position reporting, traffic control zone management |
 | Clean Analytics | Cleaning mode charts and paginated data |
 | Common Analytics | Machine overview, store overview, operation analysis |
 | Delivery Analytics | Delivery, call, cruise mode detail and chart data |
